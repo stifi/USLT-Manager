@@ -10,7 +10,7 @@
 #
 #   Author: Stefan Gansinger <stefan.gansinger@posteo.at>
 #
-#   Description: Mangment for lyrics stored in the USLT frame of the ID3v2
+#   Description: Management for lyrics stored in the USLT frame of the ID3v2
 #                tag of mp3 files
 #
 #   Thanks: o Michael Urman for Python-Mutagen and all people who contributed
@@ -116,7 +116,7 @@ class MainWindow(QMainWindow):
 class TagWidget(QWidget):
     """Widget showing the most important ID3 tag values. Most importantly the lyrics.
 
-    If the tag has been modified compared to the last savedd version tagModified(True) is emitted.
+    If the tag has been modified compared to the last saved version tagModified(True) is emitted.
     If the ID3 tag matches the view elements tagModified(False) is emitted.
     """
 
@@ -125,6 +125,13 @@ class TagWidget(QWidget):
     def __init__(self, parent=None):
         """Initialization of the widget. By default GUI element is disabled."""
         super().__init__(parent)
+
+
+        self.encoding = {}
+        self.encoding[Encoding.LATIN1] = "Latin-1"
+        self.encoding[Encoding.UTF16] = "UTF-16"
+        self.encoding[Encoding.UTF16BE] = "UTF-16BE"
+        self.encoding[Encoding.UTF8] = "UTF-8"
 
         mainLayout = QFormLayout()
 
@@ -137,6 +144,11 @@ class TagWidget(QWidget):
         self.lyricsSelection = QComboBox()
         self.lyricsSelection.setSizeAdjustPolicy(QComboBox.AdjustToContents)
         self.lyricsSelection.setDisabled(True)
+
+        self.lyricsEncoding = QLabel()
+        self.lyricsEncoding.setDisabled(True)
+        # XXX: Hide label as most users don't care about encodings
+        self.lyricsEncoding.setVisible(False)
 
         self.lyricsDisplay = QPlainTextEdit()
         self.lyricsDisplay.setReadOnly(True)
@@ -195,8 +207,9 @@ class TagWidget(QWidget):
 
         selectionGrid = QGridLayout()
         selectionGrid.addWidget(self.lyricsSelection, 0, 0, Qt.AlignLeft)
-        selectionGrid.addItem(spacer, 0, 1, Qt.AlignLeft)
-        selectionGrid.addWidget(lyricsModifyToolbar, 0, 2, Qt.AlignRight)
+        selectionGrid.addWidget(self.lyricsEncoding, 0, 1, Qt.AlignLeft)
+        selectionGrid.addItem(spacer, 0, 2, Qt.AlignLeft)
+        selectionGrid.addWidget(lyricsModifyToolbar, 0, 3, Qt.AlignRight)
 
         mainLayout.addRow(QApplication.translate('TagWidget', "Artist"), self.artistLineEdit)
         mainLayout.addRow(QApplication.translate('TagWidget', "Title"), self.titleLineEdit)
@@ -217,6 +230,7 @@ class TagWidget(QWidget):
         self.removeLyricsAction.setDisabled(True)
         self.searchLyricsAction.setDisabled(False)
         self.lyricsSelection.setDisabled(True)
+        self.lyricsEncoding.setDisabled(True)
         self.saveTagAction.setDisabled(False)
         self.tagModified.emit(True)
 
@@ -256,7 +270,7 @@ class TagWidget(QWidget):
 
     def reloadTagActionReceiver(self):
         """Reload view by loading tag again from file."""
-        # Ask user if modifcations needs to be saved (indicated by saveTagAction)
+        # Ask user if modifications needs to be saved (indicated by saveTagAction)
         #   but only if new file is loaded
         if (self.saveTagAction.isEnabled()):
             # No Cancel button is offered as a different file might be selected in tree view
@@ -270,7 +284,7 @@ class TagWidget(QWidget):
 
     def saveTagActionReceiver(self):
         """Save lyrics to file."""
-        # read back any modications in lyricsDisplay
+        # read back any modifications in lyricsDisplay
         try:
             self.tag.lyrics[self.lyricsSelection.currentData()][1] = \
                 self.lyricsDisplay.toPlainText()
@@ -316,7 +330,7 @@ class TagWidget(QWidget):
 
     def loadAndShowTag(self, filePath):
         """Load tag, show tag values, and disable GUI elements."""
-        # Ask user if modifcations needs to be saved (indicated by saveTagAction)
+        # Ask user if modifications needs to be saved (indicated by saveTagAction)
         #   but only if new file is loaded
         if (self.saveTagAction.isEnabled() and filePath != self.tag.filePath):
             # No Cancel button is offered as a different file might be selected in tree view
@@ -337,7 +351,7 @@ class TagWidget(QWidget):
 
     def unloadAndHideTag(self):
         """Unload Tag and disable GUI elements."""
-        # Ask user if modifcations needs to be saved (indicated by saveTagAction
+        # Ask user if modifications needs to be saved (indicated by saveTagAction
         if (self.saveTagAction.isEnabled()):
             # No Cancel button is offered as a different file might be selected in tree view
             ret = self.saveChangesDialog(QMessageBox.Save | QMessageBox.Discard)
@@ -348,6 +362,7 @@ class TagWidget(QWidget):
 
         self.setDisabled(True)
         self.lyricsSelection.setDisabled(True)
+        self.lyricsEncoding.setDisabled(True)
         self.editLyricsAction.setDisabled(True)
         self.addLyricsAction.setDisabled(True)
         self.removeLyricsAction.setDisabled(True)
@@ -382,20 +397,24 @@ class TagWidget(QWidget):
             self.editLyricsAction.setDisabled(not self.tag.writeable)
             self.removeLyricsAction.setDisabled(not self.tag.writeable)
             self.lyricsSelection.setDisabled(False)
+            self.lyricsEncoding.setDisabled(False)
             for key, lyrics in self.tag.lyrics.items():
                 self.lyricsSelection.addItem("/".join(key), userData=key)
 
             self.lyricsDisplay.setPlainText(self.tag.lyrics[self.lyricsSelection.currentData()][1])
+            self.lyricsEncoding.setText(self.encoding[self.tag.lyrics[self.lyricsSelection.currentData()][0]])
         else:
             self.editLyricsAction.setDisabled(True)
             self.removeLyricsAction.setDisabled(True)
             self.lyricsSelection.setDisabled(True)
+            self.lyricsEncoding.setDisabled(True)
 
     def showLyrics(self, index):
         """Show lyrics depending on selected language/description key."""
         key = self.lyricsSelection.itemData(index)
         if key in self.tag.lyrics:
             self.lyricsDisplay.setPlainText(self.tag.lyrics[key][1])
+            self.lyricsEncoding.setText(self.encoding[self.tag.lyrics[key][0]])
 
     def unsetArtist(self):
         """Clear artist display."""
@@ -408,6 +427,7 @@ class TagWidget(QWidget):
     def unsetLyrics(self):
         """Clear lyrics display."""
         self.lyricsSelection.clear()
+        self.lyricsEncoding.clear()
         self.lyricsDisplay.clear()
 
     def unsetAll(self):
@@ -589,12 +609,12 @@ class ID3Tag():
 
     @property
     def filePath(self):
-        """Return the file-path of the the tag."""
+        """Return the file-path of the tag."""
         return self._filePath
 
     @property
     def tag(self):
-        """Return the tag as Dict."""
+        """Return the tag as dict."""
         return self._tag
 
     @property
@@ -614,17 +634,17 @@ class ID3Tag():
 
     @property
     def writeable(self):
-        """Retrun True if file is writeable"""
+        """Return True if file is writeable"""
         return self._writeable
 
 
 class FileTree(QWidget):
     """QTreeView enhanced by editable root, either by line edit or file dialog.
-    A QFileSystemWatcher montiors visible files in the tree for changed. If a file
-    is selected signal is emited. If its a MP3 file mp3Selected is emited.
+    A QFileSystemWatcher monitors visible files in the tree for changed. If a file
+    is selected signal is emitted. If its a MP3 file mp3Selected is emitted.
     Otherwise, nonmp3Selected.
     """
-    # Appropriate signal is emited if a file is selected
+    # Appropriate signal is emitted if a file is selected
     mp3Selected = pyqtSignal(str)
     nonmp3Selected = pyqtSignal(str)
 
@@ -693,13 +713,13 @@ class FileTree(QWidget):
         self.addressLabel.editingFinished.connect(self.rootChanged)
         # Open file dialog if button is clicked
         openBrowserButton.clicked.connect(self.fileDialog)
-        # Go up in tree hierachy on button click
+        # Go up in tree hierarchy on button click
         upButton.clicked.connect(self.goUp)
         # force as this is the initialization
         self.rootChanged(force=True)
 
     def rootChanged(self, force=False):
-        """Initialsize all required properties, if root has changed. To force
+        """Initialize all required properties, if root has changed. To force
         initialization force must be True.
         """
         if self.rootPath != self.addressLabel.text() or force:
@@ -715,7 +735,7 @@ class FileTree(QWidget):
         """
 
         absolutePath = QDir(path).absolutePath()
-        #FIXME: If file is not readable its not in the watchlist.
+        #FIXME: If file is not readable its not in the watch list.
         #   Thus a toggling read flag is recognized.
         fileList = QDir(path).entryList(QDir.AllEntries | QDir.Readable |
                                         QDir.NoDotDot, QDir.DirsFirst)
@@ -753,14 +773,14 @@ class FileTree(QWidget):
             self.rootChanged()
 
     def goUp(self):
-        """Go one hierachy up for the root"""
+        """Go one hierarchy up for the root."""
         actDir = QDir(self.addressLabel.text())
         if actDir.cdUp():
             self.addressLabel.setText(QDir.absolutePath(actDir))
             self.rootChanged()
 
     def fileDialog(self):
-        """File dialog to set new root"""
+        """File dialog to set new root."""
         path = QFileDialog.getExistingDirectory(self, directory=self.rootPath)
         if path:
             self.addressLabel.setText(path)
@@ -829,8 +849,8 @@ class TagFileSystemModel(QFileSystemModel):
         self.fileInfoCache = {}
 
     def headerData(self, section, orientation, role):
-        """Reimplemented to be able to add an addtional header for
-        customly added columns.
+        """Reimplemented to be able to add an additional header for
+        customized columns.
         """
         if (section == self.columnCount() - 1):
             if (role == Qt.DisplayRole):
@@ -840,7 +860,7 @@ class TagFileSystemModel(QFileSystemModel):
 
     def data(self, index, role):
         """Reimplemented to enable coloring of lines depending on file type and if lyrics are
-        availabe or not. Additionally, the ID3v2 column is generated.
+        available or not. Additionally, the ID3v2 column is generated.
         """
         # Add ID3v2 column and add version number into dedicated column. Version numbers
         #  of already displayed files are cached in fileInfoCache.
@@ -855,7 +875,7 @@ class TagFileSystemModel(QFileSystemModel):
                             QApplication.translate('TagFileSystemModel', "N.A.")
                 return self.fileInfoCache[index, 'tagversion']
 
-        # paint rows in different colors depending if lyrics are availabe or not
+        # paint rows in different colors depending if lyrics are available or not
         #  test for lyrics on every paint actions makes the program really slow, so
         #  the colors are cached in self.fileInfoCache. If the color is already cached,
         #  the file is not tested anymore
@@ -873,11 +893,11 @@ class TagFileSystemModel(QFileSystemModel):
         return super().data(index, role)
 
     def columnCount(self, parent=None):
-        """Reimplemented to be able to add an addtional header for
-        customly added columns.
+        """Reimplemented to be able to add an header for
+        customized columns.
 
-        Returns the number of colmuns including the customly
-        added colmuns.
+        Returns the number of columns including the customized 
+        columns.
         """
         return super().columnCount()+1
 
