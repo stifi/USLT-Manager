@@ -46,8 +46,15 @@ from mutagen.id3 import ID3, USLT, Encoding
 
 from lngcodes import *
 
+# qt resource file created w/ pyrcc5 -o qrc_resources_rc.py uslt_manager.qrc
+import qrc_resources_rc
+
 
 class MainWindow(QMainWindow):
+    """Main window of application
+
+    :param rootPath: Path to root directory
+    """
     def __init__(self, rootPath="/", parent=None, flags=Qt.WindowFlags(0)):
         super().__init__(parent, flags)
 
@@ -56,7 +63,10 @@ class MainWindow(QMainWindow):
         self.centralWidget = self.CentralWidget(rootPath)
         self.setCentralWidget(self.centralWidget)
 
-        mainIcon = QIcon("lyrics_id3_icon.svg")
+        # Absolute path is required here.
+        # However, QCoreApplication.applicationDirPath()) will not work since it will
+        # return the path to the python executable. Thus qrc_resources_rc is used instead
+        mainIcon = QIcon(":/lyrics_id3_icon.svg")
         self.setWindowIcon(mainIcon)
         self.setWindowTitle("USLT Manager[*]")
 
@@ -116,17 +126,21 @@ class MainWindow(QMainWindow):
 class TagWidget(QWidget):
     """Widget showing the most important ID3 tag values. Most importantly the lyrics.
 
-    If the tag has been modified compared to the last saved version tagModified(True) is emitted.
-    If the ID3 tag matches the view elements tagModified(False) is emitted.
+    By default all GUI elements are disabled. They are enabled when a mp3 file is loaded
+    using :func:`loadAndShowTag()`.
+
+    The `pyqtSignal` :data:`tagModified` is used to notify if changes have been made
     """
 
+    #: emitted with the parameter True when tag has been modified
+    #: emitted with the parameter False when view elements match the tag content
+    #: i.e. when tag has been saved or tag is reloaded
     tagModified = pyqtSignal(bool)
 
     def __init__(self, parent=None):
-        """Initialization of the widget. By default GUI element is disabled."""
         super().__init__(parent)
 
-
+        #: Encodings available for USLT and defined in mutagen
         self.encoding = {}
         self.encoding[Encoding.LATIN1] = "Latin-1"
         self.encoding[Encoding.UTF16] = "UTF-16"
@@ -147,7 +161,7 @@ class TagWidget(QWidget):
 
         self.lyricsEncoding = QLabel()
         self.lyricsEncoding.setDisabled(True)
-        # XXX: Hide label as most users don't care about encodings
+        # XXX: Label is hidden as most users don't care about encodings
         self.lyricsEncoding.setVisible(False)
 
         self.lyricsDisplay = QPlainTextEdit()
@@ -159,16 +173,16 @@ class TagWidget(QWidget):
 
         spacer = QSpacerItem(0, 0, QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
 
+        lyricsModifyToolbar = QToolBar()
+        lyricsModifyToolbar.setFloatable(False)
+        lyricsModifyToolbar.setMovable(False)
+
         addLyricsButtonIcon = QIcon.fromTheme("list-add")
         removeLyricsButtonIcon = QIcon.fromTheme("list-remove")
         editLyricsButtonIcon = QIcon.fromTheme("insert-text")
         searchLyricsButtonIcon = QIcon.fromTheme("system-search")
         saveTagButtonIcon = QIcon.fromTheme("document-save")
         reloadTagButtonIcon = QIcon.fromTheme("view-refresh")
-
-        lyricsModifyToolbar = QToolBar()
-        lyricsModifyToolbar.setFloatable(False)
-        lyricsModifyToolbar.setMovable(False)
 
         self.editLyricsAction = lyricsModifyToolbar.addAction(
             editLyricsButtonIcon, QCoreApplication.translate('TagWidget', "Edit Lyrics"),
@@ -201,6 +215,8 @@ class TagWidget(QWidget):
         self.addLyricsAction.setDisabled(True)
         self.removeLyricsAction.setDisabled(True)
         self.searchLyricsAction.setDisabled(True)
+        #: The state of the button (disabled/enabled) is used as indicator as well
+        #: if the tag content has been modified compared to the saved tag version
         self.saveTagAction.setDisabled(True)
         self.tagModified.emit(False)
         self.reloadTagAction.setDisabled(True)
@@ -255,7 +271,7 @@ class TagWidget(QWidget):
         del addLyricsDialog
 
     def removeLyricsActionReceiver(self):
-        """Delete lyrics from tag objects."""
+        """Delete lyrics from tag."""
         del self.tag.lyrics[self.lyricsSelection.currentData()]
         # update lyrics in view
         self.setLyrics()
@@ -269,7 +285,7 @@ class TagWidget(QWidget):
                         .adjusted(QUrl.FullyEncoded))
 
     def reloadTagActionReceiver(self):
-        """Reload view by loading tag again from file."""
+        """Reload view by loading tag from file again."""
         # Ask user if modifications needs to be saved (indicated by saveTagAction)
         #   but only if new file is loaded
         if (self.saveTagAction.isEnabled()):
@@ -301,12 +317,18 @@ class TagWidget(QWidget):
                 'TagWidget', "Could not write to file!"))
             errorMessageDialog.setText(str(err))
             errorMessageDialog.setStandardButtons(QMessageBox.Ok)
+            # FIXME: Workaround for missing or at least not working QMessageBox
+            #   It seems that the translations are stored in the context of QPlatformTheme
+            errorMessageDialog.button(QMessageBox.Ok). \
+                setText(QCoreApplication.translate('QPlatformTheme', "Ok"))
+
             errorMessageDialog.exec()
         else:
             self.saveTagAction.setDisabled(True)
             self.tagModified.emit(False)
 
     def saveChangesDialog(self, buttons):
+        """Dialog to ask user if changes should be save into file."""
         msgBox = QMessageBox()
         msgBox.setText(QCoreApplication.translate('TagWidget', "Lyrics have been modified."))
         msgBox.setInformativeText(QCoreApplication.translate(
@@ -329,7 +351,7 @@ class TagWidget(QWidget):
         return msgBox.exec()
 
     def loadAndShowTag(self, filePath):
-        """Load tag, show tag values, and disable GUI elements."""
+        """Load tag, show tag values, and enable GUI elements."""
         # Ask user if modifications needs to be saved (indicated by saveTagAction)
         #   but only if new file is loaded
         if (self.saveTagAction.isEnabled() and filePath != self.tag.filePath):
@@ -340,7 +362,7 @@ class TagWidget(QWidget):
             self.saveTagAction.setDisabled(True)
             self.tagModified.emit(False)
 
-        # Tag might just be modified, so unload it to make sure
+        # Tag might be modified, so unload it first to make sure elements are up-to-date
         self.unloadAndHideTag()
         self.tag = ID3Tag(filePath)
         self.setDisabled(False)
@@ -386,7 +408,7 @@ class TagWidget(QWidget):
         self.titleLineEdit.setText(self.tag.title)
 
     def setLyrics(self):
-        """Show lyrics and language/description keys."""
+        """Load language/description keys and show one selected lyrics."""
         self.lyricsSelection.clear()
         self.lyricsDisplay.clear()
 
@@ -402,7 +424,8 @@ class TagWidget(QWidget):
                 self.lyricsSelection.addItem("/".join(key), userData=key)
 
             self.lyricsDisplay.setPlainText(self.tag.lyrics[self.lyricsSelection.currentData()][1])
-            self.lyricsEncoding.setText(self.encoding[self.tag.lyrics[self.lyricsSelection.currentData()][0]])
+            self.lyricsEncoding.setText(
+                self.encoding[self.tag.lyrics[self.lyricsSelection.currentData()][0]])
         else:
             self.editLyricsAction.setDisabled(True)
             self.removeLyricsAction.setDisabled(True)
@@ -438,19 +461,26 @@ class TagWidget(QWidget):
 
 
 class AddLyricsDialog(QDialog):
-    """Dialog for editing lyrics to be stored in file"""
+    """Dialog for editing lyrics to be stored in file."""
 
     class ASCIIValidator(QValidator):
-        """Sub-class for validation of ASCII input"""
+        """Sub-class for validation of ASCII input."""
+        #: `pyqtSignal` emitted when input contains ASCII only
         inputValid = pyqtSignal()
+        #: `pyqtSignal` emitted when input does not contain ASCII only
         inputInvalid = pyqtSignal()
 
         def __init__(self, parent=None):
             super().__init__(parent)
 
         def validate(self, inp, pos):
-            """return QValidator.Acceptable if entered string contains ASCII only.
-            Otherwise, QValidator.Intermediate.
+            """Emitts `inputInvalid` or `inputInvalid` depending if input string contains
+            ASCII only.
+
+            :returns: `QValidator.Acceptable` if entered input string contains ASCII only.
+                         Otherwise, `QValidator.Intermediate`.
+
+            :param inp: input string for validation
             """
             try:
                 inp.encode('ascii')
@@ -470,9 +500,7 @@ class AddLyricsDialog(QDialog):
         self.setWindowTitle(QCoreApplication.translate('AddLyricsDialog', "Add Lyrics"))
 
         mainLayout = QGridLayout()
-
         inputFieldsLayout = QFormLayout()
-        #inputFieldsLayout.setRowWrapPolicy(QFormLayout.WrapAllRows)
 
         # Language settings
         lngCodeLayout = QBoxLayout(QBoxLayout.LeftToRight)
@@ -493,6 +521,8 @@ class AddLyricsDialog(QDialog):
         descriptionValidator = self.ASCIIValidator()
         self.descriptionLineEdit.setValidator(descriptionValidator)
         self.descriptionErrorLabel = QLabel()
+        ## descriptionValidator emits inputValid or inputInvalid which is used to highlight
+        ## invalid input (e.g. changing the okay button)
         descriptionValidator.inputValid.connect(self.validDescription)
         descriptionValidator.inputInvalid.connect(self.invalidDescription)
         inputFieldsLayout.addRow(QCoreApplication.translate('AddLyricsDialog', "Description:"),
@@ -532,14 +562,21 @@ class AddLyricsDialog(QDialog):
 
         self.setLayout(mainLayout)
 
-        self.lngCodeComboBox.currentIndexChanged.connect(self.updateCodeLabel)
+        # change description of language if a different language code is selected
+        self.lngCodeComboBox.currentIndexChanged.connect(self.updateLngCodeLabel)
+
+        # emit accept or reject depending which button was selected
         self.okButton.clicked.connect(self.accept)
         cancelButton.clicked.connect(self.reject)
 
-    def updateCodeLabel(self):
+    def updateLngCodeLabel(self):
+        """Change description of language depending on selected language code."""
         self.lngCodeLabel.setText(ISO639_2_CODES[self.lngCodeComboBox.currentText()])
 
     def invalidDescription(self):
+        """Notify user for invalid characters in description by changing the text and
+        disabling the okButton.
+        """
         okButtonIcon = QIcon.fromTheme("dialog-error")
         self.okButton.setDisabled(True)
         self.okButton.setFlat(True)
@@ -548,6 +585,10 @@ class AddLyricsDialog(QDialog):
         self.okButton.setIcon(okButtonIcon)
 
     def validDescription(self):
+        """Notify user for valid only characters in description by changing the text and
+        enabling the okButton.
+        """
+        okButtonIcon = QIcon.fromTheme("dialog-error")
         okButtonIcon = QIcon.fromTheme("dialog-ok")
         self.okButton.setDisabled(False)
         self.okButton.setFlat(False)
@@ -556,15 +597,25 @@ class AddLyricsDialog(QDialog):
 
 
 class ID3Tag():
-    """Simple ID3 tag class holding the most important tag values.
+    """Simple ID3 tag class holding the most important tag values. The values are accessible as
+    object properties.
 
-    It uses the following format:
-       ID3Tag['artist'] ... artist str of song (TPE1) [might be None]
-       ID3Tag['title']  ... title str of song (TIT2) [might be None]
-       ID3Tag['USLT'][(language,description)]   ... lyrics dict;
-         the key is a tuple of language and description
-         value is a list, while list[0] is the encoding coded as integer
-         and list[1] are the lyrics str
+    :param filePath: filename and path to the mp3 file holding the tag
+
+    Internally the class uses the following dict
+
+    ID3Tag['artist']
+        artist str of song (TPE1) [might be None]
+    ID3Tag['title']
+        title str of song (TIT2) [might be None]
+    ID3Tag['USLT'][(language,description)]
+        | the key is a tuple of language and description
+        | value[0] = encoding
+        | value[1] = lyrics
+    ID3Tag['filePath']
+        filename and path
+    ID3Tag['writeable']
+        if file can be written
     """
     def __init__(self, filePath):
 
@@ -594,7 +645,7 @@ class ID3Tag():
         #FIXME: If the file handle is closed, the file might be modified in the background.
 
     def save(self):
-        """Store self._tag['USLT'] in file"""
+        """Save self._tag['USLT'] to file"""
         id3tag = ID3(self._filePath)
 
         lyricsKeys = id3tag.getall('USLT')
@@ -609,53 +660,63 @@ class ID3Tag():
 
     @property
     def filePath(self):
-        """Return the file-path of the tag."""
+        """file-path of tag."""
         return self._filePath
 
     @property
-    def tag(self):
-        """Return the tag as dict."""
-        return self._tag
-
-    @property
     def artist(self):
-        """Return artist string."""
+        """artist string."""
         return self._tag['artist']
 
     @property
     def title(self):
-        """Return title as string."""
+        """title string."""
         return self._tag['title']
 
     @property
     def lyrics(self):
-        """Return lyrics as dict."""
+        """| lyrics dict
+           |  key = (language, description)
+           |  value[0] = encoding
+           |  value[1] = lyrics
+        """
         return self._tag['USLT']
 
     @property
     def writeable(self):
-        """Return True if file is writeable"""
+        """True if file is writeable, else False."""
         return self._writeable
 
 
 class FileTree(QWidget):
-    """QTreeView enhanced by editable root, either by line edit or file dialog.
-    A QFileSystemWatcher monitors visible files in the tree for changed. If a file
-    is selected signal is emitted. If its a MP3 file mp3Selected is emitted.
-    Otherwise, nonmp3Selected.
+    """QWidget having QTreeView which root is editable either by line edit or file dialog.
+
+
+    A `QFileSystemWatcher` monitors visible files in the tree for changes. If a mp3 file
+    is selected or modified :data:`mp3Selected` signal with filePath as parameter is emitted.
+    Otherwise, :data:`nonmp3Selected` with filePath is emitted.
+
+    If the root path is changed :data:`nonmp3Selected`  with parameter None is emitted.
+
+    :param rootPath: Path to root path of file tree
     """
-    # Appropriate signal is emitted if a file is selected
+    #: `pyqtSignal` emitted when an mp3 file is selected or changed.
+    #: The file path is emitted as str parameter.
     mp3Selected = pyqtSignal(str)
+    #: `pyqtSignal` emitted when a file is selected or changed which is not mp3.
+    #: The file path is emitted as str parameter.
     nonmp3Selected = pyqtSignal(str)
 
     class DirValidator(QValidator):
-        """Sub-class for validation of root input. Validates if input is a valid directory."""
+        """Sub-class for validation of root input. Validates if input is an existing directory."""
         def __init__(self, parent=None):
             super().__init__(parent)
 
         def validate(self, inp, pos):
-            """return QValidator.Acceptable if entered directory is valid. Otherwise,
-            QValidator.Intermediate.
+            """:returns: `QValidator.Acceptable` if entered directory is valid.
+                         Otherwise, `QValidator.Intermediate`.
+
+            :param inp: input string for validation
             """
             if Path(inp).is_dir():
                 return (QValidator.Acceptable, inp, pos)
@@ -668,6 +729,7 @@ class FileTree(QWidget):
     def __init__(self, rootPath, parent=None):
         super().__init__(parent)
 
+        #: map parameter to object variable
         self.rootPath = rootPath
 
         self.model = TagFileSystemModel()
@@ -707,7 +769,7 @@ class FileTree(QWidget):
         # Process newly selected files (e.g. emit mp3Selected)
         self.tree.selectionModel().selectionChanged.connect(self.selectionChanged)
         # Double clicked on selection
-        self.tree.doubleClicked.connect(self.doubleClickEvent)
+        self.tree.doubleClicked.connect(self.changeRootToSelection)
         # Notify for rootChanged() when new root have been entered
         #   (DirValidator prevents invalid directories)
         self.addressLabel.editingFinished.connect(self.rootChanged)
@@ -719,19 +781,27 @@ class FileTree(QWidget):
         self.rootChanged(force=True)
 
     def rootChanged(self, force=False):
-        """Initialize all required properties, if root has changed. To force
-        initialization force must be True.
+        """Initializes all required properties but only if `rootPath` has really changed.
+        The object variable `rootPath` to the `addressLabel` to find out if it was changed.
+        So its important to change the `addressLabel` manually before calling this method.
+
+        :param force: Force initialization despite if `rootPath` changed.
         """
         if self.rootPath != self.addressLabel.text() or force:
             self.rootPath = self.addressLabel.text()
             self.model.setRootPath(self.rootPath)
             self.tree.setRootIndex(self.model.index(self.rootPath))
             self.createFileSystemWatcher(self.rootPath)
+            # Emit signal to notify for a root update. The parameter is set to None as no
+            # file is selected if the root is changed.
             self.nonmp3Selected.emit(None)
 
     def createFileSystemWatcher(self, path):
-        """Create a QFileSystemWatcher including all files and directories within path.
-        Additionally, the necessary connections to the TagFileSystemModel are generated.
+        """Create a QFileSystemWatcher including all files and directories within the watched path.
+        Additionally, the required connections to notify file for file changes to the
+        object of :class:`TagFileSystemModel` are generated.
+
+        :param path: path which should be monitored.
         """
 
         absolutePath = QDir(path).absolutePath()
@@ -739,7 +809,7 @@ class FileTree(QWidget):
         #   Thus a toggling read flag is recognized.
         fileList = QDir(path).entryList(QDir.AllEntries | QDir.Readable |
                                         QDir.NoDotDot, QDir.DirsFirst)
-        fileList = [absolutePath + "/" + s for s in fileList]
+        fileList = [os.path.join(absolutePath, s) for s in fileList]
 
         try:
             del self.fileSystemWatcher
@@ -765,8 +835,8 @@ class FileTree(QWidget):
 
         #print("Watching" + str(self.fileSystemWatcher.files()))
 
-    def doubleClickEvent(self):
-        """Set root to the currently selected directory. (Should be called on doubleClickEvent)"""
+    def changeRootToSelection(self):
+        """Set root to the currently selected directory. Should be called on `doubleClicked`."""
         selectedPath = self.model.filePath(self.tree.selectionModel().selectedIndexes()[0])
         if Path(selectedPath).is_dir():
             self.addressLabel.setText(selectedPath)
@@ -780,16 +850,18 @@ class FileTree(QWidget):
             self.rootChanged()
 
     def fileDialog(self):
-        """File dialog to set new root."""
+        """File dialog to sets new root."""
         path = QFileDialog.getExistingDirectory(self, directory=self.rootPath)
         if path:
             self.addressLabel.setText(path)
             self.rootChanged()
 
     def modifyWatcher(self, index):
-        """Add or remove files from the fileSystemWatcher.
+        """Add or remove files from the `fileSystemWatcher`. Depending if tree is expanded or
+        collapsed files are removed or added.
 
-        Depending if tree is expanded or collapsed files are removed or added.
+        :param index: index of changed path in tree.
+        :type index: QModelIndexType or if str the index is looked up in tree
         """
         # index should be of QModelIndexType. If its a str I assume its a path
         #   --> find index in model
@@ -800,7 +872,7 @@ class FileTree(QWidget):
         absolutePath = QDir(filePath).absolutePath()
         fileList = QDir(filePath).entryList(QDir.AllEntries | QDir.Readable |
                                             QDir.NoDotDot, QDir.DirsFirst)
-        fileList = [absolutePath + "/" + s for s in fileList]
+        fileList = [os.path.join(absolutePath, s) for s in fileList]
 
         if self.tree.isExpanded(index) or index == self.tree.rootIndex():
             #print("Adding: " + str(fileList))
@@ -812,7 +884,7 @@ class FileTree(QWidget):
         #print("Watching" + str(self.fileSystemWatcher.files()))
 
     def selectionChanged(self, selected, deselected):
-        """Emit mp3Selected or nonmp3Selected for the selected file.
+        """Emit `mp3Selected` or `nonmp3Selected` for the selected file.
         To be called when a new file is selected.
         """
         if len(selected.indexes()) > 0:
@@ -825,7 +897,7 @@ class FileTree(QWidget):
                 self.nonmp3Selected.emit(filePath)
 
     def fileChanged(self, filePath):
-        """Emit mp3Selected or nonmp3Selected for the selected file.
+        """Emit `mp3Selected` or `nonmp3Selected` for the selected file.
         To be called when the selected file changed.
         """
         index = self.model.index(filePath)
@@ -838,19 +910,43 @@ class FileTree(QWidget):
 
 
 class TagFileSystemModel(QFileSystemModel):
-    """File system model to be used w/ QTreeView. It enhances the classical
-    QFileSystemModel w/ ID3 tag handling. To speed up file handling important
-    file parameters are cached in the object variable self.fileInfoCache.
+    """File system model to be used w/ QTreeView.
+
+    It enhances the classical QFileSystemModel w/ ID3 tag handling. To speed up file
+    handling important file parameters are cached. A customized column provides information
+    about the ID3 tag version.
+
+    If file is an mp3 file it gets colored depending if lyrics are available or not.
     """
+
+    class IconProvider(QFileIconProvider):
+        """FIXME: The idea of this class is to provide different icons depending if all
+        files, some files, or no files in a directory have lyrics embedded. However,
+        its unclear how subdirectories should be handled.
+        """
+        def __init__(self):
+            super().__init__()
+            self.dirInfoCache = {}
+
+        def icon(self, info):
+            if type(info) == QFileInfo and info.isDir():
+                # FIXME: custom icons could be returned here
+                return super().icon(info)
+            else:
+                return super().icon(info)
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        # cache for file informations to speed-up painting
+        #: cache for file informations to speed-up painting.
+        #: QModelIndex is used is as key parameter
         self.fileInfoCache = {}
+        self.setIconProvider(self.IconProvider())
 
     def headerData(self, section, orientation, role):
         """Reimplemented to be able to add an additional header for
         customized columns.
+
+        :returns: "ID3v2" for the customized column, else super()
         """
         if (section == self.columnCount() - 1):
             if (role == Qt.DisplayRole):
@@ -861,24 +957,21 @@ class TagFileSystemModel(QFileSystemModel):
     def data(self, index, role):
         """Reimplemented to enable coloring of lines depending on file type and if lyrics are
         available or not. Additionally, the ID3v2 column is generated.
+
+        Before the file itself is analyzed the cached information is checked.
         """
-        # Add ID3v2 column and add version number into dedicated column. Version numbers
-        #  of already displayed files are cached in fileInfoCache.
-        if (index.column() == self.columnCount() - 1):
-            if (role == Qt.DisplayRole):
-                if (index, 'tagversion') not in self.fileInfoCache:
-                    if self.fileInfo(index).isFile() and self.isMP3(self.filePath(index)):
-                        self.fileInfoCache[index, 'tagversion'] = \
-                            self.id3v2Version(self.filePath(index))
-                    else:
-                        self.fileInfoCache[index, 'tagversion'] = \
-                            QApplication.translate('TagFileSystemModel', "N.A.")
-                return self.fileInfoCache[index, 'tagversion']
+        # add ID3v2 version number into dedicated column.
+        if ((role == Qt.DisplayRole)) and (index.column() == self.columnCount() - 1):
+            if (index, 'tagversion') not in self.fileInfoCache:
+                if self.fileInfo(index).isFile() and self.isMP3(self.filePath(index)):
+                    self.fileInfoCache[index, 'tagversion'] = \
+                        self.id3v2Version(self.filePath(index))
+                else:
+                    self.fileInfoCache[index, 'tagversion'] = \
+                        QApplication.translate('TagFileSystemModel', "N.A.")
+            return self.fileInfoCache[index, 'tagversion']
 
         # paint rows in different colors depending if lyrics are available or not
-        #  test for lyrics on every paint actions makes the program really slow, so
-        #  the colors are cached in self.fileInfoCache. If the color is already cached,
-        #  the file is not tested anymore
         if (role == Qt.ForegroundRole):
             if (index, 'color') not in self.fileInfoCache:
                 if self.fileInfo(index).isFile() and self.isMP3(self.filePath(index)):
@@ -893,16 +986,18 @@ class TagFileSystemModel(QFileSystemModel):
         return super().data(index, role)
 
     def columnCount(self, parent=None):
-        """Reimplemented to be able to add an header for
-        customized columns.
+        """Reimplemented to be able to add an header for customized columns.
 
-        Returns the number of columns including the customized 
-        columns.
+        :returns: number of columns including the customized columns.
         """
         return super().columnCount()+1
 
     def isMP3(self, filePath):
-        """Test if file is MP3 file by using Mutagen's MIME type evaluation."""
+        """Test if file is MP3 file by using Mutagen's MIME type evaluation.
+
+        :returns: True if file is an MP3, False else.
+        :rtype: boolean
+        """
         try:
             return ((mutagen.File(filePath) is not None and
                     'audio/mp3' in mutagen.File(filePath).mime) or
@@ -911,15 +1006,24 @@ class TagFileSystemModel(QFileSystemModel):
             return False
 
     def id3v2Version(self, filePath):
-        """Return the ID3v2 version number."""
+        """ID3 tag version number. If ID3v1 and ID3v2 tags are located in the file. The version
+        of ID3v2 is returned only.
+
+        :return: version number
+        :rtype: str
+        """
         return ('.'.join(str(i) for i in ID3(filePath).version))
 
     def hasID3Lyrics(self, filePath):
-        """Test if file has lyrics in ID3 tag by getting all USLT frames."""
+        """Test if file has lyrics in ID3 tag by getting all USLT frames.
+
+        :returns: True if lyrics are available, False else.
+        :rtype: boolean
+        """
         return (self.isMP3(filePath) and ID3(filePath).getall('USLT')) or False
 
     def clearFileInfoCache(self):
-        """Clears the fileInfoCache."""
+        """Clears self.fileInfoCache."""
         self.fileInfoCache = {}
 
 if __name__ == '__main__':
@@ -932,7 +1036,7 @@ if __name__ == '__main__':
 
         locale = QLocale.system()
         usltTranslator = QTranslator()
-        if usltTranslator.load(locale, "uslt-manager", "_"):
+        if usltTranslator.load(locale, ":/uslt_manager", "_"):
             app.installTranslator(usltTranslator)
 
         if len(sys.argv) > 1 and QDir(sys.argv[1]).isReadable():
