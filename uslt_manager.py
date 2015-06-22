@@ -755,12 +755,16 @@ class FileTree(QWidget):
         upButtonIcon = QIcon.fromTheme("go-up")
         upButton = QPushButton()
         upButton.setIcon(upButtonIcon)
+        reloadButtonIcon = QIcon.fromTheme("view-refresh")
+        reloadButton = QPushButton()
+        reloadButton.setIcon(reloadButtonIcon)
 
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
         mainLayout.addWidget(self.addressLabel, 0, 1)
         mainLayout.addWidget(upButton, 0, 2)
-        mainLayout.addWidget(self.tree, 1, 0, 1, 3)
+        mainLayout.addWidget(reloadButton, 0, 3)
+        mainLayout.addWidget(self.tree, 1, 0, 1, 4)
         self.setLayout(mainLayout)
 
         # clear color cache of TagFileSystemModel if directories are expanded/collapsed
@@ -777,6 +781,9 @@ class FileTree(QWidget):
         openBrowserButton.clicked.connect(self.fileDialog)
         # Go up in tree hierarchy on button click
         upButton.clicked.connect(self.goUp)
+        # Force reloading root
+        reloadButton.clicked.connect(lambda: self.rootChanged(force=True))
+
         # force as this is the initialization
         self.rootChanged(force=True)
 
