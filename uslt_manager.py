@@ -879,7 +879,10 @@ class FileTree(QWidget):
             self.fileSystemWatcher.addPaths(fileList)
         else:
             #print("Removing: " + str(fileList))
-            self.fileSystemWatcher.removePaths(fileList)
+            # fileList might be empty (e.g. when a directory is deleted)
+            # QFileSystemWatcher removes deleted files automatically
+            if fileList:
+                self.fileSystemWatcher.removePaths(fileList)
 
         #print("Watching" + str(self.fileSystemWatcher.files()))
 
