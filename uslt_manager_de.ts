@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de_AT" sourcelanguage="en">
+<!DOCTYPE TS><TS version="2.0" language="de_AT" sourcelanguage="en">
 <context>
     <name>AddLyricsDialog</name>
     <message>
@@ -52,22 +51,22 @@
         <translation type="obsolete">Verzeichnisse prüfen (Experimentell! Das kann sehr lange dauern.)</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="810"/>
+        <location filename="uslt_manager.py" line="809"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="814"/>
+        <location filename="uslt_manager.py" line="820"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="830"/>
+        <location filename="uslt_manager.py" line="842"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="765"/>
+        <location filename="uslt_manager.py" line="768"/>
         <source>Check Directories (experimental)</source>
         <translation>Verzeichnisse prüfen (experimentell)</translation>
     </message>
@@ -2479,22 +2478,22 @@
         <source>Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <location filename="lngcodes.py" line="322"/>
         <source>Bokmål, Norwegian; Norwegian Bokmål</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <location filename="lngcodes.py" line="335"/>
         <source>Occitan (post 1500); Provençal</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <location filename="lngcodes.py" line="359"/>
         <source>Provençal, Old (to 1500)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <location filename="lngcodes.py" line="469"/>
         <source>Volapük</source>
         <translation type="unfinished"></translation>
@@ -2531,12 +2530,12 @@
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="838"/>
+        <location filename="uslt_manager.py" line="850"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="840"/>
+        <location filename="uslt_manager.py" line="852"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2544,7 +2543,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="uslt_manager.py" line="1078"/>
+        <location filename="uslt_manager.py" line="1090"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>

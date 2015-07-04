@@ -740,6 +740,9 @@ class FileTree(QWidget):
         self.tree = QTreeView()
         self.tree.setModel(self.model)
         self.tree.setRootIndex(self.model.index(self.rootPath))
+        # create a custom context menu for QTreeView
+        self.tree.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tree.customContextMenuRequested.connect(self.treeContextMenu)
 
          # Address line with address label, navigation icons and browser Icon
         openBrowserIcon = QIcon.fromTheme("folder")
@@ -798,22 +801,32 @@ class FileTree(QWidget):
         # force as this is the initialization
         self.rootChanged(force=True)
 
-    def contextMenuEvent(self, event):
+    def treeContextMenu(self, pos):
         """Adds context menu."""
-        # FIXME: Context menu is visible in the whole "left area"
-        #        It should only be visible in the file tree
         menu = QMenu(self)
-        if which("kid3"):
-            menu.addAction(QCoreApplication.translate('FileTree', "Open in kid3"),
-                           lambda: self.openKID3("kid3"))
-        if which("kid3-qt"):
-            menu.addAction(QCoreApplication.translate('FileTree', "Open in kid3"),
-                           lambda: self.openKID3("kid3-qt"))
 
-        # FIXME: just show if a file is selected
-        menu.addAction(QCoreApplication.translate('FileTree', "Delete File"),
-                       self.deleteFileAction)
-        menu.exec(event.globalPos())
+        # Adds "Open in kid3" to the context menu. Action is disabled if kid3 is not available
+        kid3Action = menu.addAction(QCoreApplication.translate('FileTree', "Open in kid3"))
+        if which("kid3"):
+            kid3Action.triggered.connect(lambda: self.openKID3("kid3"))
+            kid3Action.setEnabled(True)
+        elif which("kid3-qt"):
+            kid3Action.triggered.connect(lambda: self.openKID3("kid3-qt"))
+            kid3Action.setEnabled(True)
+        else:
+            kid3Action.setEnabled(False)
+
+        # Adds "Delete File" to context menu if a writable file is selected
+        deleteFileAction = menu.addAction(QCoreApplication.translate('FileTree', "Delete File"))
+        selectedFileInfo = self.model.fileInfo(self.tree.selectionModel().selectedIndexes()[0])
+        if selectedFileInfo.isFile() and selectedFileInfo.isWritable():
+            deleteFileAction.triggered.connect(
+                lambda: self.deleteFile(selectedFileInfo.absoluteFilePath()))
+            deleteFileAction.setEnabled(True)
+        else:
+            deleteFileAction.setEnabled(False)
+
+        menu.exec(self.tree.mapToGlobal(pos))
 
     def openKID3(self, command):
         """Opens KID3 using `command`."""
@@ -822,14 +835,13 @@ class FileTree(QWidget):
         if selection:
             QProcess.startDetached("kid3", [selection])
 
-    def deleteFileAction(self):
+    def deleteFile(self, filePath):
         """Deletes the selected file."""
-        selectedFile = self.model.filePath(self.tree.selectionModel().selectedIndexes()[0])
 
         msgBox = QMessageBox()
         msgBox.setText(QCoreApplication.translate('FileTree',
                                                   "Do you really want to delete the file?"))
-        msgBox.setInformativeText(selectedFile)
+        msgBox.setInformativeText(filePath)
         msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
 
         # FIXME: Workaround for missing or at least not working QMessageBox
@@ -839,7 +851,7 @@ class FileTree(QWidget):
         msgBox.button(QMessageBox.No). \
             setText(QCoreApplication.translate('QPlatformTheme', "No"))
         if msgBox.exec() == QMessageBox.Yes:
-            QFile(selectedFile).remove()
+            QFile(filePath).remove()
 
     def checkDirsStateChanged(self, state):
         """Changes the QFileIconProvider depending on `state`."""
@@ -996,9 +1008,11 @@ class TagFileSystemModel(QFileSystemModel):
         """FIXME: The idea of this class is to provide different icons depending if all
         files, some files, or no files in a directory have lyrics embedded. However,
         its unclear how subdirectories should be handled.
+        # UNFINSHED
         """
         def __init__(self):
             super().__init__()
+            # FIXME: cache information and update if the content of directory has been changed
             self.dirInfoCache = {}
 
         def icon(self, info):
