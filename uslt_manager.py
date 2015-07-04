@@ -49,6 +49,8 @@ from lngcodes import *
 # qt resource file created w/ pyrcc5 -o qrc_resources_rc.py uslt_manager.qrc
 import qrc_resources_rc
 
+from shutil import which
+
 
 class MainWindow(QMainWindow):
     """Main window of application
@@ -759,12 +761,19 @@ class FileTree(QWidget):
         reloadButton = QPushButton()
         reloadButton.setIcon(reloadButtonIcon)
 
+        # Options at bottom
+        checkDirsCheckBox = QCheckBox(
+            QCoreApplication.translate('FileTree',
+                                       "Check Directories" +
+                                       " (experimental)"))
+
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
         mainLayout.addWidget(self.addressLabel, 0, 1)
         mainLayout.addWidget(upButton, 0, 2)
         mainLayout.addWidget(reloadButton, 0, 3)
         mainLayout.addWidget(self.tree, 1, 0, 1, 4)
+        mainLayout.addWidget(checkDirsCheckBox, 2, 0, 1, 4)
         self.setLayout(mainLayout)
 
         # clear color cache of TagFileSystemModel if directories are expanded/collapsed
@@ -783,9 +792,63 @@ class FileTree(QWidget):
         upButton.clicked.connect(self.goUp)
         # Force reloading root
         reloadButton.clicked.connect(lambda: self.rootChanged(force=True))
+        #
+        checkDirsCheckBox.stateChanged.connect(self.checkDirsStateChanged)
 
         # force as this is the initialization
         self.rootChanged(force=True)
+
+    def contextMenuEvent(self, event):
+        """Adds context menu."""
+        # FIXME: Context menu is visible in the whole "left area"
+        #        It should only be visible in the file tree
+        menu = QMenu(self)
+        if which("kid3"):
+            menu.addAction(QCoreApplication.translate('FileTree', "Open in kid3"),
+                           lambda: self.openKID3("kid3"))
+        if which("kid3-qt"):
+            menu.addAction(QCoreApplication.translate('FileTree', "Open in kid3"),
+                           lambda: self.openKID3("kid3-qt"))
+
+        # FIXME: just show if a file is selected
+        menu.addAction(QCoreApplication.translate('FileTree', "Delete File"),
+                       self.deleteFileAction)
+        menu.exec(event.globalPos())
+
+    def openKID3(self, command):
+        """Opens KID3 using `command`."""
+        selection = self.model.filePath(self.tree.selectionModel().selectedIndexes()[0])
+
+        if selection:
+            QProcess.startDetached("kid3", [selection])
+
+    def deleteFileAction(self):
+        """Deletes the selected file."""
+        selectedFile = self.model.filePath(self.tree.selectionModel().selectedIndexes()[0])
+
+        msgBox = QMessageBox()
+        msgBox.setText(QCoreApplication.translate('FileTree',
+                                                  "Do you really want to delete the file?"))
+        msgBox.setInformativeText(selectedFile)
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
+        # FIXME: Workaround for missing or at least not working QMessageBox
+        #   It seems that the translations are stored in the context of QPlatformTheme
+        msgBox.button(QMessageBox.Yes). \
+            setText(QCoreApplication.translate('QPlatformTheme', "Yes"))
+        msgBox.button(QMessageBox.No). \
+            setText(QCoreApplication.translate('QPlatformTheme', "No"))
+        if msgBox.exec() == QMessageBox.Yes:
+            QFile(selectedFile).remove()
+
+    def checkDirsStateChanged(self, state):
+        """Changes the QFileIconProvider depending on `state`."""
+        if state == Qt.Checked:
+            dirIconProvider = self.model.IconProvider()
+        else:
+            dirIconProvider = (QFileIconProvider())
+
+        self.model.setIconProvider(dirIconProvider)
 
     def rootChanged(self, force=False):
         """Initializes all required properties but only if `rootPath` has really changed.
@@ -939,18 +1002,52 @@ class TagFileSystemModel(QFileSystemModel):
             self.dirInfoCache = {}
 
         def icon(self, info):
+            """Returns the appropriate icon depending on `info`."""
             if type(info) == QFileInfo and info.isDir():
-                # FIXME: custom icons could be returned here
+                if not self.checkDirectory(info.absoluteFilePath()):
+                    # FIXME: use "general" icon instead
+                    redFolderIcon = QIcon(
+                        "/usr/share/icons/breeze/places/user-folders/folder-red.svg")
+                    return redFolderIcon
                 return super().icon(info)
             else:
                 return super().icon(info)
+
+        def checkDirectory(self, path):
+            """Return True if every mp3-file in `path` have embedded lyrics. Otherwise, False.
+            Subdirectories are not checked!"""
+            fileList = QDir(path).entryList(QDir.Files | QDir.Readable | QDir.NoDotAndDotDot)
+            fileList = [os.path.join(path, s) for s in fileList]
+
+            allHaveLyrics = True
+            allHaveMP3 = True
+            for filePath in fileList:
+                try:
+                    if ((mutagen.File(filePath) is not None) and
+                            ('audio/mp3' in mutagen.File(filePath).mime)):
+                        if not ID3(filePath).getall('USLT'):
+                            allHaveLyrics = False
+                            break
+                    else:
+                        allHaveMP3 = False
+                except PermissionError:
+                    pass
+
+                except mutagen.id3._util.ID3NoHeaderError:
+                    allHaveMP3 = False
+
+                except mutagen.mp3.HeaderNotFoundError:
+                    # corrupt mp3
+                    allHaveMP3 = False
+
+            return allHaveLyrics
 
     def __init__(self, parent=None):
         super().__init__(parent)
         #: cache for file informations to speed-up painting.
         #: QModelIndex is used is as key parameter
         self.fileInfoCache = {}
-        self.setIconProvider(self.IconProvider())
+        #self.setIconProvider(self.IconProvider())
 
     def headerData(self, section, orientation, role):
         """Reimplemented to be able to add an additional header for
