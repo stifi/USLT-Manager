@@ -770,13 +770,21 @@ class FileTree(QWidget):
                                        "Check Directories" +
                                        " (experimental)"))
 
+        self.dirCheckProgressBar = QProgressBar()
+        self.dirCheckProgressBar.setVisible(False)
+        #self.initDirCheckProgressBar(100)
+
+        bottomLineLayout = QBoxLayout(QBoxLayout.LeftToRight)
+        bottomLineLayout.addWidget(checkDirsCheckBox)
+        bottomLineLayout.addWidget(self.dirCheckProgressBar)
+
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
         mainLayout.addWidget(self.addressLabel, 0, 1)
         mainLayout.addWidget(upButton, 0, 2)
         mainLayout.addWidget(reloadButton, 0, 3)
         mainLayout.addWidget(self.tree, 1, 0, 1, 4)
-        mainLayout.addWidget(checkDirsCheckBox, 2, 0, 1, 4)
+        mainLayout.addLayout(bottomLineLayout, 2, 0, 1, 3)
         self.setLayout(mainLayout)
 
         # clear color cache of TagFileSystemModel if directories are expanded/collapsed
@@ -800,6 +808,11 @@ class FileTree(QWidget):
 
         # force as this is the initialization
         self.rootChanged(force=True)
+
+
+    def initDirCheckProgressBar(self, maximum):
+        self.dirCheckProgressBar.setVisible(True)
+        self.dirCheckProgressBar.setMaximum(maximum)
 
     def treeContextMenu(self, pos):
         """Adds context menu."""
@@ -856,7 +869,9 @@ class FileTree(QWidget):
     def checkDirsStateChanged(self, state):
         """Changes the QFileIconProvider depending on `state`."""
         if state == Qt.Checked:
-            dirIconProvider = self.model.IconProvider()
+            dirIconProvider = self.model.IconProvider(self.rootPath)
+            dirIconProvider.emitter.checkDirsStarted.connect(self.initDirCheckProgressBar)
+            dirIconProvider.emitter.cntDirsChecked.connect(self.dirCheckProgressBar.setValue)
         else:
             dirIconProvider = (QFileIconProvider())
 
@@ -874,6 +889,7 @@ class FileTree(QWidget):
             self.model.setRootPath(self.rootPath)
             self.tree.setRootIndex(self.model.index(self.rootPath))
             self.createFileSystemWatcher(self.rootPath)
+            self.dirCheckProgressBar.setValue(0) # reset progress bar
             # Emit signal to notify for a root update. The parameter is set to None as no
             # file is selected if the root is changed.
             self.nonmp3Selected.emit(None)
@@ -1010,14 +1026,33 @@ class TagFileSystemModel(QFileSystemModel):
         its unclear how subdirectories should be handled.
         # UNFINSHED
         """
-        def __init__(self):
+        
+        class Emitter(QObject):
+            """Signals can only be emitted from classes derived from QOject. As QFileIconProvider
+            is not derived from QOject this nested class provides this feature."""
+
+            checkDirsStarted = pyqtSignal(int)
+            cntDirsChecked   = pyqtSignal(int)
+
+            def __init__(self):
+                super().__init__()
+        
+        def __init__(self, rootPath = None):
             super().__init__()
             # FIXME: cache information and update if the content of directory has been changed
             self.dirInfoCache = {}
+            self.emitter = TagFileSystemModel.IconProvider.Emitter()
+            self.dirsChecked = 0
+            self.rootPath = rootPath
+            self.cntDirs = len(QDir(rootPath).entryList(QDir.Dirs | QDir.Readable ))
+            self.emitter.cntDirsChecked.emit(0)
 
         def icon(self, info):
             """Returns the appropriate icon depending on `info`."""
             if type(info) == QFileInfo and info.isDir():
+                self.emitter.checkDirsStarted.emit(self.cntDirs)
+                self.emitter.cntDirsChecked.emit(self.dirsChecked)
+                self.dirsChecked += 1
                 if not self.checkDirectory(info.absoluteFilePath()):
                     # FIXME: use "general" icon instead
                     redFolderIcon = QIcon(
@@ -1030,12 +1065,14 @@ class TagFileSystemModel(QFileSystemModel):
         def checkDirectory(self, path):
             """Return True if every mp3-file in `path` have embedded lyrics. Otherwise, False.
             Subdirectories are not checked!"""
+
             fileList = QDir(path).entryList(QDir.Files | QDir.Readable | QDir.NoDotAndDotDot)
             fileList = [os.path.join(path, s) for s in fileList]
 
             allHaveLyrics = True
             allHaveMP3 = True
-            for filePath in fileList:
+
+            for cnt, filePath in enumerate(fileList):
                 try:
                     if ((mutagen.File(filePath) is not None) and
                             ('audio/mp3' in mutagen.File(filePath).mime)):
