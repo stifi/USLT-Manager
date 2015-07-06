@@ -3,42 +3,42 @@
 <context>
     <name>AddLyricsDialog</name>
     <message>
-        <location filename="uslt_manager.py" line="502"/>
+        <location filename="uslt_manager.py" line="505"/>
         <source>Add Lyrics</source>
         <translation>Text hinzufügen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="517"/>
+        <location filename="uslt_manager.py" line="520"/>
         <source>Language:</source>
         <translation>Sprache:</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="530"/>
+        <location filename="uslt_manager.py" line="533"/>
         <source>Description:</source>
         <translation>Beschreibung:</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="541"/>
+        <location filename="uslt_manager.py" line="544"/>
         <source>Encoding:</source>
         <translation>Kodierung:</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="550"/>
+        <location filename="uslt_manager.py" line="553"/>
         <source>Lyrics:</source>
         <translation>Text:</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="597"/>
+        <location filename="uslt_manager.py" line="600"/>
         <source>Ok</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="558"/>
+        <location filename="uslt_manager.py" line="561"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="585"/>
+        <location filename="uslt_manager.py" line="588"/>
         <source>Only ASCII characters are allowed for description.</source>
         <translation>Nur ASCII Zeichen für Beschreibung erlaubt.</translation>
     </message>
@@ -51,22 +51,22 @@
         <translation type="obsolete">Verzeichnisse prüfen (Experimentell! Das kann sehr lange dauern.)</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="807"/>
+        <location filename="uslt_manager.py" line="810"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="818"/>
+        <location filename="uslt_manager.py" line="821"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="839"/>
+        <location filename="uslt_manager.py" line="842"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="764"/>
+        <location filename="uslt_manager.py" line="767"/>
         <source>Check Directories (experimental)</source>
         <translation>Verzeichnisse prüfen (experimentell)</translation>
     </message>
@@ -2510,32 +2510,32 @@
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="uslt_manager.py" line="346"/>
+        <location filename="uslt_manager.py" line="349"/>
         <source>Discard</source>
         <translation>Verwerfen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="349"/>
+        <location filename="uslt_manager.py" line="352"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="352"/>
+        <location filename="uslt_manager.py" line="355"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="326"/>
+        <location filename="uslt_manager.py" line="329"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="847"/>
+        <location filename="uslt_manager.py" line="850"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="849"/>
+        <location filename="uslt_manager.py" line="852"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2543,7 +2543,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="uslt_manager.py" line="1035"/>
+        <location filename="uslt_manager.py" line="1038"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>
@@ -2581,17 +2581,17 @@
         <translation>Tag neu laden</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="319"/>
+        <location filename="uslt_manager.py" line="322"/>
         <source>Could not write to file!</source>
         <translation>Datei konnte nicht geschrieben werden!</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="336"/>
+        <location filename="uslt_manager.py" line="339"/>
         <source>Lyrics have been modified.</source>
         <translation>Text wurde geändert.</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="337"/>
+        <location filename="uslt_manager.py" line="340"/>
         <source>Do you want to save your changes?</source>
         <translation>Äbderungen speichern?</translation>
     </message>

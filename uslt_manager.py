@@ -282,10 +282,13 @@ class TagWidget(QWidget):
 
     def searchLyricsActionReceiver(self):
         """Search for lyrics in external browser."""
-        #FIXME: Use QUrlQuery or at least escape & in artist or title
-        QDesktopServices.openUrl(QUrl("https://www.google.com/search?as_q=\"lyrics\"+\"" +
-                                      self.tag.artist + "\"+\"" + self.tag.title + "\"")
-                        .adjusted(QUrl.FullyEncoded))
+        queryUrl = QUrlQuery()
+        queryUrl.addQueryItem("as_q",
+                              "\"lyrics\"+\"" + self.tag.artist + "\"+\"" + self.tag.title + "\"")
+        finalUrl = QUrl("https://www.google.com/search")
+        finalUrl.setQuery(queryUrl)
+
+        QDesktopServices.openUrl(finalUrl)
 
     def reloadTagActionReceiver(self):
         """Reload view by loading tag from file again."""
