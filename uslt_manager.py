@@ -282,6 +282,7 @@ class TagWidget(QWidget):
 
     def searchLyricsActionReceiver(self):
         """Search for lyrics in external browser."""
+        #FIXME: Use QUrlQuery or at least escape & in artist or title
         QDesktopServices.openUrl(QUrl("https://www.google.com/search?as_q=\"lyrics\"+\"" +
                                       self.tag.artist + "\"+\"" + self.tag.title + "\"")
                         .adjusted(QUrl.FullyEncoded))
@@ -413,13 +414,12 @@ class TagWidget(QWidget):
         """Load language/description keys and show one selected lyrics."""
         self.lyricsSelection.clear()
         self.lyricsDisplay.clear()
-
-        self.addLyricsAction.setDisabled(not self.tag.writeable)
+        self.addLyricsAction.setDisabled(not self.tag.writable)
         self.searchLyricsAction.setDisabled(False)
 
         if self.tag.lyrics:
-            self.editLyricsAction.setDisabled(not self.tag.writeable)
-            self.removeLyricsAction.setDisabled(not self.tag.writeable)
+            self.editLyricsAction.setDisabled(not self.tag.writable)
+            self.removeLyricsAction.setDisabled(not self.tag.writable)
             self.lyricsSelection.setDisabled(False)
             self.lyricsEncoding.setDisabled(False)
             for key, lyrics in self.tag.lyrics.items():
@@ -616,17 +616,13 @@ class ID3Tag():
         | value[1] = lyrics
     ID3Tag['filePath']
         filename and path
-    ID3Tag['writeable']
+    ID3Tag['writable']
         if file can be written
     """
     def __init__(self, filePath):
-
         self._filePath = filePath
-
-        self._writeable = os.access(self._filePath, os.W_OK)
-
+        self._writable = os.access(self._filePath, os.W_OK)
         id3tag = ID3(self._filePath)
-
         self._tag = {}
         try:
             self._tag['artist'] = str(id3tag.getall('TPE1')[0])
@@ -685,9 +681,9 @@ class ID3Tag():
         return self._tag['USLT']
 
     @property
-    def writeable(self):
-        """True if file is writeable, else False."""
-        return self._writeable
+    def writable(self):
+        """True if file is writable, else False."""
+        return self._writable
 
 
 class FileTree(QWidget):
@@ -769,6 +765,8 @@ class FileTree(QWidget):
             QCoreApplication.translate('FileTree',
                                        "Check Directories" +
                                        " (experimental)"))
+        bottomLineLayout = QBoxLayout(QBoxLayout.LeftToRight)
+        bottomLineLayout.addWidget(checkDirsCheckBox)
 
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
@@ -776,7 +774,7 @@ class FileTree(QWidget):
         mainLayout.addWidget(upButton, 0, 2)
         mainLayout.addWidget(reloadButton, 0, 3)
         mainLayout.addWidget(self.tree, 1, 0, 1, 4)
-        mainLayout.addWidget(checkDirsCheckBox, 2, 0, 1, 4)
+        mainLayout.addLayout(bottomLineLayout, 2, 0, 1, 3)
         self.setLayout(mainLayout)
 
         # clear color cache of TagFileSystemModel if directories are expanded/collapsed
@@ -837,7 +835,6 @@ class FileTree(QWidget):
 
     def deleteFile(self, filePath):
         """Deletes the selected file."""
-
         msgBox = QMessageBox()
         msgBox.setText(QCoreApplication.translate('FileTree',
                                                   "Do you really want to delete the file?"))
@@ -854,13 +851,11 @@ class FileTree(QWidget):
             QFile(filePath).remove()
 
     def checkDirsStateChanged(self, state):
-        """Changes the QFileIconProvider depending on `state`."""
+        """Depending on `state` directory checking is enabled or nor."""
         if state == Qt.Checked:
-            dirIconProvider = self.model.IconProvider()
+            self.model.dirChecksEnable = True
         else:
-            dirIconProvider = (QFileIconProvider())
-
-        self.model.setIconProvider(dirIconProvider)
+            self.model.dirChecksEnable = False
 
     def rootChanged(self, force=False):
         """Initializes all required properties but only if `rootPath` has really changed.
@@ -873,6 +868,7 @@ class FileTree(QWidget):
             self.rootPath = self.addressLabel.text()
             self.model.setRootPath(self.rootPath)
             self.tree.setRootIndex(self.model.index(self.rootPath))
+            self.model.clearFileInfoCache()
             self.createFileSystemWatcher(self.rootPath)
             # Emit signal to notify for a root update. The parameter is set to None as no
             # file is selected if the root is changed.
@@ -1003,65 +999,12 @@ class TagFileSystemModel(QFileSystemModel):
 
     If file is an mp3 file it gets colored depending if lyrics are available or not.
     """
-
-    class IconProvider(QFileIconProvider):
-        """FIXME: The idea of this class is to provide different icons depending if all
-        files, some files, or no files in a directory have lyrics embedded. However,
-        its unclear how subdirectories should be handled.
-        # UNFINSHED
-        """
-        def __init__(self):
-            super().__init__()
-            # FIXME: cache information and update if the content of directory has been changed
-            self.dirInfoCache = {}
-
-        def icon(self, info):
-            """Returns the appropriate icon depending on `info`."""
-            if type(info) == QFileInfo and info.isDir():
-                if not self.checkDirectory(info.absoluteFilePath()):
-                    # FIXME: use "general" icon instead
-                    redFolderIcon = QIcon(
-                        "/usr/share/icons/breeze/places/user-folders/folder-red.svg")
-                    return redFolderIcon
-                return super().icon(info)
-            else:
-                return super().icon(info)
-
-        def checkDirectory(self, path):
-            """Return True if every mp3-file in `path` have embedded lyrics. Otherwise, False.
-            Subdirectories are not checked!"""
-            fileList = QDir(path).entryList(QDir.Files | QDir.Readable | QDir.NoDotAndDotDot)
-            fileList = [os.path.join(path, s) for s in fileList]
-
-            allHaveLyrics = True
-            allHaveMP3 = True
-            for filePath in fileList:
-                try:
-                    if ((mutagen.File(filePath) is not None) and
-                            ('audio/mp3' in mutagen.File(filePath).mime)):
-                        if not ID3(filePath).getall('USLT'):
-                            allHaveLyrics = False
-                            break
-                    else:
-                        allHaveMP3 = False
-                except PermissionError:
-                    pass
-
-                except mutagen.id3._util.ID3NoHeaderError:
-                    allHaveMP3 = False
-
-                except mutagen.mp3.HeaderNotFoundError:
-                    # corrupt mp3
-                    allHaveMP3 = False
-
-            return allHaveLyrics
-
     def __init__(self, parent=None):
         super().__init__(parent)
         #: cache for file informations to speed-up painting.
         #: QModelIndex is used is as key parameter
         self.fileInfoCache = {}
-        #self.setIconProvider(self.IconProvider())
+        self.dirChecksEnable = False
 
     def headerData(self, section, orientation, role):
         """Reimplemented to be able to add an additional header for
@@ -1103,6 +1046,23 @@ class TagFileSystemModel(QFileSystemModel):
                 else:
                     self.fileInfoCache[index, 'color'] = super().data(index, role)
             return self.fileInfoCache[index, 'color']
+
+        if (self.dirChecksEnable and
+                role == Qt.DecorationRole and
+                index.column() == 0 and
+                self.fileInfo(index).isDir()):
+            if (index, 'icon') not in self.fileInfoCache:
+                if not self.checkDirectory(self.fileInfo(index).absoluteFilePath()):
+                    # FIXME: use "general" icon instead
+                    self.fileInfoCache[index, 'icon'] = QIcon(
+                        "/usr/share/icons/breeze/places/user-folders/folder-red.svg")
+                else:
+                    # FIXME: the following line causes Python to crash! As a workaround
+                    #        a new QFileIconProvider is generated to get the icon of a folder
+                    # self.fileInfoCache[index, 'icon'] = self.fileIcon(index)
+                    self.fileInfoCache[index, 'icon'] = QFileIconProvider().icon(
+                        QFileIconProvider.Folder)
+            return self.fileInfoCache[index, 'icon']
 
         return super().data(index, role)
 
@@ -1146,6 +1106,36 @@ class TagFileSystemModel(QFileSystemModel):
     def clearFileInfoCache(self):
         """Clears self.fileInfoCache."""
         self.fileInfoCache = {}
+
+    def checkDirectory(self, path):
+        """Return True if every mp3-file in `path` have embedded lyrics. Otherwise, False.
+        Subdirectories are not checked!"""
+        fileList = QDir(path).entryList(QDir.Files | QDir.Readable | QDir.NoDotAndDotDot)
+        fileList = [os.path.join(path, s) for s in fileList]
+
+        allHaveLyrics = True
+        allHaveMP3 = True
+        for filePath in fileList:
+            try:
+                if ((mutagen.File(filePath) is not None) and
+                        ('audio/mp3' in mutagen.File(filePath).mime)):
+                    if not ID3(filePath).getall('USLT'):
+                        allHaveLyrics = False
+                        break
+                else:
+                    allHaveMP3 = False
+            except PermissionError:
+                pass
+
+            except mutagen.id3._util.ID3NoHeaderError:
+                allHaveMP3 = False
+
+            except mutagen.mp3.HeaderNotFoundError:
+                # corrupt mp3
+                allHaveMP3 = False
+
+        return allHaveLyrics
+
 
 if __name__ == '__main__':
     import sys
