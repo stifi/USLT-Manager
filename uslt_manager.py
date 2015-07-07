@@ -14,6 +14,7 @@
 #                tag of mp3 files
 #
 #   Thanks: o Michael Urman for Python-Mutagen and all people who contributed
+#           o Breeze (Plasma 5 icon theme) project members and contributers
 #
 ##############################################################################
 #
@@ -68,7 +69,7 @@ class MainWindow(QMainWindow):
         # Absolute path is required here.
         # However, QCoreApplication.applicationDirPath()) will not work since it will
         # return the path to the python executable. Thus qrc_resources_rc is used instead
-        mainIcon = QIcon(":/lyrics_id3_icon.svg")
+        mainIcon = QIcon(":/icons/lyrics_id3_icon.svg")
         self.setWindowIcon(mainIcon)
         self.setWindowTitle("USLT Manager[*]")
 
@@ -106,7 +107,7 @@ class MainWindow(QMainWindow):
 
             fileTree = FileTree(rootPath)
             self.tagWidget = TagWidget()
-            closeButtonIcon = QIcon.fromTheme("application-exit")
+            closeButtonIcon = QIcon.fromTheme("application-exit", QIcon(":/icons/application-exit"))
             self.closeButton = QPushButton(QCoreApplication.translate('MainWindow', "Exit"))
             self.closeButton.setIcon(closeButtonIcon)
 
@@ -179,12 +180,18 @@ class TagWidget(QWidget):
         lyricsModifyToolbar.setFloatable(False)
         lyricsModifyToolbar.setMovable(False)
 
-        addLyricsButtonIcon = QIcon.fromTheme("list-add")
-        removeLyricsButtonIcon = QIcon.fromTheme("list-remove")
-        editLyricsButtonIcon = QIcon.fromTheme("insert-text")
-        searchLyricsButtonIcon = QIcon.fromTheme("system-search")
-        saveTagButtonIcon = QIcon.fromTheme("document-save")
-        reloadTagButtonIcon = QIcon.fromTheme("view-refresh")
+        addLyricsButtonIcon = QIcon.fromTheme("list-add",
+                                              QIcon(":/icons/list-add.svg"))
+        removeLyricsButtonIcon = QIcon.fromTheme("list-remove",
+                                                 QIcon(":/icons/list-remove.svg"))
+        editLyricsButtonIcon = QIcon.fromTheme("insert-text",
+                                               QIcon(":/icons/insert-text.svg"))
+        searchLyricsButtonIcon = QIcon.fromTheme("system-search",
+                                                 QIcon(":/icons/system-search.svg"))
+        saveTagButtonIcon = QIcon.fromTheme("document-save",
+                                            QIcon(":/icons/document-save.svg"))
+        reloadTagButtonIcon = QIcon.fromTheme("view-refresh",
+                                              QIcon(":/icons/view-refresh.svg"))
 
         self.editLyricsAction = lyricsModifyToolbar.addAction(
             editLyricsButtonIcon, QCoreApplication.translate('TagWidget', "Edit Lyrics"),
@@ -323,8 +330,8 @@ class TagWidget(QWidget):
                 'TagWidget', "Could not write to file!"))
             errorMessageDialog.setText(str(err))
             errorMessageDialog.setStandardButtons(QMessageBox.Ok)
-            # FIXME: Workaround for missing or at least not working QMessageBox
-            #   It seems that the translations are stored in the context of QPlatformTheme
+            # FIXME: Workaround for missing or at least not working translations QMessageBox
+            #   buttons. It seems that the translations are stored in the context of QPlatformTheme
             errorMessageDialog.button(QMessageBox.Ok). \
                 setText(QCoreApplication.translate('QPlatformTheme', "Ok"))
 
@@ -342,8 +349,8 @@ class TagWidget(QWidget):
         msgBox.setStandardButtons(buttons)
         msgBox.setDefaultButton(QMessageBox.Save)
 
-        # FIXME: Workaround for missing or at least not working QMessageBox
-        #   It seems that the translations are stored in the context of QPlatformTheme
+        # FIXME: Workaround for missing or at least not working translations QMessageBox
+        #   buttons. It seems that the translations are stored in the context of QPlatformTheme
         if msgBox.button(QMessageBox.Discard) is not None:
             msgBox.button(QMessageBox.Discard). \
                 setText(QCoreApplication.translate('QPlatformTheme', "Discard"))
@@ -554,10 +561,10 @@ class AddLyricsDialog(QDialog):
                                  self.lyricsEdit)
 
         # Buttons
-        okButtonIcon = QIcon.fromTheme("dialog-ok")
+        okButtonIcon = QIcon.fromTheme("dialog-ok", QIcon(":/icons/dialog-ok.svg"))
         self.okButton = QPushButton(QCoreApplication.translate('AddLyricsDialog', "Ok"))
         self.okButton.setIcon(okButtonIcon)
-        cancelButtonIcon = QIcon.fromTheme("dialog-close")
+        cancelButtonIcon = QIcon.fromTheme("dialog-close", QIcon(":/icons/dialog-close.svg"))
         cancelButton = QPushButton(QCoreApplication.translate('AddLyricsDialog', "Cancel"))
         cancelButton.setIcon(cancelButtonIcon)
 
@@ -582,7 +589,7 @@ class AddLyricsDialog(QDialog):
         """Notify user for invalid characters in description by changing the text and
         disabling the okButton.
         """
-        okButtonIcon = QIcon.fromTheme("dialog-error")
+        okButtonIcon = QIcon.fromTheme("dialog-error", QIcon(":/icons/dialog-error.svg"))
         self.okButton.setDisabled(True)
         self.okButton.setFlat(True)
         self.okButton.setText(QCoreApplication.translate('AddLyricsDialog',
@@ -593,8 +600,8 @@ class AddLyricsDialog(QDialog):
         """Notify user for valid only characters in description by changing the text and
         enabling the okButton.
         """
-        okButtonIcon = QIcon.fromTheme("dialog-error")
-        okButtonIcon = QIcon.fromTheme("dialog-ok")
+        okButtonIcon = QIcon.fromTheme("dialog-error", QIcon(":/icons/dialog-error.svg"))
+        okButtonIcon = QIcon.fromTheme("dialog-ok", QIcon(":/icons/dialog-ok.svg"))
         self.okButton.setDisabled(False)
         self.okButton.setFlat(False)
         self.okButton.setText(QCoreApplication.translate('AddLyricsDialog', "Ok"))
@@ -642,8 +649,8 @@ class ID3Tag():
         for key in lyricsKeys:
             self._tag['USLT'][(key.lang, key.desc)] = [key.encoding, key.text]
 
+        # Handle is closed. File updates must be monitored elsewhere
         del id3tag
-        #FIXME: If the file handle is closed, the file might be modified in the background.
 
     def save(self):
         """Save self._tag['USLT'] to file"""
@@ -744,7 +751,7 @@ class FileTree(QWidget):
         self.tree.customContextMenuRequested.connect(self.treeContextMenu)
 
          # Address line with address label, navigation icons and browser Icon
-        openBrowserIcon = QIcon.fromTheme("folder")
+        openBrowserIcon = QIcon.fromTheme("folder", QIcon(":/icons/folder.svg"))
         openBrowserButton = QPushButton()
         openBrowserButton.setIcon(openBrowserIcon)
         self.addressLabel = QLineEdit(self.rootPath)
@@ -756,10 +763,10 @@ class FileTree(QWidget):
         addressLabelShortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_L), self)
         addressLabelShortcut.activated.connect(self.addressLabel.selectAll)
         addressLabelShortcut.activated.connect(self.addressLabel.setFocus)
-        upButtonIcon = QIcon.fromTheme("go-up")
+        upButtonIcon = QIcon.fromTheme("go-up", QIcon(":/icons/go-up.svg"))
         upButton = QPushButton()
         upButton.setIcon(upButtonIcon)
-        reloadButtonIcon = QIcon.fromTheme("view-refresh")
+        reloadButtonIcon = QIcon.fromTheme("view-refresh", QIcon(":/icons/view-refresh.svg"))
         reloadButton = QPushButton()
         reloadButton.setIcon(reloadButtonIcon)
 
@@ -768,8 +775,14 @@ class FileTree(QWidget):
             QCoreApplication.translate('FileTree',
                                        "Check Directories" +
                                        " (experimental)"))
+        self.progressBarDirCheck = QProgressBar()
+        self.progressBarDirCheck.setMinimum(0)
+        self.progressBarDirCheck.setMaximum(0)
+        self.progressBarDirCheck.setVisible(False)
+
         bottomLineLayout = QBoxLayout(QBoxLayout.LeftToRight)
         bottomLineLayout.addWidget(checkDirsCheckBox)
+        bottomLineLayout.addWidget(self.progressBarDirCheck)
 
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
@@ -801,6 +814,11 @@ class FileTree(QWidget):
 
         # force as this is the initialization
         self.rootChanged(force=True)
+
+    def showProgressBarDirCheck(self):
+        """Show progress bar and initialization of the timeout timer."""
+        self.progressTimeoutTimer.start(500)
+        self.progressBarDirCheck.setVisible(True)
 
     def treeContextMenu(self, pos):
         """Adds context menu."""
@@ -844,8 +862,8 @@ class FileTree(QWidget):
         msgBox.setInformativeText(filePath)
         msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
 
-        # FIXME: Workaround for missing or at least not working QMessageBox
-        #   It seems that the translations are stored in the context of QPlatformTheme
+        # FIXME: Workaround for missing or at least not working translations QMessageBox
+        #   buttons. It seems that the translations are stored in the context of QPlatformTheme
         msgBox.button(QMessageBox.Yes). \
             setText(QCoreApplication.translate('QPlatformTheme', "Yes"))
         msgBox.button(QMessageBox.No). \
@@ -857,8 +875,22 @@ class FileTree(QWidget):
         """Depending on `state` directory checking is enabled or nor."""
         if state == Qt.Checked:
             self.model.dirChecksEnable = True
+
+            # Generates a timeout for the progress bar shown during directory checking
+            # Every time a file is checked (in directory check mode) by the TagFileSystemModel
+            # the signal fileCheck is emitted. The signal causes the progress bar to be shown
+            # and the timeout to be set. After timeout the progress bar is hidden again.
+            self.progressTimeoutTimer = QTimer()
+            self.model.emitter.fileCheck.connect(self.showProgressBarDirCheck)
+            self.progressTimeoutTimer.timeout.connect(
+                lambda: self.progressBarDirCheck.setVisible(False))
         else:
             self.model.dirChecksEnable = False
+            self.progressBarDirCheck.setVisible(False)
+            try:
+                del self.progressTimeoutTimer
+            except AttributeError:
+                pass
 
     def rootChanged(self, force=False):
         """Initializes all required properties but only if `rootPath` has really changed.
@@ -1001,13 +1033,33 @@ class TagFileSystemModel(QFileSystemModel):
     about the ID3 tag version.
 
     If file is an mp3 file it gets colored depending if lyrics are available or not.
+
+    Additionally, the class provides a check for all files in a directory. To enable this check
+    `self.dirChecksEnable` must be `True`. Depending of the result of the check different folder
+    icons are returned. The check is not recursive! When if file is checked in this mode the signal
+    `fileCheck` is emitted.
     """
+    class Emitter(QObject):
+        """Signals can only be emitted from classes derived from QOject. As QFileIconProvider
+        is not derived from QOject this nested class provides this feature."""
+        fileCheck = pyqtSignal()
+
+        def __init__(self):
+            super().__init__()
+
     def __init__(self, parent=None):
         super().__init__(parent)
         #: cache for file informations to speed-up painting.
         #: QModelIndex is used is as key parameter
         self.fileInfoCache = {}
+        #: enables directory checking
         self.dirChecksEnable = False
+        # preload icons for speed
+        # FIXME: fallback does not work in KDE due to Bug 342906
+        self.redFolderIcon = QIcon.fromTheme("folder-red", QIcon(":/icons/folder-red.svg"))
+        self.standardFolderIcon = QIcon.fromTheme("folder", QIcon(":/icons/folder.svg"))
+
+        self.emitter = TagFileSystemModel.Emitter()
 
     def headerData(self, section, orientation, role):
         """Reimplemented to be able to add an additional header for
@@ -1026,6 +1078,9 @@ class TagFileSystemModel(QFileSystemModel):
         available or not. Additionally, the ID3v2 column is generated.
 
         Before the file itself is analyzed the cached information is checked.
+
+        If `self.dirChecksEnable` is set to `True` the content of sub-directories is checked
+        as well.
         """
         # add ID3v2 version number into dedicated column.
         if ((role == Qt.DisplayRole)) and (index.column() == self.columnCount() - 1):
@@ -1050,21 +1105,17 @@ class TagFileSystemModel(QFileSystemModel):
                     self.fileInfoCache[index, 'color'] = super().data(index, role)
             return self.fileInfoCache[index, 'color']
 
+        # directory checks if requested
         if (self.dirChecksEnable and
                 role == Qt.DecorationRole and
                 index.column() == 0 and
                 self.fileInfo(index).isDir()):
             if (index, 'icon') not in self.fileInfoCache:
                 if not self.checkDirectory(self.fileInfo(index).absoluteFilePath()):
-                    # FIXME: use "general" icon instead
-                    self.fileInfoCache[index, 'icon'] = QIcon(
-                        "/usr/share/icons/breeze/places/user-folders/folder-red.svg")
+                    self.fileInfoCache[index, 'icon'] = self.redFolderIcon
                 else:
-                    # FIXME: the following line causes Python to crash! As a workaround
-                    #        a new QFileIconProvider is generated to get the icon of a folder
-                    # self.fileInfoCache[index, 'icon'] = self.fileIcon(index)
-                    self.fileInfoCache[index, 'icon'] = QFileIconProvider().icon(
-                        QFileIconProvider.Folder)
+                    self.fileInfoCache[index, 'icon'] = self.standardFolderIcon
+
             return self.fileInfoCache[index, 'icon']
 
         return super().data(index, role)
@@ -1106,19 +1157,22 @@ class TagFileSystemModel(QFileSystemModel):
         """
         return (self.isMP3(filePath) and ID3(filePath).getall('USLT')) or False
 
-    def clearFileInfoCache(self):
-        """Clears self.fileInfoCache."""
-        self.fileInfoCache = {}
-
     def checkDirectory(self, path):
         """Return True if every mp3-file in `path` have embedded lyrics. Otherwise, False.
-        Subdirectories are not checked!"""
+        Subdirectories are not checked!
+
+        The pyqtSignal `fileCheck` is emitted every time a file is checked.
+
+        :return: if all mp3 files have lyrics
+        :rtype: boolean
+        """
         fileList = QDir(path).entryList(QDir.Files | QDir.Readable | QDir.NoDotAndDotDot)
         fileList = [os.path.join(path, s) for s in fileList]
 
         allHaveLyrics = True
-        allHaveMP3 = True
+        allAreMP3 = True
         for filePath in fileList:
+            self.emitter.fileCheck.emit()
             try:
                 if ((mutagen.File(filePath) is not None) and
                         ('audio/mp3' in mutagen.File(filePath).mime)):
@@ -1126,19 +1180,20 @@ class TagFileSystemModel(QFileSystemModel):
                         allHaveLyrics = False
                         break
                 else:
-                    allHaveMP3 = False
+                    allAreMP3 = False
             except PermissionError:
                 pass
-
             except mutagen.id3._util.ID3NoHeaderError:
-                allHaveMP3 = False
-
+                allAreMP3 = False
             except mutagen.mp3.HeaderNotFoundError:
                 # corrupt mp3
-                allHaveMP3 = False
+                allAreMP3 = False
 
         return allHaveLyrics
 
+    def clearFileInfoCache(self):
+        """Clears self.fileInfoCache."""
+        self.fileInfoCache = {}
 
 if __name__ == '__main__':
     import sys

@@ -1,6 +1,19 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file>lyrics_id3_icon.svg</file>
 		<file>uslt_manager_de.qm</file>
+    <file>icons/lyrics_id3_icon.svg</file>
+		<file>icons/application-exit.svg</file>
+		<file>icons/list-add.svg</file>
+		<file>icons/list-remove.svg</file>
+		<file>icons/insert-text.svg</file>
+		<file>icons/system-search.svg</file>
+		<file>icons/document-save.svg</file>
+		<file>icons/view-refresh.svg</file>
+		<file>icons/dialog-ok.svg</file>
+		<file>icons/dialog-close.svg</file>
+		<file>icons/dialog-error.svg</file>
+		<file>icons/folder.svg</file>
+		<file>icons/folder-red.svg</file>
+		<file>icons/go-up.svg</file>
 </qresource>
 </RCC>
