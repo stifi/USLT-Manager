@@ -47,7 +47,7 @@ from mutagen.id3 import ID3, USLT, Encoding
 
 from lngcodes import *
 
-# qt resource file created w/ pyrcc5 -o qrc_resources_rc.py uslt_manager.qrc
+# qt resource file is created w/ pyrcc5 -o qrc_resources_rc.py uslt_manager.qrc
 import qrc_resources_rc
 
 from shutil import which
@@ -290,8 +290,11 @@ class TagWidget(QWidget):
     def searchLyricsActionReceiver(self):
         """Search for lyrics in external browser."""
         queryUrl = QUrlQuery()
+        # If string is None convert it to empty string
+        toStr = lambda s: s or ""
         queryUrl.addQueryItem("as_q",
-                              "\"lyrics\"+\"" + self.tag.artist + "\"+\"" + self.tag.title + "\"")
+                              '"lyrics"+"' + toStr(self.tag.artist) +
+                              '"+"' + toStr(self.tag.title) + '"')
         finalUrl = QUrl("https://www.google.com/search")
         finalUrl.setQuery(queryUrl)
 
@@ -746,6 +749,12 @@ class FileTree(QWidget):
         self.tree = QTreeView()
         self.tree.setModel(self.model)
         self.tree.setRootIndex(self.model.index(self.rootPath))
+        # remove file type column
+        self.tree.hideColumn(2)
+        # fill available space with first column (Name) and adjust last column (ID3v2) to content
+        self.tree.header().setStretchLastSection(False)
+        self.tree.header().setSectionResizeMode(0, QHeaderView.Stretch)
+        self.tree.header().setSectionResizeMode(4, QHeaderView.ResizeToContents)
         # create a custom context menu for QTreeView
         self.tree.setContextMenuPolicy(Qt.CustomContextMenu)
         self.tree.customContextMenuRequested.connect(self.treeContextMenu)
@@ -794,8 +803,10 @@ class FileTree(QWidget):
         self.setLayout(mainLayout)
 
         # clear color cache of TagFileSystemModel if directories are expanded/collapsed
-        self.tree.expanded.connect(self.model.clearFileInfoCache)
-        self.tree.collapsed.connect(self.model.clearFileInfoCache)
+        self.tree.collapsed.connect(self.model.removeFromFileInfoCache)
+        # FIXME: temporarily disabled as cache cleaning might not be required on expansion t.b.v.
+        # self.tree.expanded.connect(self.model.clearFileInfoCache)
+
         # Process newly selected files (e.g. emit mp3Selected)
         self.tree.selectionModel().selectionChanged.connect(self.selectionChanged)
         # Double clicked on selection
@@ -884,6 +895,8 @@ class FileTree(QWidget):
             self.model.emitter.fileCheck.connect(self.showProgressBarDirCheck)
             self.progressTimeoutTimer.timeout.connect(
                 lambda: self.progressBarDirCheck.setVisible(False))
+            self.showProgressBarDirCheck()
+
         else:
             self.model.dirChecksEnable = False
             self.progressBarDirCheck.setVisible(False)
@@ -932,8 +945,8 @@ class FileTree(QWidget):
         #print("New watcher: " + ",".join(fileList))
 
         # clear color cache of TagFileSystemModel if watched directory or file changes
-        self.fileSystemWatcher.directoryChanged.connect(self.model.clearFileInfoCache)
-        self.fileSystemWatcher.fileChanged.connect(self.model.clearFileInfoCache)
+        self.fileSystemWatcher.directoryChanged.connect(self.model.removeFromFileInfoCache)
+        self.fileSystemWatcher.fileChanged.connect(self.model.removeFromFileInfoCache)
 
         # If directory was changed, files might have been added
         #   --> add them to the QFileSystemWatcher
@@ -1055,7 +1068,7 @@ class TagFileSystemModel(QFileSystemModel):
         #: enables directory checking
         self.dirChecksEnable = False
         # preload icons for speed
-        # FIXME: fallback does not work in KDE due to Bug 342906
+        # fallback does not work in KDE due to Bug 342906
         self.redFolderIcon = QIcon.fromTheme("folder-red", QIcon(":/icons/folder-red.svg"))
         self.standardFolderIcon = QIcon.fromTheme("folder", QIcon(":/icons/folder.svg"))
 
@@ -1190,6 +1203,40 @@ class TagFileSystemModel(QFileSystemModel):
                 allAreMP3 = False
 
         return allHaveLyrics
+
+    def removeFromFileInfoCache(self, filePathOrIndex):
+        """Removes specified files from fileInfoCache."""
+        # If filePathOrIndex is not QModelIndex find index of corresponding path
+        if type(filePathOrIndex) != QModelIndex:
+            index = self.index(filePathOrIndex)
+        else:
+            index = filePathOrIndex
+
+        filePath = self.fileInfo(index).filePath()
+        # loop over all columns in model and deleted cached values
+        for col in range(0, self.columnCount()):
+            idx = self.index(filePath, col)
+            self._delFromFileInfoCache(idx)
+
+        # If its a directory remove the containing files as well
+        if self.fileInfo(index).isDir():
+            # dirIterator contains all files and directories recursively
+            dirIterator = QDirIterator(self.fileInfo(index).filePath(),
+                                       QDir.AllEntries | QDir.Readable | QDir.NoDotAndDotDot,
+                                       QDirIterator.Subdirectories)
+
+            while dirIterator.hasNext():
+                f = (dirIterator.next())
+                for col in range(0, self.columnCount()):
+                    self._delFromFileInfoCache(self.index(f, col))
+
+    def _delFromFileInfoCache(self, partialKey):
+        """Removes all elements from cache having `partialKey` in key."""
+        # keys() will not work in Python 3 because an iterator is returned
+        for item in list(self.fileInfoCache):
+            if partialKey in item:
+                #print("R ", self.fileInfo(item[0]).filePath())
+                del self.fileInfoCache[item]
 
     def clearFileInfoCache(self):
         """Clears self.fileInfoCache."""
