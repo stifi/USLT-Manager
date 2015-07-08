@@ -43,7 +43,8 @@ from PyQt5.QtGui import *
 
 import mutagen
 from mutagen import version as mutagenVersion
-from mutagen.id3 import ID3, USLT, Encoding
+from mutagen.id3 import USLT, Encoding
+from mutagen.id3 import ID3 as MutagenID3
 
 from lngcodes import *
 
@@ -611,6 +612,16 @@ class AddLyricsDialog(QDialog):
         self.okButton.setIcon(okButtonIcon)
 
 
+class ID3(MutagenID3):
+    """Reimplemented to get a fast test of Lyrics."""
+    @property
+    def hasLyrics(self):
+        for key in self.keys():
+            if key.startswith('USLT:'):
+                return True
+        return False
+
+
 class ID3Tag():
     """Simple ID3 tag class holding the most important tag values. The values are accessible as
     object properties.
@@ -1168,7 +1179,7 @@ class TagFileSystemModel(QFileSystemModel):
         :returns: True if lyrics are available, False else.
         :rtype: boolean
         """
-        return (self.isMP3(filePath) and ID3(filePath).getall('USLT')) or False
+        return (self.isMP3(filePath) and ID3(filePath).hasLyrics) or False
 
     def checkDirectory(self, path):
         """Return True if every mp3-file in `path` have embedded lyrics. Otherwise, False.
@@ -1189,7 +1200,7 @@ class TagFileSystemModel(QFileSystemModel):
             try:
                 if ((mutagen.File(filePath) is not None) and
                         ('audio/mp3' in mutagen.File(filePath).mime)):
-                    if not ID3(filePath).getall('USLT'):
+                    if not ID3(filePath).hasLyrics:
                         allHaveLyrics = False
                         break
                 else:
