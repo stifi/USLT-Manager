@@ -141,7 +141,6 @@ class FileTree(QWidget):
         # Go up in tree hierarchy on button click
         upButton.clicked.connect(self.goUp)
         # Force reloading root
-        # FIXME: file is deselected in TagWidget gets disabled
         reloadButton.clicked.connect(lambda: self.rootChanged(force=True))
         #
         checkDirsCheckBox.stateChanged.connect(self.checkDirsStateChanged)
@@ -241,6 +240,8 @@ class FileTree(QWidget):
             self.tree.setRootIndex(self.model.index(self.rootPath))
             self.model.clearFileInfoCache()
             self.createFileSystemWatcher(self.rootPath)
+            # clearing selection is required if initialization is forced (at least)
+            self.tree.clearSelection()
             # Emit signal to notify for a root update. The parameter is set to None as no
             # file is selected if the root is changed.
             self.nonmp3Selected.emit(None)

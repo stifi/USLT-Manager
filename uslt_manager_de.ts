@@ -51,17 +51,17 @@
         <translation type="obsolete">Verzeichnisse prüfen (Experimentell! Das kann sehr lange dauern.)</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="162"/>
+        <location filename="usltmodules/treeview.py" line="161"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="173"/>
+        <location filename="usltmodules/treeview.py" line="172"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="194"/>
+        <location filename="usltmodules/treeview.py" line="193"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
@@ -2530,12 +2530,12 @@
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="202"/>
+        <location filename="usltmodules/treeview.py" line="201"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="204"/>
+        <location filename="usltmodules/treeview.py" line="203"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2543,7 +2543,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="429"/>
+        <location filename="usltmodules/treeview.py" line="430"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>
