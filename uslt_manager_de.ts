@@ -3,44 +3,44 @@
 <context>
     <name>AddLyricsDialog</name>
     <message>
-        <location filename="uslt_manager.py" line="517"/>
+        <location filename="usltmodules/dialogs.py" line="58"/>
         <source>Add Lyrics</source>
         <translation>Text hinzufügen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="532"/>
+        <location filename="usltmodules/dialogs.py" line="73"/>
         <source>Language:</source>
         <translation>Sprache:</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="545"/>
+        <location filename="usltmodules/dialogs.py" line="86"/>
         <source>Description:</source>
         <translation>Beschreibung:</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="556"/>
+        <location filename="usltmodules/dialogs.py" line="97"/>
         <source>Encoding:</source>
         <translation>Kodierung:</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="565"/>
+        <location filename="usltmodules/dialogs.py" line="106"/>
         <source>Lyrics:</source>
         <translation>Text:</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="612"/>
-        <source>Ok</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="uslt_manager.py" line="573"/>
+        <location filename="usltmodules/dialogs.py" line="114"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="600"/>
+        <location filename="usltmodules/dialogs.py" line="141"/>
         <source>Only ASCII characters are allowed for description.</source>
         <translation>Nur ASCII Zeichen für Beschreibung erlaubt.</translation>
+    </message>
+    <message>
+        <location filename="usltmodules/dialogs.py" line="153"/>
+        <source>Ok</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -51,22 +51,22 @@
         <translation type="obsolete">Verzeichnisse prüfen (Experimentell! Das kann sehr lange dauern.)</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="851"/>
+        <location filename="usltmodules/treeview.py" line="162"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="862"/>
+        <location filename="usltmodules/treeview.py" line="173"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="883"/>
+        <location filename="usltmodules/treeview.py" line="194"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="795"/>
+        <location filename="usltmodules/treeview.py" line="105"/>
         <source>Check Directories (experimental)</source>
         <translation>Verzeichnisse prüfen (experimentell)</translation>
     </message>
@@ -74,2427 +74,2427 @@
 <context>
     <name>ISO639_2</name>
     <message>
-        <location filename="lngcodes.py" line="10"/>
+        <location filename="usltmodules/lngcodes.py" line="18"/>
         <source>Afar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="11"/>
+        <location filename="usltmodules/lngcodes.py" line="19"/>
         <source>Abkhazian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="12"/>
+        <location filename="usltmodules/lngcodes.py" line="20"/>
         <source>Achinese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="13"/>
+        <location filename="usltmodules/lngcodes.py" line="21"/>
         <source>Acoli</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="14"/>
+        <location filename="usltmodules/lngcodes.py" line="22"/>
         <source>Adangme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="15"/>
+        <location filename="usltmodules/lngcodes.py" line="23"/>
         <source>Adyghe; Adygei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="16"/>
+        <location filename="usltmodules/lngcodes.py" line="24"/>
         <source>Afro-Asiatic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="17"/>
+        <location filename="usltmodules/lngcodes.py" line="25"/>
         <source>Afrihili</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="18"/>
+        <location filename="usltmodules/lngcodes.py" line="26"/>
         <source>Afrikaans</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="19"/>
+        <location filename="usltmodules/lngcodes.py" line="27"/>
         <source>Ainu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="20"/>
+        <location filename="usltmodules/lngcodes.py" line="28"/>
         <source>Akan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="21"/>
+        <location filename="usltmodules/lngcodes.py" line="29"/>
         <source>Akkadian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="496"/>
+        <location filename="usltmodules/lngcodes.py" line="504"/>
         <source>Albanian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="23"/>
+        <location filename="usltmodules/lngcodes.py" line="31"/>
         <source>Aleut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="24"/>
+        <location filename="usltmodules/lngcodes.py" line="32"/>
         <source>Algonquian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="25"/>
+        <location filename="usltmodules/lngcodes.py" line="33"/>
         <source>Southern Altai</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="26"/>
+        <location filename="usltmodules/lngcodes.py" line="34"/>
         <source>Amharic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="27"/>
+        <location filename="usltmodules/lngcodes.py" line="35"/>
         <source>English, Old (ca.450-1100)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="28"/>
+        <location filename="usltmodules/lngcodes.py" line="36"/>
         <source>Angika</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="29"/>
+        <location filename="usltmodules/lngcodes.py" line="37"/>
         <source>Apache languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="30"/>
+        <location filename="usltmodules/lngcodes.py" line="38"/>
         <source>Arabic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="31"/>
+        <location filename="usltmodules/lngcodes.py" line="39"/>
         <source>Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="32"/>
+        <location filename="usltmodules/lngcodes.py" line="40"/>
         <source>Aragonese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="497"/>
+        <location filename="usltmodules/lngcodes.py" line="505"/>
         <source>Armenian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="34"/>
+        <location filename="usltmodules/lngcodes.py" line="42"/>
         <source>Mapudungun; Mapuche</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="35"/>
+        <location filename="usltmodules/lngcodes.py" line="43"/>
         <source>Arapaho</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="36"/>
+        <location filename="usltmodules/lngcodes.py" line="44"/>
         <source>Artificial languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="37"/>
+        <location filename="usltmodules/lngcodes.py" line="45"/>
         <source>Arawak</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="38"/>
+        <location filename="usltmodules/lngcodes.py" line="46"/>
         <source>Assamese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="39"/>
+        <location filename="usltmodules/lngcodes.py" line="47"/>
         <source>Asturian; Bable; Leonese; Asturleonese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="40"/>
+        <location filename="usltmodules/lngcodes.py" line="48"/>
         <source>Athapascan languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="41"/>
+        <location filename="usltmodules/lngcodes.py" line="49"/>
         <source>Australian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="42"/>
+        <location filename="usltmodules/lngcodes.py" line="50"/>
         <source>Avaric</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="43"/>
+        <location filename="usltmodules/lngcodes.py" line="51"/>
         <source>Avestan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="44"/>
+        <location filename="usltmodules/lngcodes.py" line="52"/>
         <source>Awadhi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="45"/>
+        <location filename="usltmodules/lngcodes.py" line="53"/>
         <source>Aymara</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="46"/>
+        <location filename="usltmodules/lngcodes.py" line="54"/>
         <source>Azerbaijani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="47"/>
+        <location filename="usltmodules/lngcodes.py" line="55"/>
         <source>Banda languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="48"/>
+        <location filename="usltmodules/lngcodes.py" line="56"/>
         <source>Bamileke languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="49"/>
+        <location filename="usltmodules/lngcodes.py" line="57"/>
         <source>Bashkir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="50"/>
+        <location filename="usltmodules/lngcodes.py" line="58"/>
         <source>Baluchi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="51"/>
+        <location filename="usltmodules/lngcodes.py" line="59"/>
         <source>Bambara</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="52"/>
+        <location filename="usltmodules/lngcodes.py" line="60"/>
         <source>Balinese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="498"/>
+        <location filename="usltmodules/lngcodes.py" line="506"/>
         <source>Basque</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="54"/>
+        <location filename="usltmodules/lngcodes.py" line="62"/>
         <source>Basa</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="55"/>
+        <location filename="usltmodules/lngcodes.py" line="63"/>
         <source>Baltic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="56"/>
+        <location filename="usltmodules/lngcodes.py" line="64"/>
         <source>Beja; Bedawiyet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="57"/>
+        <location filename="usltmodules/lngcodes.py" line="65"/>
         <source>Belarusian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="58"/>
+        <location filename="usltmodules/lngcodes.py" line="66"/>
         <source>Bemba</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="59"/>
+        <location filename="usltmodules/lngcodes.py" line="67"/>
         <source>Bengali</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="60"/>
+        <location filename="usltmodules/lngcodes.py" line="68"/>
         <source>Berber languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="61"/>
+        <location filename="usltmodules/lngcodes.py" line="69"/>
         <source>Bhojpuri</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="62"/>
+        <location filename="usltmodules/lngcodes.py" line="70"/>
         <source>Bihari languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="63"/>
+        <location filename="usltmodules/lngcodes.py" line="71"/>
         <source>Bikol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="64"/>
+        <location filename="usltmodules/lngcodes.py" line="72"/>
         <source>Bini; Edo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="65"/>
+        <location filename="usltmodules/lngcodes.py" line="73"/>
         <source>Bislama</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="66"/>
+        <location filename="usltmodules/lngcodes.py" line="74"/>
         <source>Siksika</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="67"/>
+        <location filename="usltmodules/lngcodes.py" line="75"/>
         <source>Bantu (Other)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="68"/>
+        <location filename="usltmodules/lngcodes.py" line="76"/>
         <source>Bosnian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="69"/>
+        <location filename="usltmodules/lngcodes.py" line="77"/>
         <source>Braj</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="70"/>
+        <location filename="usltmodules/lngcodes.py" line="78"/>
         <source>Breton</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="71"/>
+        <location filename="usltmodules/lngcodes.py" line="79"/>
         <source>Batak languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="72"/>
+        <location filename="usltmodules/lngcodes.py" line="80"/>
         <source>Buriat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="73"/>
+        <location filename="usltmodules/lngcodes.py" line="81"/>
         <source>Buginese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="74"/>
+        <location filename="usltmodules/lngcodes.py" line="82"/>
         <source>Bulgarian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="499"/>
+        <location filename="usltmodules/lngcodes.py" line="507"/>
         <source>Burmese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="76"/>
+        <location filename="usltmodules/lngcodes.py" line="84"/>
         <source>Blin; Bilin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="77"/>
+        <location filename="usltmodules/lngcodes.py" line="85"/>
         <source>Caddo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="78"/>
+        <location filename="usltmodules/lngcodes.py" line="86"/>
         <source>Central American Indian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="79"/>
+        <location filename="usltmodules/lngcodes.py" line="87"/>
         <source>Galibi Carib</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="80"/>
+        <location filename="usltmodules/lngcodes.py" line="88"/>
         <source>Catalan; Valencian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="81"/>
+        <location filename="usltmodules/lngcodes.py" line="89"/>
         <source>Caucasian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="82"/>
+        <location filename="usltmodules/lngcodes.py" line="90"/>
         <source>Cebuano</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="83"/>
+        <location filename="usltmodules/lngcodes.py" line="91"/>
         <source>Celtic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="84"/>
+        <location filename="usltmodules/lngcodes.py" line="92"/>
         <source>Chamorro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="85"/>
+        <location filename="usltmodules/lngcodes.py" line="93"/>
         <source>Chibcha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="86"/>
+        <location filename="usltmodules/lngcodes.py" line="94"/>
         <source>Chechen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="87"/>
+        <location filename="usltmodules/lngcodes.py" line="95"/>
         <source>Chagatai</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="500"/>
+        <location filename="usltmodules/lngcodes.py" line="508"/>
         <source>Chinese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="89"/>
+        <location filename="usltmodules/lngcodes.py" line="97"/>
         <source>Chuukese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="90"/>
+        <location filename="usltmodules/lngcodes.py" line="98"/>
         <source>Mari</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="91"/>
+        <location filename="usltmodules/lngcodes.py" line="99"/>
         <source>Chinook jargon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="92"/>
+        <location filename="usltmodules/lngcodes.py" line="100"/>
         <source>Choctaw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="93"/>
+        <location filename="usltmodules/lngcodes.py" line="101"/>
         <source>Chipewyan; Dene Suline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="94"/>
+        <location filename="usltmodules/lngcodes.py" line="102"/>
         <source>Cherokee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="95"/>
+        <location filename="usltmodules/lngcodes.py" line="103"/>
         <source>Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="96"/>
+        <location filename="usltmodules/lngcodes.py" line="104"/>
         <source>Chuvash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="97"/>
+        <location filename="usltmodules/lngcodes.py" line="105"/>
         <source>Cheyenne</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="98"/>
+        <location filename="usltmodules/lngcodes.py" line="106"/>
         <source>Chamic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="99"/>
+        <location filename="usltmodules/lngcodes.py" line="107"/>
         <source>Coptic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="100"/>
+        <location filename="usltmodules/lngcodes.py" line="108"/>
         <source>Cornish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="101"/>
+        <location filename="usltmodules/lngcodes.py" line="109"/>
         <source>Corsican</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="102"/>
+        <location filename="usltmodules/lngcodes.py" line="110"/>
         <source>Creoles and pidgins, English based</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="103"/>
+        <location filename="usltmodules/lngcodes.py" line="111"/>
         <source>Creoles and pidgins, French-based </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="104"/>
+        <location filename="usltmodules/lngcodes.py" line="112"/>
         <source>Creoles and pidgins, Portuguese-based </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="105"/>
+        <location filename="usltmodules/lngcodes.py" line="113"/>
         <source>Cree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="106"/>
+        <location filename="usltmodules/lngcodes.py" line="114"/>
         <source>Crimean Tatar; Crimean Turkish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="107"/>
+        <location filename="usltmodules/lngcodes.py" line="115"/>
         <source>Creoles and pidgins </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="108"/>
+        <location filename="usltmodules/lngcodes.py" line="116"/>
         <source>Kashubian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="109"/>
+        <location filename="usltmodules/lngcodes.py" line="117"/>
         <source>Cushitic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="501"/>
+        <location filename="usltmodules/lngcodes.py" line="509"/>
         <source>Czech</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="111"/>
+        <location filename="usltmodules/lngcodes.py" line="119"/>
         <source>Dakota</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="112"/>
+        <location filename="usltmodules/lngcodes.py" line="120"/>
         <source>Danish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="113"/>
+        <location filename="usltmodules/lngcodes.py" line="121"/>
         <source>Dargwa</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="114"/>
+        <location filename="usltmodules/lngcodes.py" line="122"/>
         <source>Land Dayak languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="115"/>
+        <location filename="usltmodules/lngcodes.py" line="123"/>
         <source>Delaware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="116"/>
+        <location filename="usltmodules/lngcodes.py" line="124"/>
         <source>Slave (Athapascan)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="117"/>
+        <location filename="usltmodules/lngcodes.py" line="125"/>
         <source>Dogrib</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="118"/>
+        <location filename="usltmodules/lngcodes.py" line="126"/>
         <source>Dinka</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="119"/>
+        <location filename="usltmodules/lngcodes.py" line="127"/>
         <source>Divehi; Dhivehi; Maldivian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="120"/>
+        <location filename="usltmodules/lngcodes.py" line="128"/>
         <source>Dogri</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="121"/>
+        <location filename="usltmodules/lngcodes.py" line="129"/>
         <source>Dravidian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="122"/>
+        <location filename="usltmodules/lngcodes.py" line="130"/>
         <source>Lower Sorbian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="123"/>
+        <location filename="usltmodules/lngcodes.py" line="131"/>
         <source>Duala</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="124"/>
+        <location filename="usltmodules/lngcodes.py" line="132"/>
         <source>Dutch, Middle (ca.1050-1350)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="502"/>
+        <location filename="usltmodules/lngcodes.py" line="510"/>
         <source>Dutch; Flemish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="126"/>
+        <location filename="usltmodules/lngcodes.py" line="134"/>
         <source>Dyula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="127"/>
+        <location filename="usltmodules/lngcodes.py" line="135"/>
         <source>Dzongkha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="128"/>
+        <location filename="usltmodules/lngcodes.py" line="136"/>
         <source>Efik</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="129"/>
+        <location filename="usltmodules/lngcodes.py" line="137"/>
         <source>Egyptian (Ancient)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="130"/>
+        <location filename="usltmodules/lngcodes.py" line="138"/>
         <source>Ekajuk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="131"/>
+        <location filename="usltmodules/lngcodes.py" line="139"/>
         <source>Elamite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="132"/>
+        <location filename="usltmodules/lngcodes.py" line="140"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="133"/>
+        <location filename="usltmodules/lngcodes.py" line="141"/>
         <source>English, Middle (1100-1500)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="134"/>
+        <location filename="usltmodules/lngcodes.py" line="142"/>
         <source>Esperanto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="135"/>
+        <location filename="usltmodules/lngcodes.py" line="143"/>
         <source>Estonian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="136"/>
+        <location filename="usltmodules/lngcodes.py" line="144"/>
         <source>Ewe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="137"/>
+        <location filename="usltmodules/lngcodes.py" line="145"/>
         <source>Ewondo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="138"/>
+        <location filename="usltmodules/lngcodes.py" line="146"/>
         <source>Fang</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="139"/>
+        <location filename="usltmodules/lngcodes.py" line="147"/>
         <source>Faroese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="140"/>
+        <location filename="usltmodules/lngcodes.py" line="148"/>
         <source>Fanti</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="141"/>
+        <location filename="usltmodules/lngcodes.py" line="149"/>
         <source>Fijian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="142"/>
+        <location filename="usltmodules/lngcodes.py" line="150"/>
         <source>Filipino; Pilipino</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="143"/>
+        <location filename="usltmodules/lngcodes.py" line="151"/>
         <source>Finnish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="144"/>
+        <location filename="usltmodules/lngcodes.py" line="152"/>
         <source>Finno-Ugrian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="145"/>
+        <location filename="usltmodules/lngcodes.py" line="153"/>
         <source>Fon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="503"/>
+        <location filename="usltmodules/lngcodes.py" line="511"/>
         <source>French</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="147"/>
+        <location filename="usltmodules/lngcodes.py" line="155"/>
         <source>French, Middle (ca.1400-1600)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="148"/>
+        <location filename="usltmodules/lngcodes.py" line="156"/>
         <source>French, Old (842-ca.1400)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="149"/>
+        <location filename="usltmodules/lngcodes.py" line="157"/>
         <source>Northern Frisian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="150"/>
+        <location filename="usltmodules/lngcodes.py" line="158"/>
         <source>Eastern Frisian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="151"/>
+        <location filename="usltmodules/lngcodes.py" line="159"/>
         <source>Western Frisian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="152"/>
+        <location filename="usltmodules/lngcodes.py" line="160"/>
         <source>Fulah</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="153"/>
+        <location filename="usltmodules/lngcodes.py" line="161"/>
         <source>Friulian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="154"/>
+        <location filename="usltmodules/lngcodes.py" line="162"/>
         <source>Ga</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="155"/>
+        <location filename="usltmodules/lngcodes.py" line="163"/>
         <source>Gayo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="156"/>
+        <location filename="usltmodules/lngcodes.py" line="164"/>
         <source>Gbaya</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="157"/>
+        <location filename="usltmodules/lngcodes.py" line="165"/>
         <source>Germanic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="504"/>
+        <location filename="usltmodules/lngcodes.py" line="512"/>
         <source>Georgian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="505"/>
+        <location filename="usltmodules/lngcodes.py" line="513"/>
         <source>German</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="160"/>
+        <location filename="usltmodules/lngcodes.py" line="168"/>
         <source>Geez</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="161"/>
+        <location filename="usltmodules/lngcodes.py" line="169"/>
         <source>Gilbertese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="162"/>
+        <location filename="usltmodules/lngcodes.py" line="170"/>
         <source>Gaelic; Scottish Gaelic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="163"/>
+        <location filename="usltmodules/lngcodes.py" line="171"/>
         <source>Irish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="164"/>
+        <location filename="usltmodules/lngcodes.py" line="172"/>
         <source>Galician</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="165"/>
+        <location filename="usltmodules/lngcodes.py" line="173"/>
         <source>Manx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="166"/>
+        <location filename="usltmodules/lngcodes.py" line="174"/>
         <source>German, Middle High (ca.1050-1500)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="167"/>
+        <location filename="usltmodules/lngcodes.py" line="175"/>
         <source>German, Old High (ca.750-1050)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="168"/>
+        <location filename="usltmodules/lngcodes.py" line="176"/>
         <source>Gondi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="169"/>
+        <location filename="usltmodules/lngcodes.py" line="177"/>
         <source>Gorontalo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="170"/>
+        <location filename="usltmodules/lngcodes.py" line="178"/>
         <source>Gothic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="171"/>
+        <location filename="usltmodules/lngcodes.py" line="179"/>
         <source>Grebo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="172"/>
+        <location filename="usltmodules/lngcodes.py" line="180"/>
         <source>Greek, Ancient (to 1453)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="506"/>
+        <location filename="usltmodules/lngcodes.py" line="514"/>
         <source>Greek, Modern (1453-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="174"/>
+        <location filename="usltmodules/lngcodes.py" line="182"/>
         <source>Guarani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="175"/>
+        <location filename="usltmodules/lngcodes.py" line="183"/>
         <source>Swiss German; Alemannic; Alsatian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="176"/>
+        <location filename="usltmodules/lngcodes.py" line="184"/>
         <source>Gujarati</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="177"/>
+        <location filename="usltmodules/lngcodes.py" line="185"/>
         <source>Gwich&apos;in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="178"/>
+        <location filename="usltmodules/lngcodes.py" line="186"/>
         <source>Haida</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="179"/>
+        <location filename="usltmodules/lngcodes.py" line="187"/>
         <source>Haitian; Haitian Creole</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="180"/>
+        <location filename="usltmodules/lngcodes.py" line="188"/>
         <source>Hausa</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="181"/>
+        <location filename="usltmodules/lngcodes.py" line="189"/>
         <source>Hawaiian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="182"/>
+        <location filename="usltmodules/lngcodes.py" line="190"/>
         <source>Hebrew</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="183"/>
+        <location filename="usltmodules/lngcodes.py" line="191"/>
         <source>Herero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="184"/>
+        <location filename="usltmodules/lngcodes.py" line="192"/>
         <source>Hiligaynon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="185"/>
+        <location filename="usltmodules/lngcodes.py" line="193"/>
         <source>Himachali languages; Western Pahari languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="186"/>
+        <location filename="usltmodules/lngcodes.py" line="194"/>
         <source>Hindi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="187"/>
+        <location filename="usltmodules/lngcodes.py" line="195"/>
         <source>Hittite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="188"/>
+        <location filename="usltmodules/lngcodes.py" line="196"/>
         <source>Hmong; Mong</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="189"/>
+        <location filename="usltmodules/lngcodes.py" line="197"/>
         <source>Hiri Motu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="190"/>
+        <location filename="usltmodules/lngcodes.py" line="198"/>
         <source>Croatian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="191"/>
+        <location filename="usltmodules/lngcodes.py" line="199"/>
         <source>Upper Sorbian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="192"/>
+        <location filename="usltmodules/lngcodes.py" line="200"/>
         <source>Hungarian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="193"/>
+        <location filename="usltmodules/lngcodes.py" line="201"/>
         <source>Hupa</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="194"/>
+        <location filename="usltmodules/lngcodes.py" line="202"/>
         <source>Iban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="195"/>
+        <location filename="usltmodules/lngcodes.py" line="203"/>
         <source>Igbo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="507"/>
+        <location filename="usltmodules/lngcodes.py" line="515"/>
         <source>Icelandic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="197"/>
+        <location filename="usltmodules/lngcodes.py" line="205"/>
         <source>Ido</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="198"/>
+        <location filename="usltmodules/lngcodes.py" line="206"/>
         <source>Sichuan Yi; Nuosu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="199"/>
+        <location filename="usltmodules/lngcodes.py" line="207"/>
         <source>Ijo languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="200"/>
+        <location filename="usltmodules/lngcodes.py" line="208"/>
         <source>Inuktitut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="201"/>
+        <location filename="usltmodules/lngcodes.py" line="209"/>
         <source>Interlingue; Occidental</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="202"/>
+        <location filename="usltmodules/lngcodes.py" line="210"/>
         <source>Iloko</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="203"/>
+        <location filename="usltmodules/lngcodes.py" line="211"/>
         <source>Interlingua (International Auxiliary Language Association)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="204"/>
+        <location filename="usltmodules/lngcodes.py" line="212"/>
         <source>Indic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="205"/>
+        <location filename="usltmodules/lngcodes.py" line="213"/>
         <source>Indonesian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="206"/>
+        <location filename="usltmodules/lngcodes.py" line="214"/>
         <source>Indo-European languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="207"/>
+        <location filename="usltmodules/lngcodes.py" line="215"/>
         <source>Ingush</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="208"/>
+        <location filename="usltmodules/lngcodes.py" line="216"/>
         <source>Inupiaq</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="209"/>
+        <location filename="usltmodules/lngcodes.py" line="217"/>
         <source>Iranian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="210"/>
+        <location filename="usltmodules/lngcodes.py" line="218"/>
         <source>Iroquoian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="211"/>
+        <location filename="usltmodules/lngcodes.py" line="219"/>
         <source>Italian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="212"/>
+        <location filename="usltmodules/lngcodes.py" line="220"/>
         <source>Javanese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="213"/>
+        <location filename="usltmodules/lngcodes.py" line="221"/>
         <source>Lojban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="214"/>
+        <location filename="usltmodules/lngcodes.py" line="222"/>
         <source>Japanese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="215"/>
+        <location filename="usltmodules/lngcodes.py" line="223"/>
         <source>Judeo-Persian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="216"/>
+        <location filename="usltmodules/lngcodes.py" line="224"/>
         <source>Judeo-Arabic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="217"/>
+        <location filename="usltmodules/lngcodes.py" line="225"/>
         <source>Kara-Kalpak</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="218"/>
+        <location filename="usltmodules/lngcodes.py" line="226"/>
         <source>Kabyle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="219"/>
+        <location filename="usltmodules/lngcodes.py" line="227"/>
         <source>Kachin; Jingpho</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="220"/>
+        <location filename="usltmodules/lngcodes.py" line="228"/>
         <source>Kalaallisut; Greenlandic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="221"/>
+        <location filename="usltmodules/lngcodes.py" line="229"/>
         <source>Kamba</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="222"/>
+        <location filename="usltmodules/lngcodes.py" line="230"/>
         <source>Kannada</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="223"/>
+        <location filename="usltmodules/lngcodes.py" line="231"/>
         <source>Karen languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="224"/>
+        <location filename="usltmodules/lngcodes.py" line="232"/>
         <source>Kashmiri</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="225"/>
+        <location filename="usltmodules/lngcodes.py" line="233"/>
         <source>Kanuri</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="226"/>
+        <location filename="usltmodules/lngcodes.py" line="234"/>
         <source>Kawi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="227"/>
+        <location filename="usltmodules/lngcodes.py" line="235"/>
         <source>Kazakh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="228"/>
+        <location filename="usltmodules/lngcodes.py" line="236"/>
         <source>Kabardian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="229"/>
+        <location filename="usltmodules/lngcodes.py" line="237"/>
         <source>Khasi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="230"/>
+        <location filename="usltmodules/lngcodes.py" line="238"/>
         <source>Khoisan languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="231"/>
+        <location filename="usltmodules/lngcodes.py" line="239"/>
         <source>Central Khmer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="232"/>
+        <location filename="usltmodules/lngcodes.py" line="240"/>
         <source>Khotanese; Sakan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="233"/>
+        <location filename="usltmodules/lngcodes.py" line="241"/>
         <source>Kikuyu; Gikuyu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="234"/>
+        <location filename="usltmodules/lngcodes.py" line="242"/>
         <source>Kinyarwanda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="235"/>
+        <location filename="usltmodules/lngcodes.py" line="243"/>
         <source>Kirghiz; Kyrgyz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="236"/>
+        <location filename="usltmodules/lngcodes.py" line="244"/>
         <source>Kimbundu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="237"/>
+        <location filename="usltmodules/lngcodes.py" line="245"/>
         <source>Konkani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="238"/>
+        <location filename="usltmodules/lngcodes.py" line="246"/>
         <source>Komi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="239"/>
+        <location filename="usltmodules/lngcodes.py" line="247"/>
         <source>Kongo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="240"/>
+        <location filename="usltmodules/lngcodes.py" line="248"/>
         <source>Korean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="241"/>
+        <location filename="usltmodules/lngcodes.py" line="249"/>
         <source>Kosraean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="242"/>
+        <location filename="usltmodules/lngcodes.py" line="250"/>
         <source>Kpelle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="243"/>
+        <location filename="usltmodules/lngcodes.py" line="251"/>
         <source>Karachay-Balkar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="244"/>
+        <location filename="usltmodules/lngcodes.py" line="252"/>
         <source>Karelian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="245"/>
+        <location filename="usltmodules/lngcodes.py" line="253"/>
         <source>Kru languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="246"/>
+        <location filename="usltmodules/lngcodes.py" line="254"/>
         <source>Kurukh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="247"/>
+        <location filename="usltmodules/lngcodes.py" line="255"/>
         <source>Kuanyama; Kwanyama</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="248"/>
+        <location filename="usltmodules/lngcodes.py" line="256"/>
         <source>Kumyk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="249"/>
+        <location filename="usltmodules/lngcodes.py" line="257"/>
         <source>Kurdish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="250"/>
+        <location filename="usltmodules/lngcodes.py" line="258"/>
         <source>Kutenai</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="251"/>
+        <location filename="usltmodules/lngcodes.py" line="259"/>
         <source>Ladino</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="252"/>
+        <location filename="usltmodules/lngcodes.py" line="260"/>
         <source>Lahnda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="253"/>
+        <location filename="usltmodules/lngcodes.py" line="261"/>
         <source>Lamba</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="254"/>
+        <location filename="usltmodules/lngcodes.py" line="262"/>
         <source>Lao</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="255"/>
+        <location filename="usltmodules/lngcodes.py" line="263"/>
         <source>Latin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="256"/>
+        <location filename="usltmodules/lngcodes.py" line="264"/>
         <source>Latvian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="257"/>
+        <location filename="usltmodules/lngcodes.py" line="265"/>
         <source>Lezghian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="258"/>
+        <location filename="usltmodules/lngcodes.py" line="266"/>
         <source>Limburgan; Limburger; Limburgish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="259"/>
+        <location filename="usltmodules/lngcodes.py" line="267"/>
         <source>Lingala</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="260"/>
+        <location filename="usltmodules/lngcodes.py" line="268"/>
         <source>Lithuanian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="261"/>
+        <location filename="usltmodules/lngcodes.py" line="269"/>
         <source>Mongo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="262"/>
+        <location filename="usltmodules/lngcodes.py" line="270"/>
         <source>Lozi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="263"/>
+        <location filename="usltmodules/lngcodes.py" line="271"/>
         <source>Luxembourgish; Letzeburgesch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="264"/>
+        <location filename="usltmodules/lngcodes.py" line="272"/>
         <source>Luba-Lulua</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="265"/>
+        <location filename="usltmodules/lngcodes.py" line="273"/>
         <source>Luba-Katanga</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="266"/>
+        <location filename="usltmodules/lngcodes.py" line="274"/>
         <source>Ganda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="267"/>
+        <location filename="usltmodules/lngcodes.py" line="275"/>
         <source>Luiseno</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="268"/>
+        <location filename="usltmodules/lngcodes.py" line="276"/>
         <source>Lunda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="269"/>
+        <location filename="usltmodules/lngcodes.py" line="277"/>
         <source>Luo (Kenya and Tanzania)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="270"/>
+        <location filename="usltmodules/lngcodes.py" line="278"/>
         <source>Lushai</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="508"/>
+        <location filename="usltmodules/lngcodes.py" line="516"/>
         <source>Macedonian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="272"/>
+        <location filename="usltmodules/lngcodes.py" line="280"/>
         <source>Madurese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="273"/>
+        <location filename="usltmodules/lngcodes.py" line="281"/>
         <source>Magahi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="274"/>
+        <location filename="usltmodules/lngcodes.py" line="282"/>
         <source>Marshallese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="275"/>
+        <location filename="usltmodules/lngcodes.py" line="283"/>
         <source>Maithili</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="276"/>
+        <location filename="usltmodules/lngcodes.py" line="284"/>
         <source>Makasar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="277"/>
+        <location filename="usltmodules/lngcodes.py" line="285"/>
         <source>Malayalam</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="278"/>
+        <location filename="usltmodules/lngcodes.py" line="286"/>
         <source>Mandingo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="509"/>
+        <location filename="usltmodules/lngcodes.py" line="517"/>
         <source>Maori</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="280"/>
+        <location filename="usltmodules/lngcodes.py" line="288"/>
         <source>Austronesian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="281"/>
+        <location filename="usltmodules/lngcodes.py" line="289"/>
         <source>Marathi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="282"/>
+        <location filename="usltmodules/lngcodes.py" line="290"/>
         <source>Masai</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="510"/>
+        <location filename="usltmodules/lngcodes.py" line="518"/>
         <source>Malay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="284"/>
+        <location filename="usltmodules/lngcodes.py" line="292"/>
         <source>Moksha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="285"/>
+        <location filename="usltmodules/lngcodes.py" line="293"/>
         <source>Mandar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="286"/>
+        <location filename="usltmodules/lngcodes.py" line="294"/>
         <source>Mende</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="287"/>
+        <location filename="usltmodules/lngcodes.py" line="295"/>
         <source>Irish, Middle (900-1200)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="288"/>
+        <location filename="usltmodules/lngcodes.py" line="296"/>
         <source>Mi&apos;kmaq; Micmac</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="289"/>
+        <location filename="usltmodules/lngcodes.py" line="297"/>
         <source>Minangkabau</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="290"/>
+        <location filename="usltmodules/lngcodes.py" line="298"/>
         <source>Uncoded languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="291"/>
+        <location filename="usltmodules/lngcodes.py" line="299"/>
         <source>Mon-Khmer languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="292"/>
+        <location filename="usltmodules/lngcodes.py" line="300"/>
         <source>Malagasy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="293"/>
+        <location filename="usltmodules/lngcodes.py" line="301"/>
         <source>Maltese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="294"/>
+        <location filename="usltmodules/lngcodes.py" line="302"/>
         <source>Manchu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="295"/>
+        <location filename="usltmodules/lngcodes.py" line="303"/>
         <source>Manipuri</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="296"/>
+        <location filename="usltmodules/lngcodes.py" line="304"/>
         <source>Manobo languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="297"/>
+        <location filename="usltmodules/lngcodes.py" line="305"/>
         <source>Mohawk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="298"/>
+        <location filename="usltmodules/lngcodes.py" line="306"/>
         <source>Mongolian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="299"/>
+        <location filename="usltmodules/lngcodes.py" line="307"/>
         <source>Mossi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="300"/>
+        <location filename="usltmodules/lngcodes.py" line="308"/>
         <source>Multiple languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="301"/>
+        <location filename="usltmodules/lngcodes.py" line="309"/>
         <source>Munda languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="302"/>
+        <location filename="usltmodules/lngcodes.py" line="310"/>
         <source>Creek</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="303"/>
+        <location filename="usltmodules/lngcodes.py" line="311"/>
         <source>Mirandese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="304"/>
+        <location filename="usltmodules/lngcodes.py" line="312"/>
         <source>Marwari</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="305"/>
+        <location filename="usltmodules/lngcodes.py" line="313"/>
         <source>Mayan languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="306"/>
+        <location filename="usltmodules/lngcodes.py" line="314"/>
         <source>Erzya</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="307"/>
+        <location filename="usltmodules/lngcodes.py" line="315"/>
         <source>Nahuatl languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="308"/>
+        <location filename="usltmodules/lngcodes.py" line="316"/>
         <source>North American Indian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="309"/>
+        <location filename="usltmodules/lngcodes.py" line="317"/>
         <source>Neapolitan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="310"/>
+        <location filename="usltmodules/lngcodes.py" line="318"/>
         <source>Nauru</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="311"/>
+        <location filename="usltmodules/lngcodes.py" line="319"/>
         <source>Navajo; Navaho</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="312"/>
+        <location filename="usltmodules/lngcodes.py" line="320"/>
         <source>Ndebele, South; South Ndebele</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="313"/>
+        <location filename="usltmodules/lngcodes.py" line="321"/>
         <source>Ndebele, North; North Ndebele</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="314"/>
+        <location filename="usltmodules/lngcodes.py" line="322"/>
         <source>Ndonga</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="315"/>
+        <location filename="usltmodules/lngcodes.py" line="323"/>
         <source>Low German; Low Saxon; German, Low; Saxon, Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="316"/>
+        <location filename="usltmodules/lngcodes.py" line="324"/>
         <source>Nepali</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="317"/>
+        <location filename="usltmodules/lngcodes.py" line="325"/>
         <source>Nepal Bhasa; Newari</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="318"/>
+        <location filename="usltmodules/lngcodes.py" line="326"/>
         <source>Nias</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="319"/>
+        <location filename="usltmodules/lngcodes.py" line="327"/>
         <source>Niger-Kordofanian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="320"/>
+        <location filename="usltmodules/lngcodes.py" line="328"/>
         <source>Niuean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="321"/>
+        <location filename="usltmodules/lngcodes.py" line="329"/>
         <source>Norwegian Nynorsk; Nynorsk, Norwegian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="323"/>
+        <location filename="usltmodules/lngcodes.py" line="331"/>
         <source>Nogai</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="324"/>
+        <location filename="usltmodules/lngcodes.py" line="332"/>
         <source>Norse, Old</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="325"/>
+        <location filename="usltmodules/lngcodes.py" line="333"/>
         <source>Norwegian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="326"/>
+        <location filename="usltmodules/lngcodes.py" line="334"/>
         <source>N&apos;Ko</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="327"/>
+        <location filename="usltmodules/lngcodes.py" line="335"/>
         <source>Pedi; Sepedi; Northern Sotho</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="328"/>
+        <location filename="usltmodules/lngcodes.py" line="336"/>
         <source>Nubian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="329"/>
+        <location filename="usltmodules/lngcodes.py" line="337"/>
         <source>Classical Newari; Old Newari; Classical Nepal Bhasa</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="330"/>
+        <location filename="usltmodules/lngcodes.py" line="338"/>
         <source>Chichewa; Chewa; Nyanja</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="331"/>
+        <location filename="usltmodules/lngcodes.py" line="339"/>
         <source>Nyamwezi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="332"/>
+        <location filename="usltmodules/lngcodes.py" line="340"/>
         <source>Nyankole</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="333"/>
+        <location filename="usltmodules/lngcodes.py" line="341"/>
         <source>Nyoro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="334"/>
+        <location filename="usltmodules/lngcodes.py" line="342"/>
         <source>Nzima</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="336"/>
+        <location filename="usltmodules/lngcodes.py" line="344"/>
         <source>Ojibwa</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="337"/>
+        <location filename="usltmodules/lngcodes.py" line="345"/>
         <source>Oriya</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="338"/>
+        <location filename="usltmodules/lngcodes.py" line="346"/>
         <source>Oromo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="339"/>
+        <location filename="usltmodules/lngcodes.py" line="347"/>
         <source>Osage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="340"/>
+        <location filename="usltmodules/lngcodes.py" line="348"/>
         <source>Ossetian; Ossetic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="341"/>
+        <location filename="usltmodules/lngcodes.py" line="349"/>
         <source>Turkish, Ottoman (1500-1928)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="342"/>
+        <location filename="usltmodules/lngcodes.py" line="350"/>
         <source>Otomian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="343"/>
+        <location filename="usltmodules/lngcodes.py" line="351"/>
         <source>Papuan languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="344"/>
+        <location filename="usltmodules/lngcodes.py" line="352"/>
         <source>Pangasinan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="345"/>
+        <location filename="usltmodules/lngcodes.py" line="353"/>
         <source>Pahlavi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="346"/>
+        <location filename="usltmodules/lngcodes.py" line="354"/>
         <source>Pampanga; Kapampangan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="347"/>
+        <location filename="usltmodules/lngcodes.py" line="355"/>
         <source>Panjabi; Punjabi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="348"/>
+        <location filename="usltmodules/lngcodes.py" line="356"/>
         <source>Papiamento</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="349"/>
+        <location filename="usltmodules/lngcodes.py" line="357"/>
         <source>Palauan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="350"/>
+        <location filename="usltmodules/lngcodes.py" line="358"/>
         <source>Persian, Old (ca.600-400 B.C.)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="511"/>
+        <location filename="usltmodules/lngcodes.py" line="519"/>
         <source>Persian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="352"/>
+        <location filename="usltmodules/lngcodes.py" line="360"/>
         <source>Philippine languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="353"/>
+        <location filename="usltmodules/lngcodes.py" line="361"/>
         <source>Phoenician</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="354"/>
+        <location filename="usltmodules/lngcodes.py" line="362"/>
         <source>Pali</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="355"/>
+        <location filename="usltmodules/lngcodes.py" line="363"/>
         <source>Polish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="356"/>
+        <location filename="usltmodules/lngcodes.py" line="364"/>
         <source>Pohnpeian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="357"/>
+        <location filename="usltmodules/lngcodes.py" line="365"/>
         <source>Portuguese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="358"/>
+        <location filename="usltmodules/lngcodes.py" line="366"/>
         <source>Prakrit languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="360"/>
+        <location filename="usltmodules/lngcodes.py" line="368"/>
         <source>Pushto; Pashto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="362"/>
+        <location filename="usltmodules/lngcodes.py" line="370"/>
         <source>Quechua</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="363"/>
+        <location filename="usltmodules/lngcodes.py" line="371"/>
         <source>Rajasthani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="364"/>
+        <location filename="usltmodules/lngcodes.py" line="372"/>
         <source>Rapanui</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="365"/>
+        <location filename="usltmodules/lngcodes.py" line="373"/>
         <source>Rarotongan; Cook Islands Maori</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="366"/>
+        <location filename="usltmodules/lngcodes.py" line="374"/>
         <source>Romance languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="367"/>
+        <location filename="usltmodules/lngcodes.py" line="375"/>
         <source>Romansh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="368"/>
+        <location filename="usltmodules/lngcodes.py" line="376"/>
         <source>Romany</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="512"/>
+        <location filename="usltmodules/lngcodes.py" line="520"/>
         <source>Romanian; Moldavian; Moldovan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="370"/>
+        <location filename="usltmodules/lngcodes.py" line="378"/>
         <source>Rundi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="371"/>
+        <location filename="usltmodules/lngcodes.py" line="379"/>
         <source>Aromanian; Arumanian; Macedo-Romanian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="372"/>
+        <location filename="usltmodules/lngcodes.py" line="380"/>
         <source>Russian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="373"/>
+        <location filename="usltmodules/lngcodes.py" line="381"/>
         <source>Sandawe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="374"/>
+        <location filename="usltmodules/lngcodes.py" line="382"/>
         <source>Sango</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="375"/>
+        <location filename="usltmodules/lngcodes.py" line="383"/>
         <source>Yakut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="376"/>
+        <location filename="usltmodules/lngcodes.py" line="384"/>
         <source>South American Indian (Other)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="377"/>
+        <location filename="usltmodules/lngcodes.py" line="385"/>
         <source>Salishan languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="378"/>
+        <location filename="usltmodules/lngcodes.py" line="386"/>
         <source>Samaritan Aramaic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="379"/>
+        <location filename="usltmodules/lngcodes.py" line="387"/>
         <source>Sanskrit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="380"/>
+        <location filename="usltmodules/lngcodes.py" line="388"/>
         <source>Sasak</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="381"/>
+        <location filename="usltmodules/lngcodes.py" line="389"/>
         <source>Santali</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="382"/>
+        <location filename="usltmodules/lngcodes.py" line="390"/>
         <source>Sicilian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="383"/>
+        <location filename="usltmodules/lngcodes.py" line="391"/>
         <source>Scots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="384"/>
+        <location filename="usltmodules/lngcodes.py" line="392"/>
         <source>Selkup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="385"/>
+        <location filename="usltmodules/lngcodes.py" line="393"/>
         <source>Semitic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="386"/>
+        <location filename="usltmodules/lngcodes.py" line="394"/>
         <source>Irish, Old (to 900)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="387"/>
+        <location filename="usltmodules/lngcodes.py" line="395"/>
         <source>Sign Languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="388"/>
+        <location filename="usltmodules/lngcodes.py" line="396"/>
         <source>Shan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="389"/>
+        <location filename="usltmodules/lngcodes.py" line="397"/>
         <source>Sidamo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="390"/>
+        <location filename="usltmodules/lngcodes.py" line="398"/>
         <source>Sinhala; Sinhalese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="391"/>
+        <location filename="usltmodules/lngcodes.py" line="399"/>
         <source>Siouan languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="392"/>
+        <location filename="usltmodules/lngcodes.py" line="400"/>
         <source>Sino-Tibetan languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="393"/>
+        <location filename="usltmodules/lngcodes.py" line="401"/>
         <source>Slavic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="513"/>
+        <location filename="usltmodules/lngcodes.py" line="521"/>
         <source>Slovak</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="395"/>
+        <location filename="usltmodules/lngcodes.py" line="403"/>
         <source>Slovenian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="396"/>
+        <location filename="usltmodules/lngcodes.py" line="404"/>
         <source>Southern Sami</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="397"/>
+        <location filename="usltmodules/lngcodes.py" line="405"/>
         <source>Northern Sami</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="398"/>
+        <location filename="usltmodules/lngcodes.py" line="406"/>
         <source>Sami languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="399"/>
+        <location filename="usltmodules/lngcodes.py" line="407"/>
         <source>Lule Sami</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="400"/>
+        <location filename="usltmodules/lngcodes.py" line="408"/>
         <source>Inari Sami</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="401"/>
+        <location filename="usltmodules/lngcodes.py" line="409"/>
         <source>Samoan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="402"/>
+        <location filename="usltmodules/lngcodes.py" line="410"/>
         <source>Skolt Sami</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="403"/>
+        <location filename="usltmodules/lngcodes.py" line="411"/>
         <source>Shona</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="404"/>
+        <location filename="usltmodules/lngcodes.py" line="412"/>
         <source>Sindhi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="405"/>
+        <location filename="usltmodules/lngcodes.py" line="413"/>
         <source>Soninke</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="406"/>
+        <location filename="usltmodules/lngcodes.py" line="414"/>
         <source>Sogdian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="407"/>
+        <location filename="usltmodules/lngcodes.py" line="415"/>
         <source>Somali</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="408"/>
+        <location filename="usltmodules/lngcodes.py" line="416"/>
         <source>Songhai languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="409"/>
+        <location filename="usltmodules/lngcodes.py" line="417"/>
         <source>Sotho, Southern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="410"/>
+        <location filename="usltmodules/lngcodes.py" line="418"/>
         <source>Spanish; Castilian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="411"/>
+        <location filename="usltmodules/lngcodes.py" line="419"/>
         <source>Sardinian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="412"/>
+        <location filename="usltmodules/lngcodes.py" line="420"/>
         <source>Sranan Tongo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="413"/>
+        <location filename="usltmodules/lngcodes.py" line="421"/>
         <source>Serbian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="414"/>
+        <location filename="usltmodules/lngcodes.py" line="422"/>
         <source>Serer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="415"/>
+        <location filename="usltmodules/lngcodes.py" line="423"/>
         <source>Nilo-Saharan languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="416"/>
+        <location filename="usltmodules/lngcodes.py" line="424"/>
         <source>Swati</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="417"/>
+        <location filename="usltmodules/lngcodes.py" line="425"/>
         <source>Sukuma</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="418"/>
+        <location filename="usltmodules/lngcodes.py" line="426"/>
         <source>Sundanese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="419"/>
+        <location filename="usltmodules/lngcodes.py" line="427"/>
         <source>Susu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="420"/>
+        <location filename="usltmodules/lngcodes.py" line="428"/>
         <source>Sumerian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="421"/>
+        <location filename="usltmodules/lngcodes.py" line="429"/>
         <source>Swahili</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="422"/>
+        <location filename="usltmodules/lngcodes.py" line="430"/>
         <source>Swedish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="423"/>
+        <location filename="usltmodules/lngcodes.py" line="431"/>
         <source>Classical Syriac</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="424"/>
+        <location filename="usltmodules/lngcodes.py" line="432"/>
         <source>Syriac</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="425"/>
+        <location filename="usltmodules/lngcodes.py" line="433"/>
         <source>Tahitian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="426"/>
+        <location filename="usltmodules/lngcodes.py" line="434"/>
         <source>Tai languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="427"/>
+        <location filename="usltmodules/lngcodes.py" line="435"/>
         <source>Tamil</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="428"/>
+        <location filename="usltmodules/lngcodes.py" line="436"/>
         <source>Tatar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="429"/>
+        <location filename="usltmodules/lngcodes.py" line="437"/>
         <source>Telugu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="430"/>
+        <location filename="usltmodules/lngcodes.py" line="438"/>
         <source>Timne</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="431"/>
+        <location filename="usltmodules/lngcodes.py" line="439"/>
         <source>Tereno</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="432"/>
+        <location filename="usltmodules/lngcodes.py" line="440"/>
         <source>Tetum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="433"/>
+        <location filename="usltmodules/lngcodes.py" line="441"/>
         <source>Tajik</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="434"/>
+        <location filename="usltmodules/lngcodes.py" line="442"/>
         <source>Tagalog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="435"/>
+        <location filename="usltmodules/lngcodes.py" line="443"/>
         <source>Thai</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="514"/>
+        <location filename="usltmodules/lngcodes.py" line="522"/>
         <source>Tibetan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="437"/>
+        <location filename="usltmodules/lngcodes.py" line="445"/>
         <source>Tigre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="438"/>
+        <location filename="usltmodules/lngcodes.py" line="446"/>
         <source>Tigrinya</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="439"/>
+        <location filename="usltmodules/lngcodes.py" line="447"/>
         <source>Tiv</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="440"/>
+        <location filename="usltmodules/lngcodes.py" line="448"/>
         <source>Tokelau</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="441"/>
+        <location filename="usltmodules/lngcodes.py" line="449"/>
         <source>Klingon; tlhIngan-Hol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="442"/>
+        <location filename="usltmodules/lngcodes.py" line="450"/>
         <source>Tlingit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="443"/>
+        <location filename="usltmodules/lngcodes.py" line="451"/>
         <source>Tamashek</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="444"/>
+        <location filename="usltmodules/lngcodes.py" line="452"/>
         <source>Tonga (Nyasa)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="445"/>
+        <location filename="usltmodules/lngcodes.py" line="453"/>
         <source>Tonga (Tonga Islands)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="446"/>
+        <location filename="usltmodules/lngcodes.py" line="454"/>
         <source>Tok Pisin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="447"/>
+        <location filename="usltmodules/lngcodes.py" line="455"/>
         <source>Tsimshian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="448"/>
+        <location filename="usltmodules/lngcodes.py" line="456"/>
         <source>Tswana</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="449"/>
+        <location filename="usltmodules/lngcodes.py" line="457"/>
         <source>Tsonga</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="450"/>
+        <location filename="usltmodules/lngcodes.py" line="458"/>
         <source>Turkmen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="451"/>
+        <location filename="usltmodules/lngcodes.py" line="459"/>
         <source>Tumbuka</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="452"/>
+        <location filename="usltmodules/lngcodes.py" line="460"/>
         <source>Tupi languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="453"/>
+        <location filename="usltmodules/lngcodes.py" line="461"/>
         <source>Turkish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="454"/>
+        <location filename="usltmodules/lngcodes.py" line="462"/>
         <source>Altaic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="455"/>
+        <location filename="usltmodules/lngcodes.py" line="463"/>
         <source>Tuvalu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="456"/>
+        <location filename="usltmodules/lngcodes.py" line="464"/>
         <source>Twi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="457"/>
+        <location filename="usltmodules/lngcodes.py" line="465"/>
         <source>Tuvinian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="458"/>
+        <location filename="usltmodules/lngcodes.py" line="466"/>
         <source>Udmurt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="459"/>
+        <location filename="usltmodules/lngcodes.py" line="467"/>
         <source>Ugaritic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="460"/>
+        <location filename="usltmodules/lngcodes.py" line="468"/>
         <source>Uighur; Uyghur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="461"/>
+        <location filename="usltmodules/lngcodes.py" line="469"/>
         <source>Ukrainian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="462"/>
+        <location filename="usltmodules/lngcodes.py" line="470"/>
         <source>Umbundu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="463"/>
+        <location filename="usltmodules/lngcodes.py" line="471"/>
         <source>Undetermined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="464"/>
+        <location filename="usltmodules/lngcodes.py" line="472"/>
         <source>Urdu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="465"/>
+        <location filename="usltmodules/lngcodes.py" line="473"/>
         <source>Uzbek</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="466"/>
+        <location filename="usltmodules/lngcodes.py" line="474"/>
         <source>Vai</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="467"/>
+        <location filename="usltmodules/lngcodes.py" line="475"/>
         <source>Venda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="468"/>
+        <location filename="usltmodules/lngcodes.py" line="476"/>
         <source>Vietnamese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="470"/>
+        <location filename="usltmodules/lngcodes.py" line="478"/>
         <source>Votic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="471"/>
+        <location filename="usltmodules/lngcodes.py" line="479"/>
         <source>Wakashan languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="472"/>
+        <location filename="usltmodules/lngcodes.py" line="480"/>
         <source>Walamo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="473"/>
+        <location filename="usltmodules/lngcodes.py" line="481"/>
         <source>Waray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="474"/>
+        <location filename="usltmodules/lngcodes.py" line="482"/>
         <source>Washo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="515"/>
+        <location filename="usltmodules/lngcodes.py" line="523"/>
         <source>Welsh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="476"/>
+        <location filename="usltmodules/lngcodes.py" line="484"/>
         <source>Sorbian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="477"/>
+        <location filename="usltmodules/lngcodes.py" line="485"/>
         <source>Walloon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="478"/>
+        <location filename="usltmodules/lngcodes.py" line="486"/>
         <source>Wolof</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="479"/>
+        <location filename="usltmodules/lngcodes.py" line="487"/>
         <source>Kalmyk; Oirat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="480"/>
+        <location filename="usltmodules/lngcodes.py" line="488"/>
         <source>Xhosa</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="481"/>
+        <location filename="usltmodules/lngcodes.py" line="489"/>
         <source>Yao</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="482"/>
+        <location filename="usltmodules/lngcodes.py" line="490"/>
         <source>Yapese</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="483"/>
+        <location filename="usltmodules/lngcodes.py" line="491"/>
         <source>Yiddish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="484"/>
+        <location filename="usltmodules/lngcodes.py" line="492"/>
         <source>Yoruba</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="485"/>
+        <location filename="usltmodules/lngcodes.py" line="493"/>
         <source>Yupik languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="486"/>
+        <location filename="usltmodules/lngcodes.py" line="494"/>
         <source>Zapotec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="487"/>
+        <location filename="usltmodules/lngcodes.py" line="495"/>
         <source>Blissymbols; Blissymbolics; Bliss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="488"/>
+        <location filename="usltmodules/lngcodes.py" line="496"/>
         <source>Zenaga</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="489"/>
+        <location filename="usltmodules/lngcodes.py" line="497"/>
         <source>Standard Moroccan Tamazight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="490"/>
+        <location filename="usltmodules/lngcodes.py" line="498"/>
         <source>Zhuang; Chuang</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="491"/>
+        <location filename="usltmodules/lngcodes.py" line="499"/>
         <source>Zande languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="492"/>
+        <location filename="usltmodules/lngcodes.py" line="500"/>
         <source>Zulu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="493"/>
+        <location filename="usltmodules/lngcodes.py" line="501"/>
         <source>Zuni</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="494"/>
+        <location filename="usltmodules/lngcodes.py" line="502"/>
         <source>No linguistic content; Not applicable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lngcodes.py" line="495"/>
+        <location filename="usltmodules/lngcodes.py" line="503"/>
         <source>Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki</source>
         <translation type="unfinished"></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="lngcodes.py" line="322"/>
+        <location filename="usltmodules/lngcodes.py" line="330"/>
         <source>Bokmål, Norwegian; Norwegian Bokmål</source>
         <translation type="unfinished"></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="lngcodes.py" line="335"/>
+        <location filename="usltmodules/lngcodes.py" line="343"/>
         <source>Occitan (post 1500); Provençal</source>
         <translation type="unfinished"></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="lngcodes.py" line="359"/>
+        <location filename="usltmodules/lngcodes.py" line="367"/>
         <source>Provençal, Old (to 1500)</source>
         <translation type="unfinished"></translation>
     </message>
     <message encoding="UTF-8">
-        <location filename="lngcodes.py" line="469"/>
+        <location filename="usltmodules/lngcodes.py" line="477"/>
         <source>Volapük</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2502,7 +2502,7 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="uslt_manager.py" line="112"/>
+        <location filename="uslt_manager.py" line="73"/>
         <source>Exit</source>
         <translation>Beenden</translation>
     </message>
@@ -2510,32 +2510,32 @@
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="uslt_manager.py" line="361"/>
+        <location filename="usltmodules/dialogs.py" line="175"/>
         <source>Discard</source>
         <translation>Verwerfen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="364"/>
+        <location filename="usltmodules/dialogs.py" line="178"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="367"/>
+        <location filename="usltmodules/dialogs.py" line="181"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="341"/>
+        <location filename="usltmodules/tagwidget.py" line="233"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="891"/>
+        <location filename="usltmodules/treeview.py" line="202"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="893"/>
+        <location filename="usltmodules/treeview.py" line="204"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2543,7 +2543,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="uslt_manager.py" line="1118"/>
+        <location filename="usltmodules/treeview.py" line="429"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>
@@ -2551,67 +2551,67 @@
 <context>
     <name>TagWidget</name>
     <message>
-        <location filename="uslt_manager.py" line="197"/>
+        <location filename="usltmodules/tagwidget.py" line="89"/>
         <source>Edit Lyrics</source>
         <translation>Text bearbeiten</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="200"/>
+        <location filename="usltmodules/tagwidget.py" line="92"/>
         <source>Add Lyrics</source>
         <translation>Text hinzufügen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="203"/>
+        <location filename="usltmodules/tagwidget.py" line="95"/>
         <source>Remove Lyrics</source>
         <translation>Text entfernen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="206"/>
+        <location filename="usltmodules/tagwidget.py" line="98"/>
         <source>Search for Lyrics</source>
         <translation>Nach Text suchen</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="209"/>
+        <location filename="usltmodules/tagwidget.py" line="101"/>
         <source>Save Tag</source>
         <translation>Tag speichern</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="212"/>
+        <location filename="usltmodules/tagwidget.py" line="104"/>
         <source>Reload Tag</source>
         <translation>Tag neu laden</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="334"/>
+        <location filename="usltmodules/tagwidget.py" line="226"/>
         <source>Could not write to file!</source>
         <translation>Datei konnte nicht geschrieben werden!</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="351"/>
+        <location filename="usltmodules/dialogs.py" line="165"/>
         <source>Lyrics have been modified.</source>
         <translation>Text wurde geändert.</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="352"/>
+        <location filename="usltmodules/dialogs.py" line="166"/>
         <source>Do you want to save your changes?</source>
         <translation>Äbderungen speichern?</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="240"/>
+        <location filename="usltmodules/tagwidget.py" line="132"/>
         <source>Artist</source>
         <translation>Künstler</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="241"/>
+        <location filename="usltmodules/tagwidget.py" line="133"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="242"/>
+        <location filename="usltmodules/tagwidget.py" line="134"/>
         <source>Selection</source>
         <translation>Auswahl</translation>
     </message>
     <message>
-        <location filename="uslt_manager.py" line="243"/>
+        <location filename="usltmodules/tagwidget.py" line="135"/>
         <source>Lyrics</source>
         <translation>Text</translation>
     </message>
