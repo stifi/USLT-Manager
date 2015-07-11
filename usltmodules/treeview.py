@@ -22,29 +22,27 @@ from .tagoperations import *
 
 
 class FileTree(QWidget):
-    """QWidget having QTreeView which root is editable either by line edit or file dialog.
+    """:class:`QWidget` showing a :class:`QTreeView` which root is editable either by
+    line edit or file dialog.
 
 
-    A `QFileSystemWatcher` monitors visible files in the tree for changes. If a mp3 file
-    is selected or modified :data:`mp3Selected` signal with filePath as parameter is emitted.
-    Otherwise, :data:`nonmp3Selected` with filePath is emitted.
+    A :class:`QFileSystemWatcher` monitors visible files in the tree for changes.
 
-    If the root path is changed :data:`nonmp3Selected`  with parameter None is emitted.
+    The `pyqtSignal` :data:`mp3Selected(filePath)` is emitted if a mp3 file is selected.
+    The `pyqtSignal` :data:`nonmp3Selected(filePath)` is emitted if a non mp3 file is selected.
+    The `pyqtSignal` :data:`nonmp3Selected(None)` is emitted when the root path was changed.
 
     :param rootPath: Path to root path of file tree
     """
     #: `pyqtSignal` emitted when an mp3 file is selected or changed.
-    #: The file path is emitted as str parameter.
+    #: The file path is emitted as `str` parameter.
     mp3Selected = pyqtSignal(str)
     #: `pyqtSignal` emitted when a file is selected or changed which is not mp3.
-    #: The file path is emitted as str parameter.
+    #: The file path is emitted as `str` parameter.
     nonmp3Selected = pyqtSignal(str)
 
     class DirValidator(QValidator):
-        """Sub-class for validation of root input. Validates if input is an existing directory."""
-        def __init__(self, parent=None):
-            super().__init__(parent)
-
+        """Validation of root input. Validates if input is a readable directory."""
         def validate(self, inp, pos):
             """:returns: `QValidator.Acceptable` if entered directory is valid.
                          Otherwise, `QValidator.Intermediate`.
@@ -56,19 +54,19 @@ class FileTree(QWidget):
             else:
                 return (QValidator.Intermediate, inp, pos)
 
-        def fixup(self, input):
-            return super().fixup(input)
-
     def __init__(self, rootPath, parent=None):
         super().__init__(parent)
 
         #: map parameter to object variable
         self.rootPath = rootPath
 
+        # generate TagFileSystemModel
         self.model = TagFileSystemModel()
         self.model.setRootPath(self.rootPath)
 
+        ## tree view
         self.tree = QTreeView()
+        # attach TagFileSystemModel
         self.tree.setModel(self.model)
         self.tree.setRootIndex(self.model.index(self.rootPath))
         # remove file type column
@@ -77,11 +75,10 @@ class FileTree(QWidget):
         self.tree.header().setStretchLastSection(False)
         self.tree.header().setSectionResizeMode(0, QHeaderView.Stretch)
         self.tree.header().setSectionResizeMode(4, QHeaderView.ResizeToContents)
-        # create a custom context menu for QTreeView
+        # custom context menu for QTreeView
         self.tree.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.tree.customContextMenuRequested.connect(self.treeContextMenu)
 
-         # Address line with address label, navigation icons and browser Icon
+        ## Address line with address label, navigation icons and browser Icon
         openBrowserIcon = QIcon.fromTheme("folder", QIcon(":/icons/folder.svg"))
         openBrowserButton = QPushButton()
         openBrowserButton.setIcon(openBrowserIcon)
@@ -101,7 +98,7 @@ class FileTree(QWidget):
         reloadButton = QPushButton()
         reloadButton.setIcon(reloadButtonIcon)
 
-        # Options at bottom
+        ## options and progress bar at bottom
         checkDirsCheckBox = QCheckBox(
             QCoreApplication.translate('FileTree',
                                        "Check Directories" +
@@ -115,6 +112,7 @@ class FileTree(QWidget):
         bottomLineLayout.addWidget(checkDirsCheckBox)
         bottomLineLayout.addWidget(self.progressBarDirCheck)
 
+        ## main layout
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
         mainLayout.addWidget(self.addressLabel, 0, 1)
@@ -129,35 +127,31 @@ class FileTree(QWidget):
         # FIXME: temporarily disabled as cache cleaning might not be required on expansion t.b.v.
         # self.tree.expanded.connect(self.model.clearFileInfoCache)
 
-        # Process newly selected files (e.g. emit mp3Selected)
+        # process newly selected files (e.g. emit mp3Selected)
         self.tree.selectionModel().selectionChanged.connect(self.selectionChanged)
-        # Double clicked on selection
+        # double click changes root to selected folder
         self.tree.doubleClicked.connect(self.changeRootToSelection)
-        # Notify for rootChanged() when new root have been entered
+        # notify for rootChanged() when new root have been entered
         #   (DirValidator prevents invalid directories)
         self.addressLabel.editingFinished.connect(self.rootChanged)
-        # Open file dialog if button is clicked
+        # open file dialog if button is clicked
         openBrowserButton.clicked.connect(self.fileDialog)
-        # Go up in tree hierarchy on button click
+        # go up in tree hierarchy on button click
         upButton.clicked.connect(self.goUp)
-        # Force reloading root
+        # force reloading root
         reloadButton.clicked.connect(lambda: self.rootChanged(force=True))
-        #
+        # checking directories is enabled or disabled
         checkDirsCheckBox.stateChanged.connect(self.checkDirsStateChanged)
-
+        # show context menu
+        self.tree.customContextMenuRequested.connect(self.treeContextMenu)
         # force as this is the initialization
         self.rootChanged(force=True)
 
-    def showProgressBarDirCheck(self):
-        """Show progress bar and initialization of the timeout timer."""
-        self.progressTimeoutTimer.start(500)
-        self.progressBarDirCheck.setVisible(True)
-
     def treeContextMenu(self, pos):
-        """Adds context menu."""
+        """Context menu."""
         menu = QMenu(self)
 
-        # Adds "Open in kid3" to the context menu. Action is disabled if kid3 is not available
+        # add "Open in kid3" to the context menu. Action is disabled if kid3 is not available
         kid3Action = menu.addAction(QCoreApplication.translate('FileTree', "Open in kid3"))
         if which("kid3"):
             kid3Action.triggered.connect(lambda: self.openKID3("kid3"))
@@ -168,7 +162,7 @@ class FileTree(QWidget):
         else:
             kid3Action.setEnabled(False)
 
-        # Adds "Delete File" to context menu if a writable file is selected
+        # add "Delete File" to context menu if a writable file is selected
         deleteFileAction = menu.addAction(QCoreApplication.translate('FileTree', "Delete File"))
         selectedFileInfo = self.model.fileInfo(self.tree.selectionModel().selectedIndexes()[0])
         if selectedFileInfo.isFile() and selectedFileInfo.isWritable():
@@ -181,9 +175,8 @@ class FileTree(QWidget):
         menu.exec(self.tree.mapToGlobal(pos))
 
     def openKID3(self, command):
-        """Opens KID3 using `command`."""
+        """Opens KID3 by :data:`command` with the current selection."""
         selection = self.model.filePath(self.tree.selectionModel().selectedIndexes()[0])
-
         if selection:
             QProcess.startDetached("kid3", [selection])
 
@@ -205,34 +198,43 @@ class FileTree(QWidget):
             QFile(filePath).remove()
 
     def checkDirsStateChanged(self, state):
-        """Depending on `state` directory checking is enabled or nor."""
+        """Enable directory check depending on :data:`state`."""
         if state == Qt.Checked:
             self.model.dirChecksEnable = True
 
             # Generates a timeout for the progress bar shown during directory checking
-            # Every time a file is checked (in directory check mode) by the TagFileSystemModel
-            # the signal fileCheck is emitted. The signal causes the progress bar to be shown
+            # Every time a file is checked (in directory check mode) by the `TagFileSystemModel`
+            # the signal `fileCheck` is emitted. The signal causes the progress bar to be shown
             # and the timeout to be set. After timeout the progress bar is hidden again.
             self.progressTimeoutTimer = QTimer()
             self.model.emitter.fileCheck.connect(self.showProgressBarDirCheck)
+            # hide progress bar on timeout
             self.progressTimeoutTimer.timeout.connect(
                 lambda: self.progressBarDirCheck.setVisible(False))
+            # force progress bar to be shown
             self.showProgressBarDirCheck()
 
         else:
             self.model.dirChecksEnable = False
             self.progressBarDirCheck.setVisible(False)
+            # destroy any remaining timeout timer
             try:
                 del self.progressTimeoutTimer
             except AttributeError:
                 pass
 
-    def rootChanged(self, force=False):
-        """Initializes all required properties but only if `rootPath` has really changed.
-        The object variable `rootPath` to the `addressLabel` to find out if it was changed.
-        So its important to change the `addressLabel` manually before calling this method.
+    def showProgressBarDirCheck(self):
+        """Show progress bar and initialization of the timeout timer."""
+        self.progressTimeoutTimer.start(500)
+        self.progressBarDirCheck.setVisible(True)
 
-        :param force: Force initialization despite if `rootPath` changed.
+    def rootChanged(self, force=False):
+        """Initializes all required properties but only if :data:`self.rootPath` has changed.
+        The variable :data:`self.rootPath` is compared to :data:`self.addressLabel.text()` to
+        identify root changes. So its important to call the :func:`self.addressLabel.setText()`
+        before calling this method.
+
+        :param force: Force initialization despite if :data:`self.rootPath` changed.
         """
         if self.rootPath != self.addressLabel.text() or force:
             self.rootPath = self.addressLabel.text()
@@ -242,18 +244,18 @@ class FileTree(QWidget):
             self.createFileSystemWatcher(self.rootPath)
             # clearing selection is required if initialization is forced (at least)
             self.tree.clearSelection()
-            # Emit signal to notify for a root update. The parameter is set to None as no
+            # emit signal to notify for a root update. The parameter is set to None as no
             # file is selected if the root is changed.
             self.nonmp3Selected.emit(None)
 
     def createFileSystemWatcher(self, path):
-        """Create a QFileSystemWatcher including all files and directories within the watched path.
-        Additionally, the required connections to notify file for file changes to the
+        """Create a :class:`QFileSystemWatcher` including all files and directories
+        within `patch`.
+        Additionally, the required connections to notify for file changes to the
         object of :class:`TagFileSystemModel` are generated.
 
-        :param path: path which should be monitored.
+        :param path: path which should be monitored
         """
-
         absolutePath = QDir(path).absolutePath()
         #FIXME: If file is not readable its not in the watch list.
         #   Thus a toggling read flag is recognized.
@@ -300,20 +302,20 @@ class FileTree(QWidget):
             self.rootChanged()
 
     def fileDialog(self):
-        """File dialog to sets new root."""
+        """File dialog to set new root."""
         path = QFileDialog.getExistingDirectory(self, directory=self.rootPath)
         if path:
             self.addressLabel.setText(path)
             self.rootChanged()
 
     def modifyWatcher(self, index):
-        """Add or remove files from the `fileSystemWatcher`. Depending if tree is expanded or
-        collapsed files are removed or added.
+        """Add or remove files from the :data:`self.fileSystemWatcher`. Depending if
+        tree is expanded or collapsed files are removed or added.
 
         :param index: index of changed path in tree.
-        :type index: QModelIndexType or if str the index is looked up in tree
+        :type index: `QModelIndexType` or if `str` the index is looked up in tree
         """
-        # index should be of QModelIndexType. If its a str I assume its a path
+        # index should be of QModelIndexType. If its a str its a path
         #   --> find index in model
         if type(index) is str:
             index = self.model.index(index)
@@ -330,14 +332,14 @@ class FileTree(QWidget):
         else:
             #print("Removing: " + str(fileList))
             # fileList might be empty (e.g. when a directory is deleted)
-            # QFileSystemWatcher removes deleted files automatically
             if fileList:
                 self.fileSystemWatcher.removePaths(fileList)
+            # deleted files are removed automatically
 
         #print("Watching" + str(self.fileSystemWatcher.files()))
 
     def selectionChanged(self, selected, deselected):
-        """Emit `mp3Selected` or `nonmp3Selected` for the selected file.
+        """Emit :data:`mp3Selected` or :data:`nonmp3Selected` for the selected file.
         To be called when a new file is selected.
         """
         if len(selected.indexes()) > 0:
@@ -350,7 +352,7 @@ class FileTree(QWidget):
                 self.nonmp3Selected.emit(filePath)
 
     def fileChanged(self, filePath):
-        """Emit `mp3Selected` or `nonmp3Selected` for the selected file.
+        """Emit :data:`mp3Selected` or :data:`nonmp3Selected` for the selected file.
         To be called when the selected file changed.
         """
         index = self.model.index(filePath)
@@ -363,22 +365,24 @@ class FileTree(QWidget):
 
 
 class TagFileSystemModel(QFileSystemModel):
-    """File system model to be used w/ QTreeView.
+    """File system model to be used w/ :class:`QTreeView`.
 
-    It enhances the classical QFileSystemModel w/ ID3 tag handling. To speed up file
-    handling important file parameters are cached. A customized column provides information
-    about the ID3 tag version.
+    It enhances the classical :class:`QFileSystemModel` w/ ID3 tag handling. To speed up file
+    handling important file parameters are cached in :data:`self.fileInfoCache`.
+    A customized column provides information about the ID3 tag version.
 
     If file is an mp3 file it gets colored depending if lyrics are available or not.
 
     Additionally, the class provides a check for all files in a directory. To enable this check
-    `self.dirChecksEnable` must be `True`. Depending of the result of the check different folder
-    icons are returned. The check is not recursive! When if file is checked in this mode the signal
-    `fileCheck` is emitted.
+    :data:`self.dirChecksEnable` must be `True`. Depending on the result of the check different
+    folder icons are returned. The check is not recursive! When a file is checked in this mode
+    the signal :data:`fileCheck` is emitted.
     """
     class Emitter(QObject):
-        """Signals can only be emitted from classes derived from QOject. As QFileIconProvider
-        is not derived from QOject this nested class provides this feature."""
+        """Signals can only be emitted from classes derived from :class:`QOject`.
+        As :class:`QFileIconProvider` is not derived from :class:`QOject` this nested
+        class provides this feature.
+        """
         fileCheck = pyqtSignal()
 
         def __init__(self):
@@ -416,8 +420,8 @@ class TagFileSystemModel(QFileSystemModel):
 
         Before the file itself is analyzed the cached information is checked.
 
-        If `self.dirChecksEnable` is set to `True` the content of sub-directories is checked
-        as well.
+        If :data:`self.dirChecksEnable` is set to `True` the content of sub-directories is checked
+        as well and the according icons are returned.
         """
         # add ID3v2 version number into dedicated column.
         if ((role == Qt.DisplayRole)) and (index.column() == self.columnCount() - 1):
@@ -467,7 +471,7 @@ class TagFileSystemModel(QFileSystemModel):
     def isMP3(self, filePath):
         """Test if file is MP3 file by using Mutagen's MIME type evaluation.
 
-        :returns: True if file is an MP3, False else.
+        :returns: `True` if file is an MP3, else `False`.
         :rtype: boolean
         """
         try:
@@ -482,23 +486,23 @@ class TagFileSystemModel(QFileSystemModel):
         of ID3v2 is returned only.
 
         :return: version number
-        :rtype: str
+        :rtype: `str`
         """
         return ('.'.join(str(i) for i in ID3(filePath).version))
 
     def hasID3Lyrics(self, filePath):
         """Test if file has lyrics in ID3 tag by getting all USLT frames.
 
-        :returns: True if lyrics are available, False else.
+        :returns: `True` if lyrics are available, else `False`.
         :rtype: boolean
         """
         return (self.isMP3(filePath) and ID3(filePath).hasLyrics) or False
 
     def checkDirectory(self, path):
-        """Return True if every mp3-file in `path` have embedded lyrics. Otherwise, False.
+        """Return `True` if every mp3-file in `path` have embedded lyrics. Otherwise, `False`.
         Subdirectories are not checked!
 
-        The pyqtSignal `fileCheck` is emitted every time a file is checked.
+        The `pyqtSignal` :data:`fileCheck` is emitted every time a file is checked.
 
         :return: if all mp3 files have lyrics
         :rtype: boolean
@@ -529,20 +533,22 @@ class TagFileSystemModel(QFileSystemModel):
         return allHaveLyrics
 
     def removeFromFileInfoCache(self, filePathOrIndex):
-        """Removes specified files from fileInfoCache."""
-        # If filePathOrIndex is not QModelIndex find index of corresponding path
+        """Removes specified files from :data:`self.fileInfoCache`.
+        :param filePathOrIndex: model index or path
+        """
+        # if filePathOrIndex is not QModelIndex find index of corresponding path
         if type(filePathOrIndex) != QModelIndex:
             index = self.index(filePathOrIndex)
         else:
             index = filePathOrIndex
 
         filePath = self.fileInfo(index).filePath()
-        # loop over all columns in model and deleted cached values
+        # loop over all columns in model and delete cached values
         for col in range(0, self.columnCount()):
             idx = self.index(filePath, col)
             self._delFromFileInfoCache(idx)
 
-        # If its a directory remove the containing files as well
+        # if its a directory remove the containing files as well
         if self.fileInfo(index).isDir():
             # dirIterator contains all files and directories recursively
             dirIterator = QDirIterator(self.fileInfo(index).filePath(),
@@ -555,7 +561,7 @@ class TagFileSystemModel(QFileSystemModel):
                     self._delFromFileInfoCache(self.index(f, col))
 
     def _delFromFileInfoCache(self, partialKey):
-        """Removes all elements from cache having `partialKey` in key."""
+        """Removes all elements from cache having :param:`partialKey` in key."""
         # keys() will not work in Python 3 because an iterator is returned
         for item in list(self.fileInfoCache):
             if partialKey in item:
@@ -563,5 +569,5 @@ class TagFileSystemModel(QFileSystemModel):
                 del self.fileInfoCache[item]
 
     def clearFileInfoCache(self):
-        """Clears self.fileInfoCache."""
+        """Clears :data:`self.fileInfoCache`."""
         self.fileInfoCache = {}

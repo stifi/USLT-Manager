@@ -55,7 +55,7 @@ class MainWindow(QMainWindow):
     :param rootPath: Path to root directory
     """
     class CentralWidget(QWidget):
-        """The central widget combines the FileTree and TagWidget.
+        """The central widget combines the :class:`FileTree` and :class:`TagWidget`.
 
         :param rootPath: Path to root directory
         """
@@ -64,10 +64,10 @@ class MainWindow(QMainWindow):
 
             mainLayout = QGridLayout()
 
-            # File Tree at the left side
+            ## file Tree at the left side
             fileTree = FileTree(rootPath)
 
-            # TagWidget and Exit button on the right side
+            ## TagWidget and Exit button on the right side
             self.tagWidget = TagWidget()
             closeButtonIcon = QIcon.fromTheme("application-exit", QIcon(":/icons/application-exit"))
             self.closeButton = QPushButton(QCoreApplication.translate('MainWindow', "Exit"))
@@ -78,7 +78,7 @@ class MainWindow(QMainWindow):
             rightLayout.addWidget(self.tagWidget, 0, 0)
             rightLayout.addWidget(self.closeButton, 1, 0)
 
-            # combine left part and right part with QSplitter
+            ## combine left part and right part with QSplitter
             splitter = QSplitter()
             splitter.addWidget(fileTree)
             splitter.addWidget(rightWidget)
@@ -109,9 +109,11 @@ class MainWindow(QMainWindow):
         self.centralWidget.tagWidget.tagModified.connect(self.tagModified)
 
     def tagModified(self, modified):
+        """Set or unset window to "modified"."""
         self.setWindowModified(modified)
 
     def closeEvent(self, event):
+        """Actions to take when application is about to close."""
         if self.isWindowModified():
             ret = SaveChangesDialog(QMessageBox.Save | QMessageBox.Discard |
                                     QMessageBox.Cancel).exec()

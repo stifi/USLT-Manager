@@ -25,7 +25,7 @@ class TagWidget(QWidget):
     By default all GUI elements are disabled. They are enabled when a mp3 file is loaded
     using :func:`loadAndShowTag()`.
 
-    The `pyqtSignal` :data:`tagModified` is used to notify if changes have been made
+    The `pyqtSignal` :data:`tagModified` is used to notify for changes
     """
 
     #: emitted with the parameter True when tag has been modified
@@ -36,7 +36,7 @@ class TagWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        #: Encodings available for USLT and defined in mutagen
+        #: encodings available for USLT and defined in mutagen
         self.encoding = {}
         self.encoding[Encoding.LATIN1] = "Latin-1"
         self.encoding[Encoding.UTF16] = "UTF-16"
@@ -45,21 +45,26 @@ class TagWidget(QWidget):
 
         mainLayout = QFormLayout()
 
+        ## artist
         self.artistLineEdit = QLineEdit()
         self.artistLineEdit.setReadOnly(True)
 
+        ## title
         self.titleLineEdit = QLineEdit()
         self.titleLineEdit.setReadOnly(True)
 
+        ## lyrics selection (language and description)
         self.lyricsSelection = QComboBox()
         self.lyricsSelection.setSizeAdjustPolicy(QComboBox.AdjustToContents)
         self.lyricsSelection.setDisabled(True)
 
+        ## encoding
         self.lyricsEncoding = QLabel()
         self.lyricsEncoding.setDisabled(True)
         # XXX: Label is hidden as most users don't care about encodings
         self.lyricsEncoding.setVisible(False)
 
+        ## lyrics
         self.lyricsDisplay = QPlainTextEdit()
         self.lyricsDisplay.setReadOnly(True)
         # expand lyrics display to the bottom
@@ -67,8 +72,10 @@ class TagWidget(QWidget):
         policy.setVerticalStretch(1)
         self.lyricsDisplay.setSizePolicy(policy)
 
+        ## spacer between id3 elements and toolbar
         spacer = QSpacerItem(0, 0, QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
 
+        ## toolbar
         lyricsModifyToolbar = QToolBar()
         lyricsModifyToolbar.setFloatable(False)
         lyricsModifyToolbar.setMovable(False)
@@ -105,6 +112,7 @@ class TagWidget(QWidget):
             reloadTagButtonIcon, QCoreApplication.translate('TagWidget', "Reload Tag"),
             self.reloadTagActionReceiver)
 
+        # shortcuts for toolbar
         self.editLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_E))
         self.addLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_A))
         self.removeLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_D))
@@ -112,7 +120,10 @@ class TagWidget(QWidget):
         self.saveTagAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_S))
         self.reloadTagAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_R))
 
+        # separator for save button
         lyricsModifyToolbar.insertSeparator(self.saveTagAction)
+
+        # disable all buttons
         self.editLyricsAction.setDisabled(True)
         self.addLyricsAction.setDisabled(True)
         self.removeLyricsAction.setDisabled(True)
@@ -120,9 +131,9 @@ class TagWidget(QWidget):
         #: The state of the button (disabled/enabled) is used as indicator as well
         #: if the tag content has been modified compared to the saved tag version
         self.saveTagAction.setDisabled(True)
-        self.tagModified.emit(False)
         self.reloadTagAction.setDisabled(True)
 
+        ## layouts
         selectionGrid = QGridLayout()
         selectionGrid.addWidget(self.lyricsSelection, 0, 0, Qt.AlignLeft)
         selectionGrid.addWidget(self.lyricsEncoding, 0, 1, Qt.AlignLeft)
@@ -135,10 +146,15 @@ class TagWidget(QWidget):
         mainLayout.addRow(QApplication.translate('TagWidget', "Lyrics"), self.lyricsDisplay)
 
         self.setLayout(mainLayout)
+
+        # disable everything
         self.setDisabled(True)
 
         # update lyrics if a different selection (language/description) is made
         self.lyricsSelection.currentIndexChanged.connect(self.showLyrics)
+
+        # notify for matching elements with tag content
+        self.tagModified.emit(False)
 
     def editLyricsActionReceiver(self):
         """Enable editing of lyrics in view."""
@@ -150,10 +166,11 @@ class TagWidget(QWidget):
         self.lyricsSelection.setDisabled(True)
         self.lyricsEncoding.setDisabled(True)
         self.saveTagAction.setDisabled(False)
+        # tag and GUI elements do not match anymore
         self.tagModified.emit(True)
 
     def addLyricsActionReceiver(self):
-        """Initiates the AddLyricsDialog."""
+        """Initiate the AddLyricsDialog."""
         addLyricsDialog = AddLyricsDialog(self)
         if (addLyricsDialog.exec() == QDialog.Accepted):
             lng = addLyricsDialog.lngCodeComboBox.currentText()
@@ -167,23 +184,25 @@ class TagWidget(QWidget):
             # select currently added lyrics in view
             self.lyricsSelection.setCurrentText("/".join((lng, dsc)))
             self.saveTagAction.setDisabled(False)
+            # tag and GUI elements do not match anymore
             self.tagModified.emit(True)
 
         # save memory
         del addLyricsDialog
 
     def removeLyricsActionReceiver(self):
-        """Delete lyrics from tag."""
+        """Delete current shown lyrics from tag."""
         del self.tag.lyrics[self.lyricsSelection.currentData()]
         # update lyrics in view
         self.setLyrics()
         self.saveTagAction.setDisabled(False)
+        # tag and GUI elements do not match anymore
         self.tagModified.emit(True)
 
     def searchLyricsActionReceiver(self):
         """Search for lyrics in external browser."""
         queryUrl = QUrlQuery()
-        # If string is None convert it to empty string
+        # if string is None convert it to empty string
         toStr = lambda s: s or ""
         queryUrl.addQueryItem("as_q",
                               '"lyrics"+"' + toStr(self.tag.artist) +
@@ -195,14 +214,15 @@ class TagWidget(QWidget):
 
     def reloadTagActionReceiver(self):
         """Reload view by loading tag from file again."""
-        # Ask user if modifications needs to be saved (indicated by saveTagAction)
+        # ask user if modifications needs to be saved (indicated by saveTagAction)
         #   but only if new file is loaded
         if (self.saveTagAction.isEnabled()):
-            # No Cancel button is offered as a different file might be selected in tree view
+            # No Cancel button is offered as a different file might be selected in tree view already
             ret = SaveChangesDialog(QMessageBox.Save | QMessageBox.Discard).exec()
             if (ret == QMessageBox.Save):
                 self.saveTagActionReceiver()
             self.saveTagAction.setDisabled(True)
+            # tag and GUI elements match
             self.tagModified.emit(False)
 
         self.loadAndShowTag(self.tag.filePath)
@@ -230,23 +250,22 @@ class TagWidget(QWidget):
             #   buttons. It seems that the translations are stored in the context of QPlatformTheme
             errorMessageDialog.button(QMessageBox.Ok). \
                 setText(QCoreApplication.translate('QPlatformTheme', "Ok"))
-
             errorMessageDialog.exec()
         else:
             self.saveTagAction.setDisabled(True)
+            # tag and GUI elements match
             self.tagModified.emit(False)
 
     def loadAndShowTag(self, filePath):
         """Load tag, show tag values, and enable GUI elements."""
-        # Ask user if modifications needs to be saved (indicated by saveTagAction)
+        # ask user if modifications needs to be saved (indicated by saveTagAction)
         #   but only if new file is loaded
         if (self.saveTagAction.isEnabled() and filePath != self.tag.filePath):
-            # No Cancel button is offered as a different file might be selected in tree view
+            # no Cancel button is offered as a different file might be selected in tree view already
             ret = SaveChangesDialog(QMessageBox.Save | QMessageBox.Discard).exec()
             if (ret == QMessageBox.Save):
                 self.saveTagActionReceiver()
             self.saveTagAction.setDisabled(True)
-            self.tagModified.emit(False)
 
         # Tag might be modified, so unload it first to make sure elements are up-to-date
         self.unloadAndHideTag()
@@ -256,17 +275,18 @@ class TagWidget(QWidget):
         self.setArtistName()
         self.setTitleName()
         self.setLyrics()
+        # tag and GUI elements match
+        self.tagModified.emit(False)
 
     def unloadAndHideTag(self):
         """Unload Tag and disable GUI elements."""
-        # Ask user if modifications needs to be saved (indicated by saveTagAction
+        # ask user if modifications needs to be saved (indicated by saveTagAction)
         if (self.saveTagAction.isEnabled()):
-            # No Cancel button is offered as a different file might be selected in tree view
+            # no Cancel button is offered as a different file might be selected in tree view already
             ret = SaveChangesDialog(QMessageBox.Save | QMessageBox.Discard).exec()
             if (ret == QMessageBox.Save):
                 self.saveTagActionReceiver()
             self.saveTagAction.setDisabled(True)
-            self.tagModified.emit(False)
 
         self.setDisabled(True)
         self.lyricsSelection.setDisabled(True)
@@ -276,6 +296,7 @@ class TagWidget(QWidget):
         self.removeLyricsAction.setDisabled(True)
         self.searchLyricsAction.setDisabled(True)
         self.saveTagAction.setDisabled(True)
+        # tag and GUI elements match
         self.tagModified.emit(False)
         self.reloadTagAction.setDisabled(True)
         self.lyricsDisplay.setReadOnly(True)
@@ -294,7 +315,7 @@ class TagWidget(QWidget):
         self.titleLineEdit.setText(self.tag.title)
 
     def setLyrics(self):
-        """Load language/description keys and show one selected lyrics."""
+        """Load language/description keys and show selected lyrics."""
         self.lyricsSelection.clear()
         self.lyricsDisplay.clear()
         self.addLyricsAction.setDisabled(not self.tag.writable)
@@ -339,7 +360,7 @@ class TagWidget(QWidget):
         self.lyricsDisplay.clear()
 
     def unsetAll(self):
-        """Clear every GUI elements holding tag values."""
+        """Clear each GUI elements holding tag values."""
         self.unsetArtist()
         self.unsetTitle()
         self.unsetLyrics()

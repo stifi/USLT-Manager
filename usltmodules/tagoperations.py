@@ -16,11 +16,11 @@ from mutagen.id3 import USLT
 
 
 class ID3(MutagenID3):
-    """Extension of the ID3 class from Mutagen."""
+    """Extensions for the ID3 class from Mutagen."""
 
     @property
     def hasLyrics(self):
-        """Returns if tag has embedded lyrics ."""
+        """:returns: if tag has embedded lyrics"""
         for key in self.keys():
             if key.startswith('USLT:'):
                 return True
@@ -29,24 +29,15 @@ class ID3(MutagenID3):
 
 class ID3Tag():
     """Simple ID3 tag class holding the most important tag values. The values are accessible as
-    object properties.
+    object properties. To save changes :func:`self.save()` is provided.
 
-    :param filePath: filename and path to the mp3 file holding the tag
+    :param filePath: filename and path to the mp3 file
 
-    Internally the class uses the a `dict`
-
-    ID3Tag['artist']
-        artist str of song (TPE1) [might be None]
-    ID3Tag['title']
-        title str of song (TIT2) [might be None]
-    ID3Tag['USLT'][(language,description)]
-        | the key is a tuple of language and description
-        | value[0] = encoding
-        | value[1] = lyrics
-    ID3Tag['filePath']
-        filename and path
-    ID3Tag['writable']
-        if file can be written
+    | :data:`filePath` filename and path to the mp3 file
+    | :data:`artist` artist
+    | :data:`title` title
+    | :data:`lyrics` lyrics w/ encoding
+    | :data:`writable` if tag can be written
     """
     def __init__(self, filePath):
         self._filePath = filePath

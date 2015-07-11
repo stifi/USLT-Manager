@@ -3,42 +3,42 @@
 <context>
     <name>AddLyricsDialog</name>
     <message>
-        <location filename="usltmodules/dialogs.py" line="58"/>
+        <location filename="usltmodules/dialogs.py" line="65"/>
         <source>Add Lyrics</source>
         <translation>Text hinzufügen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="73"/>
+        <location filename="usltmodules/dialogs.py" line="80"/>
         <source>Language:</source>
         <translation>Sprache:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="86"/>
+        <location filename="usltmodules/dialogs.py" line="93"/>
         <source>Description:</source>
         <translation>Beschreibung:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="97"/>
+        <location filename="usltmodules/dialogs.py" line="104"/>
         <source>Encoding:</source>
         <translation>Kodierung:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="106"/>
+        <location filename="usltmodules/dialogs.py" line="113"/>
         <source>Lyrics:</source>
         <translation>Text:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="114"/>
+        <location filename="usltmodules/dialogs.py" line="121"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="141"/>
+        <location filename="usltmodules/dialogs.py" line="147"/>
         <source>Only ASCII characters are allowed for description.</source>
         <translation>Nur ASCII Zeichen für Beschreibung erlaubt.</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="153"/>
+        <location filename="usltmodules/dialogs.py" line="159"/>
         <source>Ok</source>
         <translation></translation>
     </message>
@@ -51,22 +51,22 @@
         <translation type="obsolete">Verzeichnisse prüfen (Experimentell! Das kann sehr lange dauern.)</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="161"/>
+        <location filename="usltmodules/treeview.py" line="155"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="172"/>
+        <location filename="usltmodules/treeview.py" line="166"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="193"/>
+        <location filename="usltmodules/treeview.py" line="186"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="105"/>
+        <location filename="usltmodules/treeview.py" line="102"/>
         <source>Check Directories (experimental)</source>
         <translation>Verzeichnisse prüfen (experimentell)</translation>
     </message>
@@ -2510,32 +2510,32 @@
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="usltmodules/dialogs.py" line="175"/>
+        <location filename="usltmodules/dialogs.py" line="182"/>
         <source>Discard</source>
         <translation>Verwerfen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="178"/>
+        <location filename="usltmodules/dialogs.py" line="185"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="181"/>
+        <location filename="usltmodules/dialogs.py" line="188"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="233"/>
+        <location filename="usltmodules/tagwidget.py" line="253"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="201"/>
+        <location filename="usltmodules/treeview.py" line="194"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="203"/>
+        <location filename="usltmodules/treeview.py" line="196"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2543,7 +2543,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="430"/>
+        <location filename="usltmodules/treeview.py" line="434"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>
@@ -2551,67 +2551,67 @@
 <context>
     <name>TagWidget</name>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="89"/>
+        <location filename="usltmodules/tagwidget.py" line="96"/>
         <source>Edit Lyrics</source>
         <translation>Text bearbeiten</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="92"/>
+        <location filename="usltmodules/tagwidget.py" line="99"/>
         <source>Add Lyrics</source>
         <translation>Text hinzufügen</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="95"/>
+        <location filename="usltmodules/tagwidget.py" line="102"/>
         <source>Remove Lyrics</source>
         <translation>Text entfernen</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="98"/>
+        <location filename="usltmodules/tagwidget.py" line="105"/>
         <source>Search for Lyrics</source>
         <translation>Nach Text suchen</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="101"/>
+        <location filename="usltmodules/tagwidget.py" line="108"/>
         <source>Save Tag</source>
         <translation>Tag speichern</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="104"/>
+        <location filename="usltmodules/tagwidget.py" line="111"/>
         <source>Reload Tag</source>
         <translation>Tag neu laden</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="226"/>
+        <location filename="usltmodules/tagwidget.py" line="246"/>
         <source>Could not write to file!</source>
         <translation>Datei konnte nicht geschrieben werden!</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="165"/>
+        <location filename="usltmodules/dialogs.py" line="172"/>
         <source>Lyrics have been modified.</source>
         <translation>Text wurde geändert.</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="166"/>
+        <location filename="usltmodules/dialogs.py" line="173"/>
         <source>Do you want to save your changes?</source>
         <translation>Äbderungen speichern?</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="132"/>
+        <location filename="usltmodules/tagwidget.py" line="143"/>
         <source>Artist</source>
         <translation>Künstler</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="133"/>
+        <location filename="usltmodules/tagwidget.py" line="144"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="134"/>
+        <location filename="usltmodules/tagwidget.py" line="145"/>
         <source>Selection</source>
         <translation>Auswahl</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="135"/>
+        <location filename="usltmodules/tagwidget.py" line="146"/>
         <source>Lyrics</source>
         <translation>Text</translation>
     </message>

@@ -7,7 +7,7 @@
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 
-"""Small QDialogs."""
+"""Supporting dialogs."""
 
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -19,10 +19,18 @@ from .lngcodes import *
 
 
 class AddLyricsDialog(QDialog):
-    """Dialog for editing lyrics to be stored in file."""
+    """Dialog for editing new lyrics.
+
+    | :data:`self.lngCodeComboBox.currentText()` language code according ti ISO639/2
+    | :data:`self.descriptionLineEdit.currentText()` description (ASCII only)
+    | :data:`self.encComboBox.currentData()` encoding of text as `Encoding`
+    | :data:`self.lyricsEdit.toPlainText()` lyrics
+
+    :returns: `QDialog.Accepted` or `QDialog.Rejected`
+    """
 
     class ASCIIValidator(QValidator):
-        """Sub-class for validation of ASCII input."""
+        """Validation of ASCII input."""
         #: `pyqtSignal` emitted when input contains ASCII only
         inputValid = pyqtSignal()
         #: `pyqtSignal` emitted when input does not contain ASCII only
@@ -32,13 +40,12 @@ class AddLyricsDialog(QDialog):
             super().__init__(parent)
 
         def validate(self, inp, pos):
-            """Emitts `inputInvalid` or `inputInvalid` depending if input string contains
+            """Emitts `inputInvalid` or `inputValid` depending on if input string contains
             ASCII only.
 
-            :returns: `QValidator.Acceptable` if entered input string contains ASCII only.
-                         Otherwise, `QValidator.Intermediate`.
-
             :param inp: input string for validation
+            :returns: `QValidator.Acceptable` if input string contains ASCII only. Otherwise,
+                      `QValidator.Intermediate`.
             """
             try:
                 inp.encode('ascii')
@@ -60,7 +67,7 @@ class AddLyricsDialog(QDialog):
         mainLayout = QGridLayout()
         inputFieldsLayout = QFormLayout()
 
-        # Language settings
+        ## language settings
         lngCodeLayout = QBoxLayout(QBoxLayout.LeftToRight)
         self.lngCodeComboBox = QComboBox()
         self.lngCodeComboBox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
@@ -73,20 +80,20 @@ class AddLyricsDialog(QDialog):
         inputFieldsLayout.addRow(QCoreApplication.translate('AddLyricsDialog', "Language:"),
                                  lngCodeLayout)
 
-        # Description settings
+        ## description settings
         self.descriptionLineEdit = QLineEdit()
         self.descriptionLineEdit.setText("USLT Manager")
         descriptionValidator = self.ASCIIValidator()
         self.descriptionLineEdit.setValidator(descriptionValidator)
         self.descriptionErrorLabel = QLabel()
-        ## descriptionValidator emits inputValid or inputInvalid which is used to highlight
-        ## invalid input (e.g. changing the okay button)
+        # descriptionValidator emits inputValid or inputInvalid which is used to
+        # notify the user for invalid input (e.g. changing the okay button)
         descriptionValidator.inputValid.connect(self.validDescription)
         descriptionValidator.inputInvalid.connect(self.invalidDescription)
         inputFieldsLayout.addRow(QCoreApplication.translate('AddLyricsDialog', "Description:"),
                                  self.descriptionLineEdit)
 
-        # Encoding settings
+        ## encoding settings
         self.encComboBox = QComboBox()
         self.encComboBox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
         self.encComboBox.addItem("Latin-1", Encoding.LATIN1)
@@ -97,16 +104,16 @@ class AddLyricsDialog(QDialog):
         inputFieldsLayout.addRow(QCoreApplication.translate('AddLyricsDialog', "Encoding:"),
                                  self.encComboBox)
 
-        # Lyrics
+        ## lyrics
         self.lyricsEdit = QPlainTextEdit()
-        ## expand lyrics display to the bottom
+        # expand lyrics display to the bottom
         policy = self.lyricsEdit.sizePolicy()
         policy.setVerticalStretch(1)
         self.lyricsEdit.setSizePolicy(policy)
         inputFieldsLayout.addRow(QCoreApplication.translate('AddLyricsDialog', "Lyrics:"),
                                  self.lyricsEdit)
 
-        # Buttons
+        ## buttons
         okButtonIcon = QIcon.fromTheme("dialog-ok", QIcon(":/icons/dialog-ok.svg"))
         self.okButton = QPushButton(QCoreApplication.translate('AddLyricsDialog', "Ok"))
         self.okButton.setIcon(okButtonIcon)
@@ -122,7 +129,6 @@ class AddLyricsDialog(QDialog):
 
         # change description of language if a different language code is selected
         self.lngCodeComboBox.currentIndexChanged.connect(self.updateLngCodeLabel)
-
         # emit accept or reject depending which button was selected
         self.okButton.clicked.connect(self.accept)
         cancelButton.clicked.connect(self.reject)
@@ -132,8 +138,8 @@ class AddLyricsDialog(QDialog):
         self.lngCodeLabel.setText(ISO639_2_CODES[self.lngCodeComboBox.currentText()])
 
     def invalidDescription(self):
-        """Notify user for invalid characters in description by changing the text and
-        disabling the okButton.
+        """Notify user for invalid characters in description by changing the text of the
+        `okButton` and disabling it.
         """
         okButtonIcon = QIcon.fromTheme("dialog-error", QIcon(":/icons/dialog-error.svg"))
         self.okButton.setDisabled(True)
@@ -143,8 +149,8 @@ class AddLyricsDialog(QDialog):
         self.okButton.setIcon(okButtonIcon)
 
     def validDescription(self):
-        """Notify user for valid only characters in description by changing the text and
-        enabling the okButton.
+        """Notify user for valid only characters in description by changing the text of the
+        `okButton` and enabling it.
         """
         okButtonIcon = QIcon.fromTheme("dialog-error", QIcon(":/icons/dialog-error.svg"))
         okButtonIcon = QIcon.fromTheme("dialog-ok", QIcon(":/icons/dialog-ok.svg"))
@@ -155,9 +161,10 @@ class AddLyricsDialog(QDialog):
 
 
 class SaveChangesDialog(QMessageBox):
-    """Dialog to ask user if changes should be save into file.
+    """Dialog to ask user if changes should be saved.
 
-    :param buttons: Which standard buttons should be available
+    :param buttons: `QMessageBox` buttons to be shown.
+                     Possible values `QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel`
     :return: value of pressed button
     """
     def __init__(self, buttons, parent=None):
