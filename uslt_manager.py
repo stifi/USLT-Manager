@@ -4,9 +4,7 @@
 ##############################################################################
 #   USLT Manager
 #
-#   Version: 0.1-alpha
-#
-#   last edit: 2015-06-14
+#   Version: 0.1
 #
 #   Author: Stefan Gansinger <stefan.gansinger@posteo.at>
 #
@@ -14,7 +12,8 @@
 #                tag of mp3 files
 #
 #   Thanks: o Michael Urman for Python-Mutagen and all people who contributed
-#           o Breeze (Plasma 5 icon theme) project members and contributers
+#           o Breeze (Plasma Next Icons) project members and contributers
+#           o The developers of Python, PyQt, and Qt
 #
 # Copyright (C) 2015 Stefan Gansinger
 #
@@ -36,7 +35,6 @@
 ##############################################################################
 
 import os
-from shutil import which
 
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *

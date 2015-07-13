@@ -11,6 +11,7 @@
 
 import os
 from pathlib import Path
+from shutil import which
 
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
