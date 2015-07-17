@@ -114,7 +114,7 @@ class TagWidget(QWidget):
 
         # shortcuts for toolbar
         self.editLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_E))
-        self.addLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_A))
+        self.addLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_Plus))
         self.removeLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_D))
         #self.searchLyricsAction.setShortcut(None)
         self.saveTagAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_S))

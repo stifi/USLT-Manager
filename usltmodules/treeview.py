@@ -148,6 +148,15 @@ class FileTree(QWidget):
         # force as this is the initialization
         self.rootChanged(force=True)
 
+    def keyPressEvent(self, event):
+        """Handle key press events."""
+        if event.key() == Qt.Key_Return:
+            self.changeRootToSelection()
+        elif event.key() == Qt.Key_Backspace:
+            self.goUp()
+        else:
+            super().keyPressEvent(event)
+
     def treeContextMenu(self, pos):
         """Context menu."""
         menu = QMenu(self)
@@ -290,10 +299,14 @@ class FileTree(QWidget):
 
     def changeRootToSelection(self):
         """Set root to the currently selected directory. Should be called on `doubleClicked`."""
-        selectedPath = self.model.filePath(self.tree.selectionModel().selectedIndexes()[0])
-        if Path(selectedPath).is_dir():
-            self.addressLabel.setText(selectedPath)
-            self.rootChanged()
+        try:
+            selectedPath = self.model.filePath(self.tree.selectionModel().selectedIndexes()[0])
+            if Path(selectedPath).is_dir():
+                self.addressLabel.setText(selectedPath)
+                self.rootChanged()
+        except IndexError:
+            # nothing selected
+            pass
 
     def goUp(self):
         """Go one hierarchy up for the root."""
@@ -393,6 +406,9 @@ class TagFileSystemModel(QFileSystemModel):
         super().__init__(parent)
         #: cache for file informations to speed-up painting.
         #: QModelIndex is used is as key parameter
+        # FIXME: maybe is better to implement the cache in a tree-like structure, where directories
+        #        are nodes. Deleting a node will remove the connected branches as well. Compare to
+        #        the fixmes in removeFromFileInfoCache()
         self.fileInfoCache = {}
         #: enables directory checking
         self.dirChecksEnable = False
@@ -550,7 +566,10 @@ class TagFileSystemModel(QFileSystemModel):
             self._delFromFileInfoCache(idx)
 
         # if its a directory remove the containing files as well
+        # FIXME: this gets really slow if there is a deep hierarchy
         if self.fileInfo(index).isDir():
+            # FIXME: cleaning the whole hierarchy is overkill and slow as it is most
+            #        probably not fully cached
             # dirIterator contains all files and directories recursively
             dirIterator = QDirIterator(self.fileInfo(index).filePath(),
                                        QDir.AllEntries | QDir.Readable | QDir.NoDotAndDotDot,
