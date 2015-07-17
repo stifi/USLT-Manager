@@ -35,6 +35,7 @@
 ##############################################################################
 
 import os
+import sys
 
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -129,7 +130,11 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == '__main__':
-    import sys
+    # workaround to get CTRL+C working
+    import signal
+    # handle SIGINT w/ default function
+    # must be installed before the Qt event loop
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
 
     mutagenVersion = int("".join(map(str, mutagenVersion[:2])))
 

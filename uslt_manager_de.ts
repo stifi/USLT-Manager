@@ -2502,7 +2502,7 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="uslt_manager.py" line="71"/>
+        <location filename="uslt_manager.py" line="72"/>
         <source>Exit</source>
         <translation>Beenden</translation>
     </message>
@@ -2525,7 +2525,7 @@
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="253"/>
+        <location filename="usltmodules/tagwidget.py" line="250"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
@@ -2581,7 +2581,7 @@
         <translation>Tag neu laden</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="246"/>
+        <location filename="usltmodules/tagwidget.py" line="243"/>
         <source>Could not write to file!</source>
         <translation>Datei konnte nicht geschrieben werden!</translation>
     </message>

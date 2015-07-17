@@ -187,9 +187,6 @@ class TagWidget(QWidget):
             # tag and GUI elements do not match anymore
             self.tagModified.emit(True)
 
-        # save memory
-        del addLyricsDialog
-
     def removeLyricsActionReceiver(self):
         """Delete current shown lyrics from tag."""
         del self.tag.lyrics[self.lyricsSelection.currentData()]
