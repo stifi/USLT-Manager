@@ -147,7 +147,7 @@ if __name__ == '__main__':
             app.installTranslator(usltTranslator)
 
         if len(sys.argv) > 1 and QDir(sys.argv[1]).isReadable():
-            screen = MainWindow(sys.argv[1])
+            screen = MainWindow(QFileInfo(sys.argv[1]).absolutePath())
         else:
             screen = MainWindow()
 
