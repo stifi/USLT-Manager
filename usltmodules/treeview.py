@@ -465,16 +465,28 @@ class TagFileSystemModel(QFileSystemModel):
         def removeFileInfo(self, filePath):
             """Removes all cached attributes for the `file` at `path` from the cache."""
             pathName, fileName = self._splitFilePath(filePath)
-            del self._trunk[pathName][fileName]
-            # if no more attributes are stored, remove the whole entry
-            if not self._trunk[pathName]:
-                del self._trunk[pathName]
+            try:
+                del self._trunk[pathName][fileName]
+            except KeyError:
+                pass
+            try:
+                # if no more attributes are stored, remove the whole entry
+                if not self._trunk[pathName]:
+                    del self._trunk[pathName]
+            except KeyError:
+                pass
 
         def removeDirInfo(self, pathName):
-            del self._trunk[pathName][self._dirMarker]
-            # if no more attributes are stored, remove the whole entry
-            if not self._trunk[pathName]:
-                del self._trunk[pathName]
+            try:
+                del self._trunk[pathName][self._dirMarker]
+            except KeyError:
+                pass
+            try:
+                # if no more attributes are stored, remove the whole entry
+                if not self._trunk[pathName]:
+                    del self._trunk[pathName]
+            except KeyError:
+                pass
 
         def removeRecursively(self, pathName):
             """Removes all cached attributes for all files and paths starting with `pathName`."""
