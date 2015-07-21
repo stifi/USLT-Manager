@@ -114,6 +114,13 @@ class FileTree(QWidget):
         bottomLineLayout.addWidget(checkDirsCheckBox)
         bottomLineLayout.addWidget(self.progressBarDirCheck)
 
+        ## XXX: enables printing of cache values to stdout
+        #debugCacheButtonIcon = QIcon.fromTheme("tools-report-bug")
+        #debugCacheButton = QPushButton()
+        #debugCacheButton.setIcon(debugCacheButtonIcon)
+        #bottomLineLayout.addWidget(debugCacheButton)
+        #debugCacheButton.clicked.connect(self._debugCache)
+
         ## main layout
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
@@ -148,6 +155,10 @@ class FileTree(QWidget):
         self.tree.customContextMenuRequested.connect(self.treeContextMenu)
         # force as this is the initialization
         self.rootChanged(force=True)
+
+    def _debugCache(self):
+        """Initiates cache output for debugging purposes."""
+        self.model.fileInfoCache.printCache()
 
     def keyPressEvent(self, event):
         """Handle key press events."""
@@ -500,13 +511,17 @@ class TagFileSystemModel(QFileSystemModel):
 
         def printCache(self):
             """Outputs the cache to stdout."""
-            for pathName in self._trunk.keys():
-                for fileName in self._trunk[pathName].keys():
-                    for attribute in self._trunk[pathName][fileName].keys():
-                        print((pathName, fileName, attribute),
-                              self._trunk[pathName][fileName][attribute])
             if not self._trunk:
-                print("Trunk is empty")
+                print("Cache is empty!")
+            else:
+                elements = 0
+                for pathName in self._trunk.keys():
+                    for fileName in self._trunk[pathName].keys():
+                        for attribute in self._trunk[pathName][fileName].keys():
+                            elements = elements + 1
+                            print((pathName, fileName, attribute),
+                                  self._trunk[pathName][fileName][attribute])
+                print(elements, "elements in cache.\n")
 
     def __init__(self, parent=None):
         super().__init__(parent)
