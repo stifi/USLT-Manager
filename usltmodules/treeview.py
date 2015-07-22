@@ -10,6 +10,8 @@
 """QTreeView with attached QFileSystemModel."""
 
 import os
+import threading
+from collections import defaultdict
 from pathlib import Path
 from shutil import which
 
@@ -113,6 +115,13 @@ class FileTree(QWidget):
         bottomLineLayout.addWidget(checkDirsCheckBox)
         bottomLineLayout.addWidget(self.progressBarDirCheck)
 
+        ## XXX: enables printing of cache values to stdout
+        #debugCacheButtonIcon = QIcon.fromTheme("tools-report-bug")
+        #debugCacheButton = QPushButton()
+        #debugCacheButton.setIcon(debugCacheButtonIcon)
+        #bottomLineLayout.addWidget(debugCacheButton)
+        #debugCacheButton.clicked.connect(self._debugCache)
+
         ## main layout
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
@@ -147,6 +156,10 @@ class FileTree(QWidget):
         self.tree.customContextMenuRequested.connect(self.treeContextMenu)
         # force as this is the initialization
         self.rootChanged(force=True)
+
+    def _debugCache(self):
+        """Initiates cache output for debugging purposes."""
+        self.model.fileInfoCache.printCache()
 
     def keyPressEvent(self, event):
         """Handle key press events."""
@@ -402,16 +415,125 @@ class TagFileSystemModel(QFileSystemModel):
         def __init__(self):
             super().__init__()
 
+    class FileInfoCache():
+        """Provides a cache for file and directory informations."""
+        def __init__(self):
+            self._initCache()
+            # inmutable tuple used as key (to make sure its not mixed with files)
+            self._dirMarker = ('<dir>',)
+
+        def _initCache(self):
+            """Initializes an empty cache as object variable."""
+            try:
+                del self._trunk
+            except AttributeError:
+                pass
+            # 3-dimensional defaultdict -- totally wired in my opinion
+            self._trunk = defaultdict(lambda: defaultdict(defaultdict))
+
+        def _splitFilePath(self, filePath):
+            """Splits filePath into file name and path name.
+            :returns: pathName, fileName
+            """
+            pathName = os.path.dirname(filePath)
+            fileName = os.path.basename(filePath)
+            return self._normPath(pathName), fileName
+
+        def _normPath(self, pathName):
+            """Normalize path, eliminating double slashes, etc."""
+            return os.path.normpath(pathName)
+
+        def insFileInfo(self, filePath, attribute, setting):
+            """Inserts the `setting` of the `attribute` for the `file` at `path` into the cache."""
+            pathName, fileName = self._splitFilePath(filePath)
+            self._trunk[pathName][fileName][attribute] = setting
+
+        def insertDirInfo(self, pathName, attribute, setting):
+            """Inserts the `setting` of the `attribute` for the `pathName` into the cache."""
+            pathName = self._normPath(pathName)
+            self._trunk[pathName][self._dirMarker][attribute] = setting
+
+        def getFileInfo(self, filePath, attribute):
+            """Returns the `setting` of the `attribute` for the `file` at `path`.
+            :return: `setting` or `None` if not available
+            """
+            pathName, fileName = self._splitFilePath(filePath)
+            try:
+                return self._trunk[pathName][fileName][attribute]
+            except KeyError:
+                return None
+
+        def getDirInfo(self, pathName, attribute):
+            """Returns the `setting` of the `attribute` for the `pathName`.
+            :return: `setting` or `None` if not available
+            """
+
+            pathName = self._normPath(pathName)
+            try:
+                return self._trunk[pathName][self._dirMarker][attribute]
+            except KeyError:
+                return None
+
+        def removeFileInfo(self, filePath):
+            """Removes all cached attributes for the `file` at `path` from the cache."""
+            pathName, fileName = self._splitFilePath(filePath)
+            try:
+                del self._trunk[pathName][fileName]
+            except KeyError:
+                pass
+            try:
+                # if no more attributes are stored, remove the whole entry
+                if not self._trunk[pathName]:
+                    del self._trunk[pathName]
+            except KeyError:
+                pass
+
+        def removeDirInfo(self, pathName):
+            try:
+                del self._trunk[pathName][self._dirMarker]
+            except KeyError:
+                pass
+            try:
+                # if no more attributes are stored, remove the whole entry
+                if not self._trunk[pathName]:
+                    del self._trunk[pathName]
+            except KeyError:
+                pass
+
+        def removeRecursively(self, pathName):
+            """Removes all cached attributes for all files and paths starting with `pathName`."""
+            for item in list(self._trunk):
+                if pathName in item:
+                    del self._trunk[item]
+
+        def clearCache(self):
+            """Deletes the whole cache by calling :func:`self._initCache()`."""
+            self._initCache()
+
+        def printCache(self):
+            """Outputs the cache to stdout."""
+            if not self._trunk:
+                print("Cache is empty!")
+            else:
+                elements = 0
+                for pathName in self._trunk.keys():
+                    for fileName in self._trunk[pathName].keys():
+                        for attribute in self._trunk[pathName][fileName].keys():
+                            elements = elements + 1
+                            print((pathName, fileName, attribute),
+                                  self._trunk[pathName][fileName][attribute])
+                print(elements, "elements in cache.\n")
+
     def __init__(self, parent=None):
         super().__init__(parent)
         #: cache for file informations to speed-up painting.
         #: QModelIndex is used is as key parameter
-        # FIXME: maybe is better to implement the cache in a tree-like structure, where directories
-        #        are nodes. Deleting a node will remove the connected branches as well. Compare to
-        #        the fixmes in removeFromFileInfoCache()
-        self.fileInfoCache = {}
+        self.fileInfoCache = self.FileInfoCache()
         #: enables directory checking
         self.dirChecksEnable = False
+        #: List threads (identified by path) which are currently running
+        self.threadList = []
+
         # preload icons for speed
         # fallback does not work in KDE due to Bug 342906
         self.redFolderIcon = QIcon.fromTheme("folder-red", QIcon(":/icons/folder-red.svg"))
@@ -438,43 +560,52 @@ class TagFileSystemModel(QFileSystemModel):
         Before the file itself is analyzed the cached information is checked.
 
         If :data:`self.dirChecksEnable` is set to `True` the content of sub-directories is checked
-        as well and the according icons are returned.
+        as well and the according icons are returned. Checking directories is done in a separate
+        thread.
         """
         # add ID3v2 version number into dedicated column.
         if ((role == Qt.DisplayRole)) and (index.column() == self.columnCount() - 1):
-            if (index, 'tagversion') not in self.fileInfoCache:
+            filePath = self.filePath(index)
+            if self.fileInfoCache.getFileInfo(filePath, 'tagversion') is None:
                 if self.fileInfo(index).isFile() and self.isMP3(self.filePath(index)):
-                    self.fileInfoCache[index, 'tagversion'] = \
-                        self.id3v2Version(self.filePath(index))
+                    self.fileInfoCache.insFileInfo(filePath, 'tagversion',
+                                                   self.id3v2Version(filePath))
                 else:
-                    self.fileInfoCache[index, 'tagversion'] = \
-                        QApplication.translate('TagFileSystemModel', "N.A.")
-            return self.fileInfoCache[index, 'tagversion']
+                    self.fileInfoCache.insFileInfo(filePath, 'tagversion',
+                                                   QApplication.translate('TagFileSystemModel',
+                                                                          "N.A."))
+            return self.fileInfoCache.getFileInfo(filePath, 'tagversion')
 
         # paint rows in different colors depending if lyrics are available or not
         if (role == Qt.ForegroundRole):
-            if (index, 'color') not in self.fileInfoCache:
+            filePath = self.filePath(index)
+            if self.fileInfoCache.getFileInfo(filePath, 'color') is None:
                 if self.fileInfo(index).isFile() and self.isMP3(self.filePath(index)):
                     if self.hasID3Lyrics(self.filePath(index)):
-                        self.fileInfoCache[index, 'color'] = QVariant(QColor("green"))
+                        self.fileInfoCache.insFileInfo(filePath, 'color',
+                                                       QVariant(QColor("green")))
                     else:
-                        self.fileInfoCache[index, 'color'] = QVariant(QColor("red"))
+                        self.fileInfoCache.insFileInfo(filePath, 'color',
+                                                       QVariant(QColor("red")))
                 else:
-                    self.fileInfoCache[index, 'color'] = super().data(index, role)
-            return self.fileInfoCache[index, 'color']
+                    self.fileInfoCache.insFileInfo(filePath, 'color', super().data(index, role))
+            return self.fileInfoCache.getFileInfo(filePath, 'color')
 
         # directory checks if requested
-        if (self.dirChecksEnable and
-                role == Qt.DecorationRole and
-                index.column() == 0 and
+        if (self.dirChecksEnable and role == Qt.DecorationRole and index.column() == 0 and
                 self.fileInfo(index).isDir()):
-            if (index, 'icon') not in self.fileInfoCache:
-                if not self.checkDirectory(self.fileInfo(index).absoluteFilePath()):
-                    self.fileInfoCache[index, 'icon'] = self.redFolderIcon
-                else:
-                    self.fileInfoCache[index, 'icon'] = self.standardFolderIcon
-
-            return self.fileInfoCache[index, 'icon']
+            pathName = self.filePath(index)
+            if self.fileInfoCache.getDirInfo(pathName, 'icon') is None:
+                path = self.fileInfo(index).absoluteFilePath()
+                # if path is not already checked by a dedicated process start new process
+                if path not in self.threadList:
+                    self.threadList.append(path)
+                    thread = threading.Thread(target=self.checkDirectory, args=(path,))
+                    #FIXME: threads are NOT terminated gracefully on shutdown
+                    thread.start()
+                # Thread is still running as there is no icon in cache -> return intermediate icon
+                return QIcon.fromTheme("folder-download", QIcon(":/icons/folder-download.svg"))
+            return self.fileInfoCache.getDirInfo(pathName, 'icon')
 
         return super().data(index, role)
 
@@ -516,13 +647,13 @@ class TagFileSystemModel(QFileSystemModel):
         return (self.isMP3(filePath) and ID3(filePath).hasLyrics) or False
 
     def checkDirectory(self, path):
-        """Return `True` if every mp3-file in `path` have embedded lyrics. Otherwise, `False`.
+        """Saves :data:`self.standardFolderIcon` in :data:`self.fileInfoCache` if every mp3-file in
+        `path` has embedded lyrics. Otherwise, `self.redFolderIcon`.
         Subdirectories are not checked!
 
-        The `pyqtSignal` :data:`fileCheck` is emitted every time a file is checked.
+        If checking is done, `path` is removed from :data:`self.threadList`.
 
-        :return: if all mp3 files have lyrics
-        :rtype: boolean
+        The `pyqtSignal` :data:`fileCheck` is emitted every time a file is checked.
         """
         fileList = QDir(path).entryList(QDir.Files | QDir.Readable | QDir.NoDotAndDotDot)
         fileList = [os.path.join(path, s) for s in fileList]
@@ -547,7 +678,12 @@ class TagFileSystemModel(QFileSystemModel):
                 # corrupt mp3
                 allAreMP3 = False
 
-        return allHaveLyrics
+        if not allHaveLyrics:
+            self.fileInfoCache.insertDirInfo(path, 'icon', self.redFolderIcon)
+        else:
+            self.fileInfoCache.insertDirInfo(path, 'icon', self.standardFolderIcon)
+
+        self.threadList.remove(path)
 
     def removeFromFileInfoCache(self, filePathOrIndex):
         """Removes specified files from :data:`self.fileInfoCache`.
@@ -560,34 +696,12 @@ class TagFileSystemModel(QFileSystemModel):
             index = filePathOrIndex
 
         filePath = self.fileInfo(index).filePath()
-        # loop over all columns in model and delete cached values
-        for col in range(0, self.columnCount()):
-            idx = self.index(filePath, col)
-            self._delFromFileInfoCache(idx)
 
-        # if its a directory remove the containing files as well
-        # FIXME: this gets really slow if there is a deep hierarchy
         if self.fileInfo(index).isDir():
-            # FIXME: cleaning the whole hierarchy is overkill and slow as it is most
-            #        probably not fully cached
-            # dirIterator contains all files and directories recursively
-            dirIterator = QDirIterator(self.fileInfo(index).filePath(),
-                                       QDir.AllEntries | QDir.Readable | QDir.NoDotAndDotDot,
-                                       QDirIterator.Subdirectories)
-
-            while dirIterator.hasNext():
-                f = (dirIterator.next())
-                for col in range(0, self.columnCount()):
-                    self._delFromFileInfoCache(self.index(f, col))
-
-    def _delFromFileInfoCache(self, partialKey):
-        """Removes all elements from cache having :param:`partialKey` in key."""
-        # keys() will not work in Python 3 because an iterator is returned
-        for item in list(self.fileInfoCache):
-            if partialKey in item:
-                #print("R ", self.fileInfo(item[0]).filePath())
-                del self.fileInfoCache[item]
+            self.fileInfoCache.removeRecursively(filePath)
+        else:
+            self.fileInfoCache.removeFileInfo(filePath)
 
     def clearFileInfoCache(self):
         """Clears :data:`self.fileInfoCache`."""
-        self.fileInfoCache = {}
+        self.fileInfoCache.clearCache()

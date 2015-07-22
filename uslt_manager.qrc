@@ -15,5 +15,6 @@
 		<file>icons/folder.svg</file>
 		<file>icons/folder-red.svg</file>
 		<file>icons/go-up.svg</file>
+		<file>icons/folder-download.svg</file>
 </qresource>
 </RCC>
