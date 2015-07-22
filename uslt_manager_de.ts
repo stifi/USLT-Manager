@@ -51,22 +51,22 @@
         <translation type="obsolete">Verzeichnisse prüfen (Experimentell! Das kann sehr lange dauern.)</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="166"/>
+        <location filename="usltmodules/treeview.py" line="178"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="177"/>
+        <location filename="usltmodules/treeview.py" line="189"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="197"/>
+        <location filename="usltmodules/treeview.py" line="209"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="104"/>
+        <location filename="usltmodules/treeview.py" line="105"/>
         <source>Check Directories (experimental)</source>
         <translation>Verzeichnisse prüfen (experimentell)</translation>
     </message>
@@ -2530,12 +2530,12 @@
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="205"/>
+        <location filename="usltmodules/treeview.py" line="217"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="207"/>
+        <location filename="usltmodules/treeview.py" line="219"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2543,7 +2543,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="542"/>
+        <location filename="usltmodules/treeview.py" line="574"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>
