@@ -10,6 +10,7 @@
 """QTreeView with attached QFileSystemModel."""
 
 import os
+import threading
 from collections import defaultdict
 from pathlib import Path
 from shutil import which
@@ -530,6 +531,9 @@ class TagFileSystemModel(QFileSystemModel):
         self.fileInfoCache = self.FileInfoCache()
         #: enables directory checking
         self.dirChecksEnable = False
+        #: List threads (identified by path) which are currently running
+        self.threadList = []
+
         # preload icons for speed
         # fallback does not work in KDE due to Bug 342906
         self.redFolderIcon = QIcon.fromTheme("folder-red", QIcon(":/icons/folder-red.svg"))
@@ -556,7 +560,8 @@ class TagFileSystemModel(QFileSystemModel):
         Before the file itself is analyzed the cached information is checked.
 
         If :data:`self.dirChecksEnable` is set to `True` the content of sub-directories is checked
-        as well and the according icons are returned.
+        as well and the according icons are returned. Checking directories is done in a separate
+        thread.
         """
         # add ID3v2 version number into dedicated column.
         if ((role == Qt.DisplayRole)) and (index.column() == self.columnCount() - 1):
@@ -587,17 +592,19 @@ class TagFileSystemModel(QFileSystemModel):
             return self.fileInfoCache.getFileInfo(filePath, 'color')
 
         # directory checks if requested
-        if (self.dirChecksEnable and
-                role == Qt.DecorationRole and
-                index.column() == 0 and
+        if (self.dirChecksEnable and role == Qt.DecorationRole and index.column() == 0 and
                 self.fileInfo(index).isDir()):
             pathName = self.filePath(index)
             if self.fileInfoCache.getDirInfo(pathName, 'icon') is None:
-                if not self.checkDirectory(self.fileInfo(index).absoluteFilePath()):
-                    self.fileInfoCache.insertDirInfo(pathName, 'icon', self.redFolderIcon)
-                else:
-                    self.fileInfoCache.insertDirInfo(pathName, 'icon', self.standardFolderIcon)
-
+                path = self.fileInfo(index).absoluteFilePath()
+                # if path is not already checked by a dedicated process start new process
+                if path not in self.threadList:
+                    self.threadList.append(path)
+                    thread = threading.Thread(target=self.checkDirectory, args=(path,))
+                    #FIXME: threads are NOT terminated gracefully on shutdown
+                    thread.start()
+                # Thread is still running as there is no icon in cache -> return intermediate icon
+                return QIcon.fromTheme("folder-download", QIcon(":/icons/folder-download.svg"))
             return self.fileInfoCache.getDirInfo(pathName, 'icon')
 
         return super().data(index, role)
@@ -640,13 +647,13 @@ class TagFileSystemModel(QFileSystemModel):
         return (self.isMP3(filePath) and ID3(filePath).hasLyrics) or False
 
     def checkDirectory(self, path):
-        """Return `True` if every mp3-file in `path` have embedded lyrics. Otherwise, `False`.
+        """Saves :data:`self.standardFolderIcon` in :data:`self.fileInfoCache` if every mp3-file in
+        `path` has embedded lyrics. Otherwise, `self.redFolderIcon`.
         Subdirectories are not checked!
 
-        The `pyqtSignal` :data:`fileCheck` is emitted every time a file is checked.
+        If checking is done, `path` is removed from :data:`self.threadList`.
 
-        :return: if all mp3 files have lyrics
-        :rtype: boolean
+        The `pyqtSignal` :data:`fileCheck` is emitted every time a file is checked.
         """
         fileList = QDir(path).entryList(QDir.Files | QDir.Readable | QDir.NoDotAndDotDot)
         fileList = [os.path.join(path, s) for s in fileList]
@@ -671,7 +678,12 @@ class TagFileSystemModel(QFileSystemModel):
                 # corrupt mp3
                 allAreMP3 = False
 
-        return allHaveLyrics
+        if not allHaveLyrics:
+            self.fileInfoCache.insertDirInfo(path, 'icon', self.redFolderIcon)
+        else:
+            self.fileInfoCache.insertDirInfo(path, 'icon', self.standardFolderIcon)
+
+        self.threadList.remove(path)
 
     def removeFromFileInfoCache(self, filePathOrIndex):
         """Removes specified files from :data:`self.fileInfoCache`.
