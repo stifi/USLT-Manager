@@ -3,42 +3,42 @@
 <context>
     <name>AddLyricsDialog</name>
     <message>
-        <location filename="usltmodules/dialogs.py" line="65"/>
+        <location filename="usltmodules/dialogs.py" line="69"/>
         <source>Add Lyrics</source>
         <translation>Text hinzufügen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="80"/>
+        <location filename="usltmodules/dialogs.py" line="84"/>
         <source>Language:</source>
         <translation>Sprache:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="93"/>
+        <location filename="usltmodules/dialogs.py" line="97"/>
         <source>Description:</source>
         <translation>Beschreibung:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="104"/>
+        <location filename="usltmodules/dialogs.py" line="108"/>
         <source>Encoding:</source>
         <translation>Kodierung:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="113"/>
+        <location filename="usltmodules/dialogs.py" line="117"/>
         <source>Lyrics:</source>
         <translation>Text:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="121"/>
+        <location filename="usltmodules/dialogs.py" line="125"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="147"/>
+        <location filename="usltmodules/dialogs.py" line="151"/>
         <source>Only ASCII characters are allowed for description.</source>
         <translation>Nur ASCII Zeichen für Beschreibung erlaubt.</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="159"/>
+        <location filename="usltmodules/dialogs.py" line="163"/>
         <source>Ok</source>
         <translation></translation>
     </message>
@@ -2510,17 +2510,17 @@
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="usltmodules/dialogs.py" line="182"/>
+        <location filename="usltmodules/dialogs.py" line="186"/>
         <source>Discard</source>
         <translation>Verwerfen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="185"/>
+        <location filename="usltmodules/dialogs.py" line="189"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="188"/>
+        <location filename="usltmodules/dialogs.py" line="192"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
@@ -2586,12 +2586,12 @@
         <translation>Datei konnte nicht geschrieben werden!</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="172"/>
+        <location filename="usltmodules/dialogs.py" line="176"/>
         <source>Lyrics have been modified.</source>
         <translation>Text wurde geändert.</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="173"/>
+        <location filename="usltmodules/dialogs.py" line="177"/>
         <source>Do you want to save your changes?</source>
         <translation>Äbderungen speichern?</translation>
     </message>

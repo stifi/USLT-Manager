@@ -36,9 +36,6 @@ class AddLyricsDialog(QDialog):
         #: `pyqtSignal` emitted when input does not contain ASCII only
         inputInvalid = pyqtSignal()
 
-        def __init__(self, parent=None):
-            super().__init__(parent)
-
         def validate(self, inp, pos):
             """Emitts `inputInvalid` or `inputValid` depending on if input string contains
             ASCII only.
@@ -56,8 +53,15 @@ class AddLyricsDialog(QDialog):
                 self.inputValid.emit()
                 return (QValidator.Acceptable, inp, pos)
 
-        def fixup(self, input):
-            return super().fixup(input)
+    class PlainTextEdit(QPlainTextEdit):
+        """Sub-class to provide :func:`sizeHint()`."""
+        def sizeHint(self):
+            """:returns: the height of 25 lines and the width of 70 characters."""
+            fontMetrics = self.fontMetrics()
+            # FIXME: apparently, the height is limited somewhere else to about 20
+            height = 25 * fontMetrics.height()
+            width = 70 * fontMetrics.width("_")
+            return QSize(width, height)
 
     def __init__(self, parent):
         super().__init__(parent)
@@ -105,7 +109,7 @@ class AddLyricsDialog(QDialog):
                                  self.encComboBox)
 
         ## lyrics
-        self.lyricsEdit = QPlainTextEdit()
+        self.lyricsEdit = self.PlainTextEdit()
         # expand lyrics display to the bottom
         policy = self.lyricsEdit.sizePolicy()
         policy.setVerticalStretch(1)
