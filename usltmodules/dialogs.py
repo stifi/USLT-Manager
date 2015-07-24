@@ -19,6 +19,7 @@ from .lngcodes import *
 
 
 def addShortcutToToolTip(qWidget):
+    """Adds to shortcut (if available) in brackets to the tooltip text."""
     shortcutText = qWidget.shortcut().toString(QKeySequence.NativeText)
     toolTip = qWidget.toolTip()
     if shortcutText:

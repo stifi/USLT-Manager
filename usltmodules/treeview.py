@@ -21,6 +21,7 @@ from PyQt5.QtGui import *
 
 import mutagen
 
+from .dialogs import addShortcutToToolTip
 from .tagoperations import *
 
 
@@ -91,9 +92,6 @@ class FileTree(QWidget):
         addressCompleter = QCompleter()
         addressCompleter.setModel(QDirModel(addressCompleter))
         self.addressLabel.setCompleter(addressCompleter)
-        addressLabelShortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_L), self)
-        addressLabelShortcut.activated.connect(self.addressLabel.selectAll)
-        addressLabelShortcut.activated.connect(self.addressLabel.setFocus)
         upButtonIcon = QIcon.fromTheme("go-up", QIcon(":/icons/go-up.svg"))
         upButton = QPushButton()
         upButton.setIcon(upButtonIcon)
@@ -115,7 +113,14 @@ class FileTree(QWidget):
         bottomLineLayout.addWidget(checkDirsCheckBox)
         bottomLineLayout.addWidget(self.progressBarDirCheck)
 
-        # tooltips
+        ## shortcuts
+        openBrowserButton.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_O))
+        reloadButton.setShortcut(QKeySequence(Qt.Key_F5))
+        addressLabelShortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_L), self)
+        addressLabelShortcut.activated.connect(self.addressLabel.selectAll)
+        addressLabelShortcut.activated.connect(self.addressLabel.setFocus)
+
+        ## tooltips
         openBrowserButton.setToolTip(QCoreApplication.translate('FileTree', "Open in file browser"))
         upButton.setToolTip(QCoreApplication.translate('FileTree', "Up"))
         reloadButton.setToolTip(QCoreApplication.translate('FileTree', "Reload"))
@@ -125,6 +130,8 @@ class FileTree(QWidget):
                                        "<font>Check mp3 files in directory for lyrics. "
                                        "In case of missing lyrics the folder is marked. "
                                        "Subfolders are not checked!</font>"))
+        addShortcutToToolTip(openBrowserButton)
+        addShortcutToToolTip(reloadButton)
 
         ## XXX: enables printing of cache values to stdout
         #debugCacheButtonIcon = QIcon.fromTheme("tools-report-bug")

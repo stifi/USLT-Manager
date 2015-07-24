@@ -3,42 +3,42 @@
 <context>
     <name>AddLyricsDialog</name>
     <message>
-        <location filename="usltmodules/dialogs.py" line="75"/>
+        <location filename="usltmodules/dialogs.py" line="76"/>
         <source>Add Lyrics</source>
         <translation>Text hinzufügen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="90"/>
+        <location filename="usltmodules/dialogs.py" line="91"/>
         <source>Language:</source>
         <translation>Sprache:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="103"/>
+        <location filename="usltmodules/dialogs.py" line="104"/>
         <source>Description:</source>
         <translation>Beschreibung:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="114"/>
+        <location filename="usltmodules/dialogs.py" line="115"/>
         <source>Encoding:</source>
         <translation>Kodierung:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="123"/>
+        <location filename="usltmodules/dialogs.py" line="124"/>
         <source>Lyrics:</source>
         <translation>Text:</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="131"/>
+        <location filename="usltmodules/dialogs.py" line="132"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="160"/>
+        <location filename="usltmodules/dialogs.py" line="161"/>
         <source>Only ASCII characters are allowed for description.</source>
         <translation>Nur ASCII Zeichen für Beschreibung erlaubt.</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="172"/>
+        <location filename="usltmodules/dialogs.py" line="173"/>
         <source>Ok</source>
         <translation></translation>
     </message>
@@ -46,42 +46,42 @@
 <context>
     <name>FileTree</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="189"/>
+        <location filename="usltmodules/treeview.py" line="196"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="200"/>
+        <location filename="usltmodules/treeview.py" line="207"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="220"/>
+        <location filename="usltmodules/treeview.py" line="227"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="105"/>
+        <location filename="usltmodules/treeview.py" line="103"/>
         <source>Check Directories (experimental)</source>
         <translation>Verzeichnisse prüfen (experimentell)</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="119"/>
+        <location filename="usltmodules/treeview.py" line="124"/>
         <source>Open in file browser</source>
         <translation>In Dateibrowser öffnen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="120"/>
+        <location filename="usltmodules/treeview.py" line="125"/>
         <source>Up</source>
         <translation>Nach oben</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="121"/>
+        <location filename="usltmodules/treeview.py" line="126"/>
         <source>Reload</source>
         <translation>Neu laden</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="123"/>
+        <location filename="usltmodules/treeview.py" line="128"/>
         <source>&lt;font&gt;Check mp3 files in directory for lyrics. In case of missing lyrics the folder is marked. Subfolders are not checked!&lt;/font&gt;</source>
         <translation>&lt;font&gt;mp3-Dateien in Verzeichnissen nach Liedtext prüfen. Fehlen Texte werden die Verzeichnisse markiert. Unterverzeichnisse werden nicht geprüft!&lt;/font&gt;</translation>
     </message>
@@ -2530,17 +2530,17 @@
 <context>
     <name>QPlatformTheme</name>
     <message>
-        <location filename="usltmodules/dialogs.py" line="195"/>
+        <location filename="usltmodules/dialogs.py" line="196"/>
         <source>Discard</source>
         <translation>Verwerfen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="198"/>
+        <location filename="usltmodules/dialogs.py" line="199"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="201"/>
+        <location filename="usltmodules/dialogs.py" line="202"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
@@ -2550,12 +2550,12 @@
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="228"/>
+        <location filename="usltmodules/treeview.py" line="235"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="230"/>
+        <location filename="usltmodules/treeview.py" line="237"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2563,7 +2563,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="585"/>
+        <location filename="usltmodules/treeview.py" line="592"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>
@@ -2606,12 +2606,12 @@
         <translation>Datei konnte nicht geschrieben werden!</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="185"/>
+        <location filename="usltmodules/dialogs.py" line="186"/>
         <source>Lyrics have been modified.</source>
         <translation>Text wurde geändert.</translation>
     </message>
     <message>
-        <location filename="usltmodules/dialogs.py" line="186"/>
+        <location filename="usltmodules/dialogs.py" line="187"/>
         <source>Do you want to save your changes?</source>
         <translation>Äbderungen speichern?</translation>
     </message>
