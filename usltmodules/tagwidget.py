@@ -16,7 +16,7 @@ from PyQt5.QtWidgets import *
 from mutagen.id3 import Encoding
 
 from .tagoperations import ID3Tag
-from .dialogs import AddLyricsDialog, SaveChangesDialog
+from .dialogs import AddLyricsDialog, SaveChangesDialog, addShortcutToToolTip
 
 
 class TagWidget(QWidget):
@@ -119,6 +119,13 @@ class TagWidget(QWidget):
         #self.searchLyricsAction.setShortcut(None)
         self.saveTagAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_S))
         self.reloadTagAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_R))
+
+        addShortcutToToolTip(self.editLyricsAction)
+        addShortcutToToolTip(self.addLyricsAction)
+        addShortcutToToolTip(self.removeLyricsAction)
+        addShortcutToToolTip(self.searchLyricsAction)
+        addShortcutToToolTip(self.saveTagAction)
+        addShortcutToToolTip(self.reloadTagAction)
 
         # separator for save button
         lyricsModifyToolbar.insertSeparator(self.saveTagAction)

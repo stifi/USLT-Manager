@@ -18,6 +18,13 @@ from mutagen.id3 import Encoding
 from .lngcodes import *
 
 
+def addShortcutToToolTip(qWidget):
+    shortcutText = qWidget.shortcut().toString(QKeySequence.NativeText)
+    toolTip = qWidget.toolTip()
+    if shortcutText:
+        qWidget.setToolTip(toolTip + " (" + shortcutText + ")")
+
+
 class AddLyricsDialog(QDialog):
     """Dialog for editing new lyrics.
 
@@ -56,14 +63,13 @@ class AddLyricsDialog(QDialog):
     class PlainTextEdit(QPlainTextEdit):
         """Sub-class to provide :func:`sizeHint()`."""
         def sizeHint(self):
-            """:returns: the height of 25 lines and the width of 70 characters."""
+            """:returns: the height of 35 lines and the width of 70 characters."""
             fontMetrics = self.fontMetrics()
-            # FIXME: apparently, the height is limited somewhere else to about 20
-            height = 25 * fontMetrics.height()
+            height = 35 * fontMetrics.height()
             width = 70 * fontMetrics.width("_")
             return QSize(width, height)
 
-    def __init__(self, parent):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.setModal(True)
         self.setWindowTitle(QCoreApplication.translate('AddLyricsDialog', "Add Lyrics"))
@@ -128,7 +134,6 @@ class AddLyricsDialog(QDialog):
         mainLayout.addLayout(inputFieldsLayout, 0, 0, 1, 2)
         mainLayout.addWidget(self.okButton, 10, 0)
         mainLayout.addWidget(cancelButton, 10, 1)
-
         self.setLayout(mainLayout)
 
         # change description of language if a different language code is selected
@@ -136,6 +141,10 @@ class AddLyricsDialog(QDialog):
         # emit accept or reject depending which button was selected
         self.okButton.clicked.connect(self.accept)
         cancelButton.clicked.connect(self.reject)
+
+        # resize dialog to sizeHint(). This is somehow a workaround, as setSizePolizy() and
+        # adjust() did not provide satisfactory results
+        self.resize(self.sizeHint())
 
     def updateLngCodeLabel(self):
         """Change description of language depending on selected language code."""

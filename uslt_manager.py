@@ -68,14 +68,18 @@ class MainWindow(QMainWindow):
 
             ## TagWidget and Exit button on the right side
             self.tagWidget = TagWidget()
-            closeButtonIcon = QIcon.fromTheme("application-exit", QIcon(":/icons/application-exit"))
-            self.closeButton = QPushButton(QCoreApplication.translate('MainWindow', "Exit"))
-            self.closeButton.setIcon(closeButtonIcon)
+            exitButtonIcon = QIcon.fromTheme("application-exit", QIcon(":/icons/application-exit"))
+            self.exitButton = QPushButton(QCoreApplication.translate('MainWindow', "Exit"))
+            self.exitButton.setIcon(exitButtonIcon)
             rightWidget = QWidget()
             rightLayout = QGridLayout()
             rightWidget.setLayout(rightLayout)
             rightLayout.addWidget(self.tagWidget, 0, 0)
-            rightLayout.addWidget(self.closeButton, 1, 0)
+            rightLayout.addWidget(self.exitButton, 1, 0)
+
+            # tooltips
+            self.exitButton.setToolTip(QCoreApplication.translate('MainWindow',
+                                                                  "Quits the application"))
 
             ## combine left part and right part with QSplitter
             splitter = QSplitter()
@@ -104,7 +108,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(mainIcon)
         self.setWindowTitle("USLT Manager[*]")
 
-        self.centralWidget.closeButton.clicked.connect(self.close)
+        self.centralWidget.exitButton.clicked.connect(self.close)
         self.centralWidget.tagWidget.tagModified.connect(self.tagModified)
 
     def tagModified(self, modified):

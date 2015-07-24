@@ -115,6 +115,17 @@ class FileTree(QWidget):
         bottomLineLayout.addWidget(checkDirsCheckBox)
         bottomLineLayout.addWidget(self.progressBarDirCheck)
 
+        # tooltips
+        openBrowserButton.setToolTip(QCoreApplication.translate('FileTree', "Open in file browser"))
+        upButton.setToolTip(QCoreApplication.translate('FileTree', "Up"))
+        reloadButton.setToolTip(QCoreApplication.translate('FileTree', "Reload"))
+        # <font> tag changes the string into "rich text" which is wrapped automatically
+        checkDirsCheckBox.setToolTip(
+            QCoreApplication.translate('FileTree',
+                                       "<font>Check mp3 files in directory for lyrics. "
+                                       "In case of missing lyrics the folder is marked. "
+                                       "Subfolders are not checked!</font>"))
+
         ## XXX: enables printing of cache values to stdout
         #debugCacheButtonIcon = QIcon.fromTheme("tools-report-bug")
         #debugCacheButton = QPushButton()
