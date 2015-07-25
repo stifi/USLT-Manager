@@ -1,0 +1,12 @@
+Next release:
+	New features:
+		* Add and modify shortcuts and show them in the tooltip
+		* Show download icon during directory check
+		* Run directory check is done a separate thread
+		* Increase the size of the dialog for adding lyrics
+		* Add some tooltips
+
+	Bugfixes:
+		* Close the program by CTRL+C
+		* Improved file caching methodology
+		* Remove the filename from argv[1]
