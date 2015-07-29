@@ -10,3 +10,5 @@ Next release:
 		* Close the program by CTRL+C
 		* Improved file caching methodology
 		* Remove the filename from argv[1]
+		* Watch all visible files and directories for changes (expanded
+		  directories where not on the watch list so far)

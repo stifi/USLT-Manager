@@ -46,17 +46,17 @@
 <context>
     <name>FileTree</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="196"/>
+        <location filename="usltmodules/treeview.py" line="212"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="207"/>
+        <location filename="usltmodules/treeview.py" line="223"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="227"/>
+        <location filename="usltmodules/treeview.py" line="243"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
@@ -2550,12 +2550,12 @@
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="235"/>
+        <location filename="usltmodules/treeview.py" line="251"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="237"/>
+        <location filename="usltmodules/treeview.py" line="253"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2563,7 +2563,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="592"/>
+        <location filename="usltmodules/treeview.py" line="619"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>

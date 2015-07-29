@@ -140,6 +140,13 @@ class FileTree(QWidget):
         #bottomLineLayout.addWidget(debugCacheButton)
         #debugCacheButton.clicked.connect(self._debugCache)
 
+        ## XXX: enables printing of fileSystemWatcher values to stdout
+        #debugWatcherButtonIcon = QIcon.fromTheme("tools-report-bug")
+        #debugWatcherButton = QPushButton()
+        #debugWatcherButton.setIcon(debugWatcherButtonIcon)
+        #bottomLineLayout.addWidget(debugWatcherButton)
+        #debugWatcherButton.clicked.connect(self._debugWatcher)
+
         ## main layout
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
@@ -176,8 +183,17 @@ class FileTree(QWidget):
         self.rootChanged(force=True)
 
     def _debugCache(self):
-        """Initiates cache output for debugging purposes."""
+        """Print cache for debugging purposes."""
+        print("______debugCache______")
         self.model.fileInfoCache.printCache()
+
+    def _debugWatcher(self):
+        """Print content of fileSystemWatcher for debugging purposes."""
+        print("______debugWatch______")
+        print("Directories" + "(" + str(len(self.fileSystemWatcher.directories())) + ")\n" +
+              "\n".join(self.fileSystemWatcher.directories()))
+        print("Files (" + str(len(self.fileSystemWatcher.files())) + ")\n" +
+              "\n".join(self.fileSystemWatcher.files()))
 
     def keyPressEvent(self, event):
         """Handle key press events."""
@@ -282,21 +298,22 @@ class FileTree(QWidget):
             self.model.setRootPath(self.rootPath)
             self.tree.setRootIndex(self.model.index(self.rootPath))
             self.model.clearFileInfoCache()
-            self.createFileSystemWatcher(self.rootPath)
+            self.createFileSystemWatcher()
             # clearing selection is required if initialization is forced (at least)
             self.tree.clearSelection()
             # emit signal to notify for a root update. The parameter is set to None as no
             # file is selected if the root is changed.
             self.nonmp3Selected.emit(None)
 
-    def createFileSystemWatcher(self, path):
+    def createFileSystemWatcher(self):
         """Create a :class:`QFileSystemWatcher` including all files and directories
-        within `patch`.
+        within `self.rootPath`. All expanded indexes in the model are included as well.
         Additionally, the required connections to notify for file changes to the
         object of :class:`TagFileSystemModel` are generated.
 
         :param path: path which should be monitored
         """
+        path = self.rootPath
         absolutePath = QDir(path).absolutePath()
         #FIXME: If file is not readable its not in the watch list.
         #   Thus a toggling read flag is recognized.
@@ -304,12 +321,22 @@ class FileTree(QWidget):
                                         QDir.NoDotDot, QDir.DirsFirst)
         fileList = [os.path.join(absolutePath, s) for s in fileList]
 
+        # loop over all available indexes and add the to the watcher if it is expanded
+        for index in self.model.persistentIndexList():
+            if self.tree.isExpanded(index):
+                path = self.model.filePath(index)
+                absolutePath = QDir(path).absolutePath()
+                expansionList = QDir(path).entryList(QDir.AllEntries | QDir.Readable |
+                                                     QDir.NoDotDot, QDir.DirsFirst)
+                expansionList = [os.path.join(absolutePath, s) for s in expansionList]
+                fileList.extend(expansionList)
+
         try:
             del self.fileSystemWatcher
         except AttributeError:
             pass
         self.fileSystemWatcher = QFileSystemWatcher(fileList)
-        #print("New watcher: " + ",".join(fileList))
+        # print("New watcher: " + "\n".join(fileList))
 
         # clear color cache of TagFileSystemModel if watched directory or file changes
         self.fileSystemWatcher.directoryChanged.connect(self.model.removeFromFileInfoCache)
