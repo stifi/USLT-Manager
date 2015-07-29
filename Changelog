@@ -12,3 +12,4 @@ Next release:
 		* Remove the filename from argv[1]
 		* Watch all visible files and directories for changes (expanded
 		  directories where not on the watch list so far)
+		* Don't fail on missing ID3 header

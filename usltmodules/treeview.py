@@ -673,6 +673,8 @@ class TagFileSystemModel(QFileSystemModel):
                     False)
         except PermissionError:
             return False
+        except mutagen.mp3.HeaderNotFoundError:
+            return False
 
     def id3v2Version(self, filePath):
         """ID3 tag version number. If ID3v1 and ID3v2 tags are located in the file. The version
