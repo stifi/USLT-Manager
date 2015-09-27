@@ -78,7 +78,7 @@ class AddLyricsDialog(QDialog):
         mainLayout = QGridLayout()
         inputFieldsLayout = QFormLayout()
 
-        ## language settings
+        # language settings
         lngCodeLayout = QBoxLayout(QBoxLayout.LeftToRight)
         self.lngCodeComboBox = QComboBox()
         self.lngCodeComboBox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
@@ -91,7 +91,7 @@ class AddLyricsDialog(QDialog):
         inputFieldsLayout.addRow(QCoreApplication.translate('AddLyricsDialog', "Language:"),
                                  lngCodeLayout)
 
-        ## description settings
+        # description settings
         self.descriptionLineEdit = QLineEdit()
         self.descriptionLineEdit.setText("USLT Manager")
         descriptionValidator = self.ASCIIValidator()
@@ -104,7 +104,7 @@ class AddLyricsDialog(QDialog):
         inputFieldsLayout.addRow(QCoreApplication.translate('AddLyricsDialog', "Description:"),
                                  self.descriptionLineEdit)
 
-        ## encoding settings
+        # encoding settings
         self.encComboBox = QComboBox()
         self.encComboBox.setSizeAdjustPolicy(QComboBox.AdjustToContents)
         self.encComboBox.addItem("Latin-1", Encoding.LATIN1)
@@ -115,7 +115,7 @@ class AddLyricsDialog(QDialog):
         inputFieldsLayout.addRow(QCoreApplication.translate('AddLyricsDialog', "Encoding:"),
                                  self.encComboBox)
 
-        ## lyrics
+        # lyrics
         self.lyricsEdit = self.PlainTextEdit()
         # expand lyrics display to the bottom
         policy = self.lyricsEdit.sizePolicy()
@@ -124,7 +124,7 @@ class AddLyricsDialog(QDialog):
         inputFieldsLayout.addRow(QCoreApplication.translate('AddLyricsDialog', "Lyrics:"),
                                  self.lyricsEdit)
 
-        ## buttons
+        # buttons
         okButtonIcon = QIcon.fromTheme("dialog-ok", QIcon(":/icons/dialog-ok.svg"))
         self.okButton = QPushButton(QCoreApplication.translate('AddLyricsDialog', "Ok"))
         self.okButton.setIcon(okButtonIcon)

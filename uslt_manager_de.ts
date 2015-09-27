@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="de_AT" sourcelanguage="en">
+<!DOCTYPE TS>
+<TS version="2.1" language="de_AT" sourcelanguage="en">
 <context>
     <name>AddLyricsDialog</name>
     <message>
@@ -46,42 +47,42 @@
 <context>
     <name>FileTree</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="212"/>
+        <location filename="usltmodules/treeview.py" line="210"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="223"/>
+        <location filename="usltmodules/treeview.py" line="221"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="243"/>
+        <location filename="usltmodules/treeview.py" line="241"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
     <message>
         <location filename="usltmodules/treeview.py" line="103"/>
-        <source>Check Directories (experimental)</source>
-        <translation>Verzeichnisse prüfen (experimentell)</translation>
+        <source>Check Directories</source>
+        <translation>Verzeichnisse prüfen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="124"/>
+        <location filename="usltmodules/treeview.py" line="122"/>
         <source>Open in file browser</source>
         <translation>In Dateibrowser öffnen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="125"/>
+        <location filename="usltmodules/treeview.py" line="123"/>
         <source>Up</source>
         <translation>Nach oben</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="126"/>
+        <location filename="usltmodules/treeview.py" line="124"/>
         <source>Reload</source>
         <translation>Neu laden</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="128"/>
+        <location filename="usltmodules/treeview.py" line="126"/>
         <source>&lt;font&gt;Check mp3 files in directory for lyrics. In case of missing lyrics the folder is marked. Subfolders are not checked!&lt;/font&gt;</source>
         <translation>&lt;font&gt;mp3-Dateien in Verzeichnissen nach Liedtext prüfen. Fehlen Texte werden die Verzeichnisse markiert. Unterverzeichnisse werden nicht geprüft!&lt;/font&gt;</translation>
     </message>
@@ -2493,22 +2494,22 @@
         <source>Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="usltmodules/lngcodes.py" line="330"/>
         <source>Bokmål, Norwegian; Norwegian Bokmål</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="usltmodules/lngcodes.py" line="343"/>
         <source>Occitan (post 1500); Provençal</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="usltmodules/lngcodes.py" line="367"/>
         <source>Provençal, Old (to 1500)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="usltmodules/lngcodes.py" line="477"/>
         <source>Volapük</source>
         <translation type="unfinished"></translation>
@@ -2550,12 +2551,12 @@
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="251"/>
+        <location filename="usltmodules/treeview.py" line="249"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="253"/>
+        <location filename="usltmodules/treeview.py" line="251"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2563,7 +2564,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="619"/>
+        <location filename="usltmodules/treeview.py" line="622"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>

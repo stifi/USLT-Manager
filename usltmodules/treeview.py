@@ -68,7 +68,7 @@ class FileTree(QWidget):
         self.model = TagFileSystemModel()
         self.model.setRootPath(self.rootPath)
 
-        ## tree view
+        # tree view
         self.tree = QTreeView()
         # attach TagFileSystemModel
         self.tree.setModel(self.model)
@@ -82,7 +82,7 @@ class FileTree(QWidget):
         # custom context menu for QTreeView
         self.tree.setContextMenuPolicy(Qt.CustomContextMenu)
 
-        ## Address line with address label, navigation icons and browser Icon
+        # Address line with address label, navigation icons and browser Icon
         openBrowserIcon = QIcon.fromTheme("folder", QIcon(":/icons/folder.svg"))
         openBrowserButton = QPushButton()
         openBrowserButton.setIcon(openBrowserIcon)
@@ -99,11 +99,9 @@ class FileTree(QWidget):
         reloadButton = QPushButton()
         reloadButton.setIcon(reloadButtonIcon)
 
-        ## options and progress bar at bottom
+        # options and progress bar at bottom
         checkDirsCheckBox = QCheckBox(
-            QCoreApplication.translate('FileTree',
-                                       "Check Directories" +
-                                       " (experimental)"))
+            QCoreApplication.translate('FileTree', "Check Directories"))
         self.progressBarDirCheck = QProgressBar()
         self.progressBarDirCheck.setMinimum(0)
         self.progressBarDirCheck.setMaximum(0)
@@ -113,14 +111,14 @@ class FileTree(QWidget):
         bottomLineLayout.addWidget(checkDirsCheckBox)
         bottomLineLayout.addWidget(self.progressBarDirCheck)
 
-        ## shortcuts
+        # shortcuts
         openBrowserButton.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_O))
         reloadButton.setShortcut(QKeySequence(Qt.Key_F5))
         addressLabelShortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_L), self)
         addressLabelShortcut.activated.connect(self.addressLabel.selectAll)
         addressLabelShortcut.activated.connect(self.addressLabel.setFocus)
 
-        ## tooltips
+        # tooltips
         openBrowserButton.setToolTip(QCoreApplication.translate('FileTree', "Open in file browser"))
         upButton.setToolTip(QCoreApplication.translate('FileTree', "Up"))
         reloadButton.setToolTip(QCoreApplication.translate('FileTree', "Reload"))
@@ -133,21 +131,21 @@ class FileTree(QWidget):
         addShortcutToToolTip(openBrowserButton)
         addShortcutToToolTip(reloadButton)
 
-        ## XXX: enables printing of cache values to stdout
-        #debugCacheButtonIcon = QIcon.fromTheme("tools-report-bug")
-        #debugCacheButton = QPushButton()
-        #debugCacheButton.setIcon(debugCacheButtonIcon)
-        #bottomLineLayout.addWidget(debugCacheButton)
-        #debugCacheButton.clicked.connect(self._debugCache)
+        # XXX: enables printing of cache values to stdout
+        # debugCacheButtonIcon = QIcon.fromTheme("tools-report-bug")
+        # debugCacheButton = QPushButton()
+        # debugCacheButton.setIcon(debugCacheButtonIcon)
+        # bottomLineLayout.addWidget(debugCacheButton)
+        # debugCacheButton.clicked.connect(self._debugCache)
 
-        ## XXX: enables printing of fileSystemWatcher values to stdout
-        #debugWatcherButtonIcon = QIcon.fromTheme("tools-report-bug")
-        #debugWatcherButton = QPushButton()
-        #debugWatcherButton.setIcon(debugWatcherButtonIcon)
-        #bottomLineLayout.addWidget(debugWatcherButton)
-        #debugWatcherButton.clicked.connect(self._debugWatcher)
+        # XXX: enables printing of fileSystemWatcher values to stdout
+        # debugWatcherButtonIcon = QIcon.fromTheme("tools-report-bug")
+        # debugWatcherButton = QPushButton()
+        # debugWatcherButton.setIcon(debugWatcherButtonIcon)
+        # bottomLineLayout.addWidget(debugWatcherButton)
+        # debugWatcherButton.clicked.connect(self._debugWatcher)
 
-        ## main layout
+        # main layout
         mainLayout = QGridLayout()
         mainLayout.addWidget(openBrowserButton, 0, 0)
         mainLayout.addWidget(self.addressLabel, 0, 1)
@@ -282,8 +280,13 @@ class FileTree(QWidget):
 
     def showProgressBarDirCheck(self):
         """Show progress bar and initialization of the timeout timer."""
-        self.progressTimeoutTimer.start(500)
-        self.progressBarDirCheck.setVisible(True)
+        try:
+            self.progressTimeoutTimer.start(500)
+            self.progressBarDirCheck.setVisible(True)
+        except AttributeError:
+            # progressTimeoutTimer might already be removed
+            # just to make sure: force progress bar to be invisible when no timer is available
+            self.progressBarDirCheck.setVisible(False)
 
     def rootChanged(self, force=False):
         """Initializes all required properties but only if :data:`self.rootPath` has changed.
@@ -315,7 +318,7 @@ class FileTree(QWidget):
         """
         path = self.rootPath
         absolutePath = QDir(path).absolutePath()
-        #FIXME: If file is not readable its not in the watch list.
+        # FIXME: If file is not readable its not in the watch list.
         #   Thus a toggling read flag is recognized.
         fileList = QDir(path).entryList(QDir.AllEntries | QDir.Readable |
                                         QDir.NoDotDot, QDir.DirsFirst)
@@ -353,7 +356,7 @@ class FileTree(QWidget):
         self.tree.expanded.connect(self.modifyWatcher)
         self.tree.collapsed.connect(self.modifyWatcher)
 
-        #print("Watching" + str(self.fileSystemWatcher.files()))
+        # print("Watching" + str(self.fileSystemWatcher.files()))
 
     def changeRootToSelection(self):
         """Set root to the currently selected directory. Should be called on `doubleClicked`."""
@@ -399,16 +402,16 @@ class FileTree(QWidget):
         fileList = [os.path.join(absolutePath, s) for s in fileList]
 
         if self.tree.isExpanded(index) or index == self.tree.rootIndex():
-            #print("Adding: " + str(fileList))
+            # print("Adding: " + str(fileList))
             self.fileSystemWatcher.addPaths(fileList)
         else:
-            #print("Removing: " + str(fileList))
+            # print("Removing: " + str(fileList))
             # fileList might be empty (e.g. when a directory is deleted)
             if fileList:
                 self.fileSystemWatcher.removePaths(fileList)
             # deleted files are removed automatically
 
-        #print("Watching" + str(self.fileSystemWatcher.files()))
+        # print("Watching" + str(self.fileSystemWatcher.files()))
 
     def selectionChanged(self, selected, deselected):
         """Emit :data:`mp3Selected` or :data:`nonmp3Selected` for the selected file.
@@ -646,7 +649,7 @@ class TagFileSystemModel(QFileSystemModel):
                 if path not in self.threadList:
                     self.threadList.append(path)
                     thread = threading.Thread(target=self.checkDirectory, args=(path,))
-                    #FIXME: threads are NOT terminated gracefully on shutdown
+                    # FIXME: threads are NOT terminated gracefully on shutdown
                     thread.start()
                 # Thread is still running as there is no icon in cache -> return intermediate icon
                 return QIcon.fromTheme("folder-download", QIcon(":/icons/folder-download.svg"))

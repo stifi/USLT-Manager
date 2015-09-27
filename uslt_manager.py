@@ -63,10 +63,10 @@ class MainWindow(QMainWindow):
 
             mainLayout = QGridLayout()
 
-            ## file Tree at the left side
+            # file Tree at the left side
             fileTree = FileTree(rootPath)
 
-            ## TagWidget and Exit button on the right side
+            # TagWidget and Exit button on the right side
             self.tagWidget = TagWidget()
             exitButtonIcon = QIcon.fromTheme("application-exit", QIcon(":/icons/application-exit"))
             self.exitButton = QPushButton(QCoreApplication.translate('MainWindow', "Exit"))
@@ -81,7 +81,7 @@ class MainWindow(QMainWindow):
             self.exitButton.setToolTip(QCoreApplication.translate('MainWindow',
                                                                   "Quits the application"))
 
-            ## combine left part and right part with QSplitter
+            # combine left part and right part with QSplitter
             splitter = QSplitter()
             splitter.addWidget(fileTree)
             splitter.addWidget(rightWidget)

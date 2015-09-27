@@ -45,26 +45,26 @@ class TagWidget(QWidget):
 
         mainLayout = QFormLayout()
 
-        ## artist
+        # artist
         self.artistLineEdit = QLineEdit()
         self.artistLineEdit.setReadOnly(True)
 
-        ## title
+        # title
         self.titleLineEdit = QLineEdit()
         self.titleLineEdit.setReadOnly(True)
 
-        ## lyrics selection (language and description)
+        # lyrics selection (language and description)
         self.lyricsSelection = QComboBox()
         self.lyricsSelection.setSizeAdjustPolicy(QComboBox.AdjustToContents)
         self.lyricsSelection.setDisabled(True)
 
-        ## encoding
+        # encoding
         self.lyricsEncoding = QLabel()
         self.lyricsEncoding.setDisabled(True)
         # XXX: Label is hidden as most users don't care about encodings
         self.lyricsEncoding.setVisible(False)
 
-        ## lyrics
+        # lyrics
         self.lyricsDisplay = QPlainTextEdit()
         self.lyricsDisplay.setReadOnly(True)
         # expand lyrics display to the bottom
@@ -72,10 +72,10 @@ class TagWidget(QWidget):
         policy.setVerticalStretch(1)
         self.lyricsDisplay.setSizePolicy(policy)
 
-        ## spacer between id3 elements and toolbar
+        # spacer between id3 elements and toolbar
         spacer = QSpacerItem(0, 0, QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
 
-        ## toolbar
+        # toolbar
         lyricsModifyToolbar = QToolBar()
         lyricsModifyToolbar.setFloatable(False)
         lyricsModifyToolbar.setMovable(False)
@@ -116,7 +116,7 @@ class TagWidget(QWidget):
         self.editLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_E))
         self.addLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_Plus))
         self.removeLyricsAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_D))
-        #self.searchLyricsAction.setShortcut(None)
+        # self.searchLyricsAction.setShortcut(None)
         self.saveTagAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_S))
         self.reloadTagAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_R))
 
@@ -140,7 +140,7 @@ class TagWidget(QWidget):
         self.saveTagAction.setDisabled(True)
         self.reloadTagAction.setDisabled(True)
 
-        ## layouts
+        # layouts
         selectionGrid = QGridLayout()
         selectionGrid.addWidget(self.lyricsSelection, 0, 0, Qt.AlignLeft)
         selectionGrid.addWidget(self.lyricsEncoding, 0, 1, Qt.AlignLeft)
@@ -206,8 +206,9 @@ class TagWidget(QWidget):
     def searchLyricsActionReceiver(self):
         """Search for lyrics in external browser."""
         queryUrl = QUrlQuery()
-        # if string is None convert it to empty string
-        toStr = lambda s: s or ""
+
+        def toStr(s): return (s or "")
+
         queryUrl.addQueryItem("as_q",
                               '"lyrics"+"' + toStr(self.tag.artist) +
                               '"+"' + toStr(self.tag.title) + '"')
