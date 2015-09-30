@@ -5,6 +5,7 @@ Next release:
 		* Run directory check is done a separate thread
 		* Increase the size of the dialog for adding lyrics
 		* Add some tooltips
+		* Directory checking is now considered as stable
 
 	Bugfixes:
 		* Close the program by CTRL+C
