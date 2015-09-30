@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de_AT" sourcelanguage="en">
+<!DOCTYPE TS><TS version="2.0" language="de_AT" sourcelanguage="en">
 <context>
     <name>AddLyricsDialog</name>
     <message>
@@ -2496,22 +2495,22 @@
     </message>
     <message>
         <location filename="usltmodules/lngcodes.py" line="330"/>
-        <source>Bokmål, Norwegian; Norwegian Bokmål</source>
+        <source>Bokm&#xc3;&#xa5;l, Norwegian; Norwegian Bokm&#xc3;&#xa5;l</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="usltmodules/lngcodes.py" line="343"/>
-        <source>Occitan (post 1500); Provençal</source>
+        <source>Occitan (post 1500); Proven&#xc3;&#xa7;al</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="usltmodules/lngcodes.py" line="367"/>
-        <source>Provençal, Old (to 1500)</source>
+        <source>Proven&#xc3;&#xa7;al, Old (to 1500)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="usltmodules/lngcodes.py" line="477"/>
-        <source>Volapük</source>
+        <source>Volap&#xc3;&#xbc;k</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
