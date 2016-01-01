@@ -4,7 +4,7 @@
 ##############################################################################
 #   USLT Manager
 #
-#   Version: 1.0
+#   Version: 1.1
 #
 #   Author: Stefan Gansinger <stefan.gansinger@posteo.at>
 #
