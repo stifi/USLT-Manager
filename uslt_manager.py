@@ -15,7 +15,7 @@
 #           o Breeze (Plasma Next Icons) project members and contributers
 #           o The developers of Python, PyQt, and Qt
 #
-# Copyright (C) 2015 Stefan Gansinger
+# Copyright (C) 2015-2016 Stefan Gansinger
 #
 ##############################################################################
 #
@@ -151,7 +151,7 @@ if __name__ == '__main__':
             app.installTranslator(usltTranslator)
 
         if len(sys.argv) > 1 and QDir(sys.argv[1]).isReadable():
-            screen = MainWindow(QFileInfo(sys.argv[1]).absolutePath())
+            screen = MainWindow(QFileInfo(sys.argv[1]).canonicalFilePath())
         else:
             screen = MainWindow()
 

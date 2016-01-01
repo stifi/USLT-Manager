@@ -9,11 +9,11 @@
 
 """Modules for the USLT manager."""
 
-__all__ = ['ID3', 'ID3Tag', 'ISO639_2_CODES', 'FileTree', 'TagFileSystemModel',
-           'AddLyricsDialog', 'SaveChangesDialog', 'TagWidget']
-
 from .tagoperations import *
 from .lngcodes import *
 from .treeview import *
 from .dialogs import *
 from .tagwidget import *
+
+__all__ = ['ID3', 'ID3Tag', 'ISO639_2_CODES', 'FileTree', 'TagFileSystemModel',
+           'AddLyricsDialog', 'SaveChangesDialog', 'TagWidget']

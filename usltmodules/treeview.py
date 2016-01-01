@@ -233,7 +233,7 @@ class FileTree(QWidget):
         """Opens KID3 by :data:`command` with the current selection."""
         selection = self.model.filePath(self.tree.selectionModel().selectedIndexes()[0])
         if selection:
-            QProcess.startDetached("kid3", [selection])
+            QProcess.startDetached(command, [selection])
 
     def deleteFile(self, filePath):
         """Deletes the selected file."""
@@ -677,6 +677,8 @@ class TagFileSystemModel(QFileSystemModel):
         except PermissionError:
             return False
         except mutagen.mp3.HeaderNotFoundError:
+            return False
+        except mutagen.id3._util.ID3NoHeaderError:
             return False
 
     def id3v2Version(self, filePath):

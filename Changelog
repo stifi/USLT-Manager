@@ -1,3 +1,10 @@
+Version 1.1:
+	Bugfixes:
+		* Allow '.' as startup parameter
+		* Catch ID3NoHeaderError from mutagen
+		* Use kid3-qt command instead of kid3 if available
+		* PEP8 fixes
+
 Version 1.0:
 	New features:
 		* Add and modify shortcuts and show them in the tooltip
