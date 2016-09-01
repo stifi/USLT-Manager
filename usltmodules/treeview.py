@@ -586,6 +586,9 @@ class TagFileSystemModel(QFileSystemModel):
         # fallback does not work in KDE due to Bug 342906
         self.redFolderIcon = QIcon.fromTheme("folder-red", QIcon(":/icons/folder-red.svg"))
         self.standardFolderIcon = QIcon.fromTheme("folder", QIcon(":/icons/folder.svg"))
+        self.standardMP3Icon = QIcon.fromTheme("audio-x-generic", QIcon(":/icons/audio-mp3.svg"))
+        self.standardFileIcon = QIcon.fromTheme("text-x-generic",
+                                                QIcon(":/icons/text-x-generic.svg"))
 
         self.emitter = TagFileSystemModel.Emitter()
 
@@ -638,6 +641,19 @@ class TagFileSystemModel(QFileSystemModel):
                 else:
                     self.fileInfoCache.insFileInfo(filePath, 'color', super().data(index, role))
             return self.fileInfoCache.getFileInfo(filePath, 'color')
+
+        # XXX: QFileIconProvider is not working in Plasma 5 -> return symbol manually
+        if (not self.dirChecksEnable and role == Qt.DecorationRole and index.column() == 0 and
+                self.fileInfo(index).isDir()):
+            return self.standardFolderIcon
+
+        # XXX: QFileIconProvider is not working in Plasma 5 -> return symbol manually
+        if (role == Qt.DecorationRole and index.column() == 0 and
+                self.fileInfo(index).isFile()):
+            if self.isMP3(self.filePath(index)):
+                return self.standardMP3Icon
+            else:
+                return self.standardFileIcon
 
         # directory checks if requested
         if (self.dirChecksEnable and role == Qt.DecorationRole and index.column() == 0 and

@@ -83,7 +83,7 @@
     <message>
         <location filename="usltmodules/treeview.py" line="126"/>
         <source>&lt;font&gt;Check mp3 files in directory for lyrics. In case of missing lyrics the folder is marked. Subfolders are not checked!&lt;/font&gt;</source>
-        <translation>&lt;font&gt;mp3-Dateien in Verzeichnissen nach Liedtext prüfen. Fehlen Texte werden die Verzeichnisse markiert. Unterverzeichnisse werden nicht geprüft!&lt;/font&gt;</translation>
+        <translation>&lt;font&gt;mp3-Dateien in Verzeichnissen nach Liedtext prüfen. Fehlende Texte werden durch rote Verzeichnissymbole markiert. Unterverzeichnisse werden nicht geprüft!&lt;/font&gt;</translation>
     </message>
 </context>
 <context>
@@ -2563,7 +2563,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="622"/>
+        <location filename="usltmodules/treeview.py" line="625"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>

@@ -16,5 +16,7 @@
 		<file>icons/folder-red.svg</file>
 		<file>icons/go-up.svg</file>
 		<file>icons/folder-download.svg</file>
+		<file>icons/audio-mp3.svg</file>
+		<file>icons/text-x-generic.svg</file>
 </qresource>
 </RCC>
