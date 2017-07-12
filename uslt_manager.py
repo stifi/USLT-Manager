@@ -4,7 +4,7 @@
 ##############################################################################
 #   USLT Manager
 #
-#   Version: 1.1
+#   Version: 1.2
 #
 #   Author: Stefan Gansinger <stefan.gansinger@posteo.at>
 #
@@ -15,7 +15,7 @@
 #           o Breeze (Plasma Next Icons) project members and contributers
 #           o The developers of Python, PyQt, and Qt
 #
-# Copyright (C) 2015-2016 Stefan Gansinger
+# Copyright (C) 2015-2017 Stefan Gansinger
 #
 ##############################################################################
 #

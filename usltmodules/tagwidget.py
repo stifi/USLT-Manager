@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2015 Stefan Gansinger
+# Copyright (C) 2015-2017 Stefan Gansinger
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -119,6 +119,8 @@ class TagWidget(QWidget):
         # self.searchLyricsAction.setShortcut(None)
         self.saveTagAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_S))
         self.reloadTagAction.setShortcut(QKeySequence(Qt.CTRL + Qt.Key_R))
+        # reloading cancels the editing process
+        self.reloadTagAction.setShortcut(QKeySequence(Qt.Key_Escape))
 
         addShortcutToToolTip(self.editLyricsAction)
         addShortcutToToolTip(self.addLyricsAction)
