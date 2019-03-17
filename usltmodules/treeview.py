@@ -75,6 +75,8 @@ class FileTree(QWidget):
         self.tree.setRootIndex(self.model.index(self.rootPath))
         # remove file type column
         self.tree.hideColumn(2)
+        # remove last modified column
+        self.tree.hideColumn(3)
         # fill available space with first column (Name) and adjust last column (ID3v2) to content
         self.tree.header().setStretchLastSection(False)
         self.tree.header().setSectionResizeMode(0, QHeaderView.Stretch)
@@ -596,8 +598,11 @@ class TagFileSystemModel(QFileSystemModel):
         """Reimplemented to be able to add an additional header for
         customized columns.
 
-        :returns: "ID3v2" for the customized column, else super()
+        :returns: "ID3v2" or "Track" for the customized column, else super()
         """
+        if (section == self.columnCount() - 2):
+            if (role == Qt.DisplayRole):
+                return(QCoreApplication.translate('FileTree', "Track"))
         if (section == self.columnCount() - 1):
             if (role == Qt.DisplayRole):
                 return("ID3v2")
@@ -606,7 +611,7 @@ class TagFileSystemModel(QFileSystemModel):
 
     def data(self, index, role):
         """Reimplemented to enable coloring of lines depending on file type and if lyrics are
-        available or not. Additionally, the ID3v2 column is generated.
+        available or not. Additionally, the Track and the ID3v2 column is generated.
 
         Before the file itself is analyzed the cached information is checked.
 
@@ -614,6 +619,20 @@ class TagFileSystemModel(QFileSystemModel):
         as well and the according icons are returned. Checking directories is done in a separate
         thread.
         """
+
+        # add Track number into dedicated column.
+        if ((role == Qt.DisplayRole)) and (index.column() == self.columnCount() - 2):
+            filePath = self.filePath(index)
+            if self.fileInfoCache.getFileInfo(filePath, 'track') is None:
+                if self.fileInfo(index).isFile() and self.isMP3(self.filePath(index)):
+                    self.fileInfoCache.insFileInfo(filePath, 'track',
+                                                   self.ID3track(filePath))
+                else:
+                    self.fileInfoCache.insFileInfo(filePath, 'track',
+                                                   QApplication.translate('TagFileSystemModel',
+                                                                          "N.A."))
+            return self.fileInfoCache.getFileInfo(filePath, 'track')
+
         # add ID3v2 version number into dedicated column.
         if ((role == Qt.DisplayRole)) and (index.column() == self.columnCount() - 1):
             filePath = self.filePath(index)
@@ -678,7 +697,7 @@ class TagFileSystemModel(QFileSystemModel):
 
         :returns: number of columns including the customized columns.
         """
-        return super().columnCount()+1
+        return super().columnCount()+2
 
     def isMP3(self, filePath):
         """Test if file is MP3 file by using Mutagen's MIME type evaluation.
@@ -705,6 +724,14 @@ class TagFileSystemModel(QFileSystemModel):
         :rtype: `str`
         """
         return ('.'.join(str(i) for i in ID3(filePath).version))
+
+    def ID3track(self, filePath):
+        """Returns track number
+
+        :return: track number
+        :rtype: `str`
+        """
+        return (self.isMP3(filePath) and ID3(filePath).track)
 
     def hasID3Lyrics(self, filePath):
         """Test if file has lyrics in ID3 tag by getting all USLT frames.

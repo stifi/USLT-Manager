@@ -26,6 +26,13 @@ class ID3(MutagenID3):
                 return True
         return False
 
+    @property
+    def track(self):
+        try:
+            return str((self)['TRCK'])
+        except KeyError:
+            return None
+
 
 class ID3Tag():
     """Simple ID3 tag class holding the most important tag values. The values are accessible as
