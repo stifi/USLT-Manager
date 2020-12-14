@@ -46,47 +46,47 @@
 <context>
     <name>FileTree</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="212"/>
+        <location filename="usltmodules/treeview.py" line="216"/>
         <source>Open in kid3</source>
         <translation>In KID3 öffen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="223"/>
+        <location filename="usltmodules/treeview.py" line="227"/>
         <source>Delete File</source>
         <translation>Datei löschen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="243"/>
+        <location filename="usltmodules/treeview.py" line="247"/>
         <source>Do you really want to delete the file?</source>
         <translation>Datei wirklich löschen?</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="105"/>
+        <location filename="usltmodules/treeview.py" line="109"/>
         <source>Check Directories</source>
         <translation>Verzeichnisse prüfen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="124"/>
+        <location filename="usltmodules/treeview.py" line="128"/>
         <source>Open in file browser</source>
         <translation>In Dateibrowser öffnen</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="125"/>
+        <location filename="usltmodules/treeview.py" line="129"/>
         <source>Up</source>
         <translation>Nach oben</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="126"/>
+        <location filename="usltmodules/treeview.py" line="130"/>
         <source>Reload</source>
         <translation>Neu laden</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="128"/>
+        <location filename="usltmodules/treeview.py" line="132"/>
         <source>&lt;font&gt;Check mp3 files in directory for lyrics. In case of missing lyrics the folder is marked. Subfolders are not checked!&lt;/font&gt;</source>
         <translation>&lt;font&gt;mp3-Dateien in Verzeichnissen nach Liedtext prüfen. Fehlende Texte werden durch rote Verzeichnissymbole markiert. Unterverzeichnisse werden nicht geprüft!&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="605"/>
+        <location filename="usltmodules/treeview.py" line="613"/>
         <source>Track</source>
         <translation>Titel</translation>
     </message>
@@ -2550,17 +2550,17 @@
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="259"/>
+        <location filename="usltmodules/tagwidget.py" line="307"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="251"/>
+        <location filename="usltmodules/treeview.py" line="255"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="usltmodules/treeview.py" line="253"/>
+        <location filename="usltmodules/treeview.py" line="257"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -2568,7 +2568,7 @@
 <context>
     <name>TagFileSystemModel</name>
     <message>
-        <location filename="usltmodules/treeview.py" line="644"/>
+        <location filename="usltmodules/treeview.py" line="652"/>
         <source>N.A.</source>
         <translation>N.V.</translation>
     </message>
@@ -2576,37 +2576,37 @@
 <context>
     <name>TagWidget</name>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="96"/>
+        <location filename="usltmodules/tagwidget.py" line="109"/>
         <source>Edit Lyrics</source>
         <translation>Text bearbeiten</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="99"/>
+        <location filename="usltmodules/tagwidget.py" line="112"/>
         <source>Add Lyrics</source>
         <translation>Text hinzufügen</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="102"/>
+        <location filename="usltmodules/tagwidget.py" line="115"/>
         <source>Remove Lyrics</source>
         <translation>Text entfernen</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="105"/>
+        <location filename="usltmodules/tagwidget.py" line="118"/>
         <source>Search for Lyrics</source>
         <translation>Nach Text suchen</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="108"/>
+        <location filename="usltmodules/tagwidget.py" line="121"/>
         <source>Save Tag</source>
         <translation>Tag speichern</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="111"/>
+        <location filename="usltmodules/tagwidget.py" line="124"/>
         <source>Reload Tag</source>
         <translation>Tag neu laden</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="252"/>
+        <location filename="usltmodules/tagwidget.py" line="300"/>
         <source>Could not write to file!</source>
         <translation>Datei konnte nicht geschrieben werden!</translation>
     </message>
@@ -2621,22 +2621,22 @@
         <translation>Äbderungen speichern?</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="152"/>
+        <location filename="usltmodules/tagwidget.py" line="166"/>
         <source>Artist</source>
         <translation>Künstler</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="153"/>
+        <location filename="usltmodules/tagwidget.py" line="167"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="154"/>
+        <location filename="usltmodules/tagwidget.py" line="168"/>
         <source>Selection</source>
         <translation>Auswahl</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="155"/>
+        <location filename="usltmodules/tagwidget.py" line="169"/>
         <source>Lyrics</source>
         <translation>Text</translation>
     </message>
@@ -2654,6 +2654,11 @@
         <location filename="uslt-manager.py" line="297"/>
         <source>Save</source>
         <translation type="obsolete">Speichern</translation>
+    </message>
+    <message>
+        <location filename="usltmodules/tagwidget.py" line="165"/>
+        <source>Play</source>
+        <translation>abspielen</translation>
     </message>
 </context>
 </TS>

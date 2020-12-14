@@ -10,8 +10,10 @@
 """Widget showing the most important ID3 tag values. Most importantly the lyrics."""
 
 from PyQt5.QtCore import *
+from PyQt5.QtCore import QDir, Qt, QUrl
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from PyQt5.QtMultimedia import *
 
 from mutagen.id3 import Encoding
 
@@ -44,6 +46,17 @@ class TagWidget(QWidget):
         self.encoding[Encoding.UTF8] = "UTF-8"
 
         mainLayout = QFormLayout()
+
+        # audio player
+        self.player = QMediaPlayer()
+        self.playButton = QPushButton()
+        playButtonIcon = QIcon.fromTheme("media-playback-start",
+                                         QIcon(":/icons/media-playback-start"))
+        self.playButton.setIcon(playButtonIcon)
+        self.playerSeekBar = QSlider(Qt.Horizontal)
+        self.playerGrid = QGridLayout()
+        self.playerGrid.addWidget(self.playButton, 0, 0, Qt.AlignVCenter)
+        self.playerGrid.addWidget(self.playerSeekBar, 0, 1, Qt.AlignVCenter)
 
         # artist
         self.artistLineEdit = QLineEdit()
@@ -149,6 +162,7 @@ class TagWidget(QWidget):
         selectionGrid.addItem(spacer, 0, 2, Qt.AlignLeft)
         selectionGrid.addWidget(lyricsModifyToolbar, 0, 3, Qt.AlignRight)
 
+        mainLayout.addRow(QApplication.translate('TagWidget', "Play"), self.playerGrid)
         mainLayout.addRow(QApplication.translate('TagWidget', "Artist"), self.artistLineEdit)
         mainLayout.addRow(QApplication.translate('TagWidget', "Title"), self.titleLineEdit)
         mainLayout.addRow(QApplication.translate('TagWidget', "Selection"), selectionGrid)
@@ -162,8 +176,42 @@ class TagWidget(QWidget):
         # update lyrics if a different selection (language/description) is made
         self.lyricsSelection.currentIndexChanged.connect(self.showLyrics)
 
+        # audio player
+        self.playButton.clicked.connect(self.playAudio)
+        self.player.stateChanged.connect(self.playStateChanged)
+        self.player.positionChanged.connect(self.playPositionChanged)
+        self.player.durationChanged.connect(self.playDurationChanged)
+        self.playerSeekBar.sliderMoved.connect(self.playSetPosition)
+
         # notify for matching elements with tag content
         self.tagModified.emit(False)
+
+    def playAudio(self):
+        """Play or pause audio player"""
+        if self.player.state() == QMediaPlayer.PlayingState:
+            self.player.pause()
+        else:
+            self.player.play()
+
+    def playStateChanged(self, state):
+        """Change icon of playButton depending on player state"""
+        if self.player.state() == QMediaPlayer.PlayingState:
+            playButtonIcon = QIcon.fromTheme("media-playback-pause", QIcon(":/icons/media-playback-pause"))
+        else:
+            playButtonIcon = QIcon.fromTheme("media-playback-start", QIcon(":/icons/media-playback-start"))
+        self.playButton.setIcon(playButtonIcon)
+
+    def playDurationChanged(self, duration):
+        """Update range of seek bar"""
+        self.playerSeekBar.setRange(0, duration)
+
+    def playPositionChanged(self, position):
+        """Update position of seek bar"""
+        self.playerSeekBar.setValue(position)
+
+    def playSetPosition(self, position):
+        """Update position of player"""
+        self.player.setPosition(position)
 
     def editLyricsActionReceiver(self):
         """Enable editing of lyrics in view."""
@@ -282,6 +330,7 @@ class TagWidget(QWidget):
         self.setArtistName()
         self.setTitleName()
         self.setLyrics()
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile(filePath)))
         # tag and GUI elements match
         self.tagModified.emit(False)
 

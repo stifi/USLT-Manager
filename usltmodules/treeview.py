@@ -84,6 +84,10 @@ class FileTree(QWidget):
         # custom context menu for QTreeView
         self.tree.setContextMenuPolicy(Qt.CustomContextMenu)
 
+        # allow sorting
+        self.tree.setSortingEnabled(True)
+        self.model.sort(0, Qt.AscendingOrder)
+
         # Address line with address label, navigation icons and browser Icon
         openBrowserIcon = QIcon.fromTheme("folder", QIcon(":/icons/folder.svg"))
         openBrowserButton = QPushButton()
@@ -593,6 +597,10 @@ class TagFileSystemModel(QFileSystemModel):
                                                 QIcon(":/icons/text-x-generic.svg"))
 
         self.emitter = TagFileSystemModel.Emitter()
+
+    def sort(self, column, order):
+        # FIXME: sorting of custom columns is not working
+        super().sort(column, order)
 
     def headerData(self, section, orientation, role):
         """Reimplemented to be able to add an additional header for
