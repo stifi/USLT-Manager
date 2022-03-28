@@ -21,6 +21,40 @@ from .tagoperations import ID3Tag
 from .dialogs import AddLyricsDialog, SaveChangesDialog, addShortcutToToolTip
 
 
+class SliderClickable(QSlider):
+    """Enable changing position on QSlider by clicking on it
+    based on: https://stackoverflow.com/questions/52689047/moving-qslider-to-mouse-click-position
+
+    The `pyqtSignal` :data:`sliderMoved` is used to broadcast the new position
+    """
+
+    def mousePressEvent(self, event):
+        super(SliderClickable, self).mousePressEvent(event)
+        if event.button() == Qt.LeftButton:
+            val = self.pixelPosToRangeValue(event.pos())
+            self.setValue(val)
+            self.sliderMoved.emit(val)
+
+    def pixelPosToRangeValue(self, pos):
+        opt = QStyleOptionSlider()
+        self.initStyleOption(opt)
+        gr = self.style().subControlRect(QStyle.CC_Slider, opt, QStyle.SC_SliderGroove, self)
+        sr = self.style().subControlRect(QStyle.CC_Slider, opt, QStyle.SC_SliderHandle, self)
+
+        if self.orientation() == Qt.Horizontal:
+            sliderLength = sr.width()
+            sliderMin = gr.x()
+            sliderMax = gr.right() - sliderLength + 1
+        else:
+            sliderLength = sr.height()
+            sliderMin = gr.y()
+            sliderMax = gr.bottom() - sliderLength + 1
+        pr = pos - sr.center() + sr.topLeft()
+        p = pr.x() if self.orientation() == Qt.Horizontal else pr.y()
+        return QStyle.sliderValueFromPosition(self.minimum(), self.maximum(), p - sliderMin,
+                                              sliderMax - sliderMin, opt.upsideDown)
+
+
 class TagWidget(QWidget):
     """Widget showing the most important ID3 tag values. Most importantly the lyrics.
 
@@ -53,7 +87,7 @@ class TagWidget(QWidget):
         playButtonIcon = QIcon.fromTheme("media-playback-start",
                                          QIcon(":/icons/media-playback-start"))
         self.playButton.setIcon(playButtonIcon)
-        self.playerSeekBar = QSlider(Qt.Horizontal)
+        self.playerSeekBar = SliderClickable(Qt.Horizontal)
         self.playerGrid = QGridLayout()
         self.playerGrid.addWidget(self.playButton, 0, 0, Qt.AlignVCenter)
         self.playerGrid.addWidget(self.playerSeekBar, 0, 1, Qt.AlignVCenter)
@@ -196,9 +230,11 @@ class TagWidget(QWidget):
     def playStateChanged(self, state):
         """Change icon of playButton depending on player state"""
         if self.player.state() == QMediaPlayer.PlayingState:
-            playButtonIcon = QIcon.fromTheme("media-playback-pause", QIcon(":/icons/media-playback-pause"))
+            playButtonIcon = QIcon.fromTheme("media-playback-pause",
+                                             QIcon(":/icons/media-playback-pause"))
         else:
-            playButtonIcon = QIcon.fromTheme("media-playback-start", QIcon(":/icons/media-playback-start"))
+            playButtonIcon = QIcon.fromTheme("media-playback-start",
+                                             QIcon(":/icons/media-playback-start"))
         self.playButton.setIcon(playButtonIcon)
 
     def playDurationChanged(self, duration):

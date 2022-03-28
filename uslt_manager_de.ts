@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="de_AT" sourcelanguage="en">
+<!DOCTYPE TS>
+<TS version="2.1" language="de_AT" sourcelanguage="en">
 <context>
     <name>AddLyricsDialog</name>
     <message>
@@ -2500,22 +2501,22 @@
     </message>
     <message>
         <location filename="usltmodules/lngcodes.py" line="330"/>
-        <source>Bokm&#xc3;&#xa5;l, Norwegian; Norwegian Bokm&#xc3;&#xa5;l</source>
+        <source>BokmÃ¥l, Norwegian; Norwegian BokmÃ¥l</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="usltmodules/lngcodes.py" line="343"/>
-        <source>Occitan (post 1500); Proven&#xc3;&#xa7;al</source>
+        <source>Occitan (post 1500); ProvenÃ§al</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="usltmodules/lngcodes.py" line="367"/>
-        <source>Proven&#xc3;&#xa7;al, Old (to 1500)</source>
+        <source>ProvenÃ§al, Old (to 1500)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="usltmodules/lngcodes.py" line="477"/>
-        <source>Volap&#xc3;&#xbc;k</source>
+        <source>VolapÃ¼k</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2550,7 +2551,7 @@
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="307"/>
+        <location filename="usltmodules/tagwidget.py" line="343"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
@@ -2576,37 +2577,37 @@
 <context>
     <name>TagWidget</name>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="109"/>
+        <location filename="usltmodules/tagwidget.py" line="143"/>
         <source>Edit Lyrics</source>
         <translation>Text bearbeiten</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="112"/>
+        <location filename="usltmodules/tagwidget.py" line="146"/>
         <source>Add Lyrics</source>
         <translation>Text hinzufügen</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="115"/>
+        <location filename="usltmodules/tagwidget.py" line="149"/>
         <source>Remove Lyrics</source>
         <translation>Text entfernen</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="118"/>
+        <location filename="usltmodules/tagwidget.py" line="152"/>
         <source>Search for Lyrics</source>
         <translation>Nach Text suchen</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="121"/>
+        <location filename="usltmodules/tagwidget.py" line="155"/>
         <source>Save Tag</source>
         <translation>Tag speichern</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="124"/>
+        <location filename="usltmodules/tagwidget.py" line="158"/>
         <source>Reload Tag</source>
         <translation>Tag neu laden</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="300"/>
+        <location filename="usltmodules/tagwidget.py" line="336"/>
         <source>Could not write to file!</source>
         <translation>Datei konnte nicht geschrieben werden!</translation>
     </message>
@@ -2621,22 +2622,22 @@
         <translation>Äbderungen speichern?</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="166"/>
+        <location filename="usltmodules/tagwidget.py" line="200"/>
         <source>Artist</source>
         <translation>Künstler</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="167"/>
+        <location filename="usltmodules/tagwidget.py" line="201"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="168"/>
+        <location filename="usltmodules/tagwidget.py" line="202"/>
         <source>Selection</source>
         <translation>Auswahl</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="169"/>
+        <location filename="usltmodules/tagwidget.py" line="203"/>
         <source>Lyrics</source>
         <translation>Text</translation>
     </message>
@@ -2656,7 +2657,7 @@
         <translation type="obsolete">Speichern</translation>
     </message>
     <message>
-        <location filename="usltmodules/tagwidget.py" line="165"/>
+        <location filename="usltmodules/tagwidget.py" line="199"/>
         <source>Play</source>
         <translation>abspielen</translation>
     </message>
