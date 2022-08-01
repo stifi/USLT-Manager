@@ -723,6 +723,8 @@ class TagFileSystemModel(QFileSystemModel):
             return False
         except mutagen.id3._util.ID3NoHeaderError:
             return False
+        except mutagen.mp4.MP4StreamInfoError:
+            return False
 
     def id3v2Version(self, filePath):
         """ID3 tag version number. If ID3v1 and ID3v2 tags are located in the file. The version
